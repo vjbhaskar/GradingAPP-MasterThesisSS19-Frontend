@@ -1,1 +1,223 @@
 /* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+
+@import '~@angular/material/theming';
+@import './app-colors.scss';
+html, body{
+    margin:0px;
+    padding:0px;
+    height:100%;
+    // font-family: Arial, Helvetica, sans-serif;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-weight:300;
+}
+
+.no-focus-outline:focus {
+    outline: 0;
+  }
+.snackBar-error{
+    background-color: rgb(246, 49, 49);
+    color: #FFFF;
+}
+
+// --------------- Styles for tables starts here-----------------
+
+table{
+    width:100%;
+}
+.table-container{
+    overflow-x:hidden;
+    font-size:.875rem;
+   
+    .table-pagination{
+        border-bottom:1px solid lightgrey;
+        border-left: 1px solid lightgrey;
+        border-right: 1px solid lightgrey;
+        width:100%;
+        background:white;
+        text-align: center;
+        padding:5px;
+    }
+
+    .table-action-icons{
+       
+        font-size: small !important;
+        color: white !important;
+        padding: 3px !important;
+        border-radius: 3px !important;
+        height: initial !important;
+        width: initial !important;
+        margin: 0px 3px !important;
+        cursor: pointer !important;
+        box-shadow: 2px 2px 1px lightgrey;
+    }
+    
+    .table-action-icon-danger{
+        background:red;
+    }
+    
+    .table-action-icon-warn{
+        background:orange;
+    }
+    
+    .table-action-icon-primary{
+        background: #002e62;
+    }
+    
+    .mat-row:nth-child(even){
+        background-color: #fdfdfd;
+    }
+    
+    .mat-row:nth-child(odd){
+        background-color:white;
+    }
+    
+    .mat-header-row{
+        background:#d0e6ff;
+    }
+
+    .mat-sort-header-sorted{
+        .mat-sort-header-arrow{
+            opacity: 1 !important;
+            transform: translateY(0%) !important;
+        }
+    }
+
+    .mat-sort-header-arrow{
+        opacity: 0.54 !important;
+        transform: translateY(0%) !important;
+    }
+
+    .mat-header-cell{
+        color: black !important;
+    }
+
+    .mat-row:hover{
+        background: rgb(240, 226, 163);
+    }
+    
+    .mat-paginator{
+        font-size: 14px !important;
+    }
+}
+
+// --------------- Styles for tables Ends here -----------------
+
+
+.snackBar-success{
+    background-color: rgb(30, 153, 30);
+    color: #FFFF;
+}
+
+.snackBar-info{
+    background-color: orange;
+    color: #FFFF;
+}
+
+
+.mat-dialog-container{
+    padding: 0px !important;
+    overflow-x: hidden !important;
+}
+
+.error-msg{
+    color:red;
+}
+
+.success-msg{
+    color:green;
+}
+
+.affirmative-button{
+    background:#00a65a;
+    color: white;
+}
+
+.upload-button{
+    background:#2196f3;
+    color: white;
+}
+
+.cancel-button{
+    background:#ffbb00;
+    color: white;
+}
+
+.open-search-button{
+    background: #007eff;
+    height: 28px;
+    padding: 6px 10px;
+    color: white;
+    font-size: small;
+    border-radius: 4px;
+}
+
+.dialog-header{
+    background: color(primary);
+    padding: 18px;
+    color:white;
+}
+
+.action-icons{
+    font-size: small !important;
+        color: white !important;
+        padding: 3px !important;
+        border-radius: 3px !important;
+        height: initial !important;
+        width: initial !important;
+        margin: 0px 3px !important;
+        cursor: pointer !important;
+        box-shadow: 2px 2px 1px lightgrey;
+}
+
+.action-icon-warn{
+    background:orange;
+}
+
+.action-icon-danger{
+    background:red;
+}
+
+.action-icon-primary{
+    background: #002e62;
+}
+
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: flex;
+    padding: 6px 12px;
+    cursor: pointer;
+    color: white !important;
+    span{
+        margin-top: 5px;
+        font-size: 14px;
+    }
+  }
+
+.required-text{
+    color:grey;
+}
+
+.mat-input-element:disabled{
+    color:black !important;
+}
+
+.mat-select-disabled .mat-select-value{
+    color:black !important;
+}
+
+
+.card-head-button{
+    background-image:linear-gradient(60deg,#66bb6a,#43a047);
+    margin-top: -30px;
+    width: fit-content;
+    padding: 8px;
+    color: white;
+}
+
+.line-after-text{
+    border-bottom: 1px solid green;
+    height: 1px;
+    margin: auto;
+    margin-left: 15px;
+  }

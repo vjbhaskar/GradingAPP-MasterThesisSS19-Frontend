@@ -1,0 +1,18 @@
+<div class="loader" fxLayout.sm="column" fxLayout.xs="column" fxLayout.md="column" fxLayout.lg="column" fxLayout.xl="column"
+  fxLayoutAlign="center center">
+  <div style="text-align: center;">
+    <h2 *ngIf="text">{{text}}</h2>
+    <h2 *ngIf="!text">Please Wait ...</h2>
+  </div>
+
+  <div *ngIf="type == 'spinner'; else progressBar" style="align-items:center">
+    <mat-progress-spinner mode="indeterminate" color="primary"></mat-progress-spinner>
+
+  </div>
+
+  <ng-template style="width:25%" #progressBar>
+
+    <mat-progress-bar style="width:25%" mode="indeterminate" color="primary"></mat-progress-bar>
+
+  </ng-template>
+</div>

@@ -1,0 +1,10 @@
+$colors:(primary: #002e62,
+primary-light: lighten(#002e62, 40%),
+primary-dark: darken(#002e62, 40%),
+accent: #BC8D09,
+accent-light:lighten(#BC8D09, 30%),
+);
+
+@function color($color-name) {
+    @return map-get($colors, $color-name)
+}

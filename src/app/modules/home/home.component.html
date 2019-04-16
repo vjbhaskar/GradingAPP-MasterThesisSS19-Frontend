@@ -1,0 +1,82 @@
+<div class="home-page">
+  <div id="bg">
+    <div fxLayout="row" fxLayoutAlign="center">
+      <img style="height: 53px;
+              margin: 15px 0px 0px 15px;width:200px" src="../../../assets/images/Hochschule_Fulda_Header.jpg">
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center">
+      <mat-card fxFlex="75" class="signup-card">
+        <div fxLayout="row" style="height:100%" fxLayoutAlign="start none">
+          <section fxFlex="52" style="padding:45px 35px 45px 75px" fxLayout="column" fxLayoutAlign="space-around">
+            <div>
+              <div fxLayout="row">
+                <i style="color: #1da1f2" class="fas fa-users about-icons"></i>
+                <div class="about-heading">Faster way to submit exam</div>
+              </div>
+              <p class="about-info">
+                This is a master thesis project for submitting students exam online so that the professor 
+                can view the file and grade it accordingly
+              </p>
+            </div>
+            <div>
+              <div fxLayout="row">
+                <i style="color: #1da1f2" class="fas fa-users about-icons"></i>
+                <div class="about-heading">Faster way to submit exam</div>
+              </div>
+              <p class="about-info">
+                Submiting exam 
+              </p>
+            </div>
+
+            <div>
+              <div fxLayout="row">
+                <i style="color:#ff5a5a" class="fab fa-connectdevelop about-icons"></i>
+                <div class="about-heading">Share results</div>
+              </div>
+              <p class="about-info">
+                Share your results among other students
+              </p>
+            </div>
+          </section>
+          <section fxFlex="48">
+            <div fxLayout="column" style="height:100%">
+              <div fxFlex="85">
+                <form [formGroup]="loginForm" (ngSubmit)="login()"
+                  style="padding:40px;margin-top:25px;" fxLayout="column" fxLayoutAlign="center none">
+                  <mat-form-field class="signup-form-field" fxFlex="80">
+                    <input type="text" matInput formControlName="username" placeholder="Username">
+                  </mat-form-field>
+
+                  <mat-form-field class="signup-form-field" fxFlex="80">
+                    <input formControlName="password" (keyup.enter)="login()" matInput placeholder="Password">
+                  </mat-form-field>
+                  <div fxLayout="row" fxLayoutAlign="end center" style="margin-top:10px;">
+                    <button type="button" mat-raised-button class="secondary-button"
+                      (click)="toggleForgotPassword()">Forgot
+                      password</button>
+                    <button type="submit" mat-raised-button class="primary-button">Login</button>
+                  </div>
+
+                </form>
+                <!-- <form *ngIf="loginTab && !showLogin" [formGroup]="forgotPasswordForm" (ngSubmit)="forgotPassoword()"
+                  style="padding:40px;" fxLayout="column" fxLayoutAlign="center none">
+
+                  <mat-form-field class="signup-form-field" fxFlex="80">
+                    <input type="text" matInput formControlName="email" placeholder="Enter your Email">
+                  </mat-form-field>
+
+                  <div fxLayout="row" fxLayoutAlign="end center" style="margin-top:10px;">
+                    <button type="button" mat-raised-button class="secondary-button" (click)="toggleForgotPassword()">Go
+                      Back</button>
+                    <button mat-raised-button type="submit" class="primary-button"
+                      (click)="forgotPassoword()">Reset</button>
+                  </div>
+                </form> -->
+              </div>
+            </div>
+          </section>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>
