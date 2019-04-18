@@ -14,7 +14,7 @@ export class CommonApiService {
 
   private httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'multipart/form-data'
+      'Content-Type': 'application/json'
     })
   };
 
@@ -29,6 +29,17 @@ export class CommonApiService {
       }), catchError((error: Error) => throwError(error)));
   }
 
+  
+  //Function to make get api call with token
+  getRequestWithToken(url: any): Observable<any> {
+
+    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', 'JWT ' + sessionStorage.getItem('token'));
+    return this.http.get(this.API_ENDPOINT + url, this.httpOptions)
+      .pipe(map(response => {
+        return response;
+      }), catchError((error: Error) => throwError(error)));
+  }
+
   //Function to make POST api call
   postRequest(url: any, data: any): Observable<any> {
     return this.http.post(this.API_ENDPOINT + url, data, { observe: 'response' })
@@ -36,6 +47,25 @@ export class CommonApiService {
         return response;
       }), catchError((error: Error) => throwError(error)));
 
+  }
+
+    //Function to make POST api call
+    postRequestWithToken(url: any, data: any): Observable<any> {
+      this.httpOptions.headers = this.httpOptions.headers.set('Authorization', 'JWT ' + sessionStorage.getItem('token'));
+      return this.http.post(this.API_ENDPOINT + url, data, this.httpOptions)
+        .pipe(map(response => {
+          return response;
+        }), catchError((error: Error) => throwError(error)));
+  
+    }
+    
+    //Function to make PUT api call
+  putRequestWithToken(url: any, data: any): Observable<any> {
+    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', 'JWT ' + sessionStorage.getItem('token'));
+    return this.http.put(this.API_ENDPOINT + url, data,this.httpOptions)
+      .pipe(map(response => {
+        return response;
+      }), catchError((error: Error) => throwError(error)));
   }
 
 
@@ -56,6 +86,15 @@ export class CommonApiService {
 
   }
 
+  patchRequestWithToken(url: any, data: any): Observable<any> {
+    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', 'JWT ' + sessionStorage.getItem('token'));
+    return this.http.patch(this.API_ENDPOINT + url, data,this.httpOptions)
+      .pipe(map(response => {
+        return response;
+      }), catchError((error: Error) => throwError(error)));
+
+  }
+
   postFormData(url: String, data): Observable<any> {
     return this.http.post(this.API_ENDPOINT + url, data, { observe: 'response' })
       .pipe(map(response => {
@@ -70,6 +109,15 @@ export class CommonApiService {
         return response;
       }), catchError((error: Error) => throwError(error)));
   }
+
+    //Function to make DELETE api call
+    deleteReqeustWithToken(url: any): Observable<any> {
+      this.httpOptions.headers = this.httpOptions.headers.set('Authorization', 'JWT ' + sessionStorage.getItem('token'));
+      return this.http.delete(this.API_ENDPOINT + url,this.httpOptions)
+        .pipe(map(response => {
+          return response;
+        }), catchError((error: Error) => throwError(error)));
+    }
 
 
 }

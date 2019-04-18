@@ -14,13 +14,22 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HelperService } from './helpers/services/helper.service';
 import { CommonApiService } from './api/common-api.service';
+import { GradingAppApiService } from './api/grading-app-api.service';
+import { FeedComponent } from './modules/dashboard/feed/feed.component';
+import { UserManagementComponent } from './modules/dashboard/user-management/user-management.component';
+import { UserDialogComponent } from './modules/dashboard/user-management/user-dialog/user-dialog.component';
+import { ConfirmDialogComponent } from './modules/commons/confirm-dialog/confirm-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     DashboardComponent,
     UploadFilesComponent,
-    LoaderComponent
+    LoaderComponent,
+    FeedComponent,
+    UserManagementComponent,
+    UserDialogComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -34,8 +43,13 @@ import { CommonApiService } from './api/common-api.service';
     CookieModule.forRoot(),
     FlexLayoutModule
   ],
+  entryComponents:[
+    UserDialogComponent,
+    ConfirmDialogComponent
+  ],
   providers: [ 
     HttpClient,
+    GradingAppApiService,
     HelperService,
     CommonApiService,
     HomeComponent,],

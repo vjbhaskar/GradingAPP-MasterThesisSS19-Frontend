@@ -1,0 +1,29 @@
+<div fxLayout="column">
+  <div fxFlex class="dialog-header">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div style="font-size:larger">{{data.title}}</div>
+      <mat-icon style="cursor:pointer" (click)="closeDialog(0)">close</mat-icon>
+    </div>
+  </div>
+  <div  fxLayout="column" mat-dialog-content>
+    <div style="margin:10px;" *ngIf="data.isContentHtml">
+      <div [innerHTML]="data.content"></div>
+    </div>
+    <div style="margin:10px;" *ngIf="!data.isContentHtml">
+      <p>{{data.content}}</p>
+    </div>
+    <div *ngIf="data.isUser" style="margin:10px;">
+        <mat-form-field class="signup-form-field" fxFlex="80">
+            <input matInput type="text" [(ngModel)]="enteredName" (keyup)="check()" placeholder="type here">
+          </mat-form-field>
+    </div>
+  </div>
+  <!-- <span fxFlex></span> -->
+  <div mat-dialog-actions fxLayout="row">
+    <div fxFlex></div>
+
+    <button mat-raised-button type="button" color="warn" (click)="closeDialog(0)">No</button> 
+    <button class="affirmative-button" mat-raised-button type="button" (click)="closeDialog(1)" cdkFocusInitial [disabled]="!canDelete">YES</button>
+    <div fxFlex="5"></div>
+  </div>
+</div>

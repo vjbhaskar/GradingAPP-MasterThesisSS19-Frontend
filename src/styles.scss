@@ -1,5 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-/* You can add global styles to this file, and also import other style files */
 
 @import '~@angular/material/theming';
 @import './app-colors.scss';
@@ -181,7 +180,9 @@ table{
 .action-icon-primary{
     background: #002e62;
 }
-
+app-user-settings{
+    height: 99%;
+}
 .custom-file-upload {
     border: 1px solid #ccc;
     display: flex;
@@ -192,6 +193,21 @@ table{
         margin-top: 5px;
         font-size: 14px;
     }
+  }
+
+  .rl-snackBar{
+    simple-snack-bar{
+        font-size: 18px;
+        font-weight: 600;
+    }
+    .mat-simple-snackbar-action{
+        button{    
+            border: 1px solid black;
+            color: white;
+            box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+
+        }
+        }
   }
 
 .required-text{
@@ -205,15 +221,32 @@ table{
 .mat-select-disabled .mat-select-value{
     color:black !important;
 }
-
+.app-name{
+    font-weight: 300;
+}
 
 .card-head-button{
     background-image:linear-gradient(60deg,#66bb6a,#43a047);
-    margin-top: -30px;
-    width: fit-content;
-    padding: 8px;
-    color: white;
+    margin-top: -30px !important;
+    width: fit-content !important;
+    padding: 8px !important;
+    color: white !important;
+    box-shadow: 1px 1px 5px 1px #c3c3c3;
+
 }
+
+.card-head-icon-button{
+    background-image:linear-gradient(60deg,#66bb6a,#459c64);
+    margin-top: -30px !important;
+    width: 47px;
+    text-align: center;
+    color: white;
+    font-size: 25px;
+    padding: 15px;
+    box-shadow: 1px 1px 5px 1px #c3c3c3;
+
+}
+
 
 .line-after-text{
     border-bottom: 1px solid green;

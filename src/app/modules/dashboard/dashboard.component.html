@@ -1,3 +1,100 @@
-<p>
-  dashboard works!
-</p>
+<div style="height:100%">
+  <!-- ----------------- App header ----------------- -->
+  <div fxLayout="row">
+    <mat-toolbar *ngIf="!collapseSidenav" fxFlex="20" class="app-header" style="height:64px;">
+      <mat-toolbar-row class="main-header" fxLayout="row" fxLayoutAlign="center center">
+        <img [routerLink]="['/dashboard/feed']" style="height: 50px;width: 100%;cursor: pointer;"
+          src="../../../../assets/images/Hochschule_Fulda_Header.jpg">
+      </mat-toolbar-row>
+    </mat-toolbar>
+
+    <mat-toolbar *ngIf="collapseSidenav" fxFlex="7" class="app-header" style="height:64px;">
+      <mat-toolbar-row class="main-header" fxLayout="row" fxLayoutAlign="center center">
+        <img [routerLink]="['/dashboard/feed']" style="height: 50px;width: 100%;cursor: pointer;"
+          src="../../../../assets/images/logo.PNG">
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <mat-toolbar fxFlex class="app-header" style="height:64px;">
+      <mat-toolbar-row class="main-header" fxLayout="row" fxLayoutAlign="space-between center">
+        <mat-icon style="color:white;cursor: pointer;" (click)="toggleSidenav()">menu</mat-icon>
+        <div fxLayout="row" fxLayoutAlign="end center">
+          <!-- <div *ngIf="userData.firstName || userData.lastName" class="user-name">Hi, {{userData.firstName}}
+            {{userData.lastName}}</div> -->
+            <div  class="user-name">Hi, User</div>
+          <!-- <div *ngIf="!userData.firstName && !userData.lastName" class="user-name">Hi, User</div> -->
+          <button mat-button (click)="logout()">
+            <i class="fas fa-sign-out-alt"></i> Logout</button>
+        </div>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </div>
+
+  <!-- ----------------- App header ----------------- -->
+
+  <div class="dashboard-container" fxLayout="row">
+    <div fxFlex="20" *ngIf="!collapseSidenav" class="side-nav">
+      <div fxLayout="column">
+        <!-- <div class="user-info">
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <img class="user-avatar" src="../../../assets/images/beach.jpg">
+            
+          </div>
+        </div> -->
+
+        <div fxFlex class="side-nav-list">
+          <mat-accordion class="side-nav-accordion" *ngFor="let app of dashboardApps">
+            <mat-expansion-panel *ngIf="app.isAccordion">
+              <mat-expansion-panel-header>
+                <mat-icon *ngIf="app.icon">{{app.icon}}</mat-icon>
+                <i *ngIf="app.fontAwesomeIcon" [class]="app.fontAwesomeIcon"></i>
+                {{app.headerName}}
+              </mat-expansion-panel-header>
+
+              <div *ngFor=" let appObj of app.apps" [ngClass]="{'active-link':activeLink == appObj.route}"
+                [routerLink]="[appObj.route]" class="side-nav-item no-focus-outline" fxLayout="row"
+                fxLayoutAlign="start center">
+                <mat-icon *ngIf="appObj.icon">{{appObj.icon}}</mat-icon>
+                <i *ngIf="appObj.fontAwesomeIcon" [class]="appObj.fontAwesomeIcon"></i>
+                {{appObj.name}}
+              </div>
+            </mat-expansion-panel>
+
+            <div *ngIf="!app.isAccordion">
+              <div *ngFor="let appObj of app.apps" [ngClass]="{'active-link':activeLink == appObj.route}"
+                [routerLink]="[appObj.route]" class="side-nav-item no-focus-outline" fxLayout="row"
+                fxLayoutAlign="start center">
+                <mat-icon *ngIf="appObj.icon">{{appObj.icon}}</mat-icon>
+                <i *ngIf="appObj.fontAwesomeIcon" [class]="appObj.fontAwesomeIcon"></i>
+                {{appObj.name}}
+              </div>
+            </div>
+
+          </mat-accordion>
+        </div>
+      </div>
+    </div>
+
+    <div fxFlex="7" *ngIf="collapseSidenav" class="side-nav">
+      <div fxLayout="column">
+        <div fxFlex class="side-nav-list">
+          <div *ngFor="let app of dashboardApps">
+            <div *ngFor="let appObj of app.apps"
+              [ngClass]="{'collapsed-side-nav-activelink':activeLink == appObj.route}" [routerLink]="[appObj.route]"
+              class="collapsed-side-nav-item no-focus-outline">
+              <mat-icon style="margin-right:0px" *ngIf="appObj.icon" [matTooltip]="appObj.name">{{appObj.icon}}
+              </mat-icon>
+              <i style="margin-right:0px" *ngIf="appObj.fontAwesomeIcon" [class]="appObj.fontAwesomeIcon"
+                [matTooltip]="appObj.name"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div fxFlex class="content" style="overflow-y:auto">
+
+      <router-outlet></router-outlet>
+
+    </div>
+  </div>
+</div>
