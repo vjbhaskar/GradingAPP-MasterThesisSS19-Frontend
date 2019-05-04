@@ -5,7 +5,7 @@
       <mat-icon style="cursor:pointer" (click)="closeDialog()">close</mat-icon>
     </div>
   </div>
-  <div>
+  <div style="height:100%;overflow-y:auto">
     <form style="padding:20px 40px;" [formGroup]="userForm" (ngSubmit)="saveUser()" fxLayout="column"
       fxLayoutAlign="center none">
 
@@ -72,9 +72,21 @@
           <input type="text" formControlName="department"  matInput placeholder="Department">
           <mat-hint *ngIf="profile.department.touched && profile.department.errors" align="start">
             <div *ngIf="profile.department.errors.required" class="error-msg">
-              Email is required </div>
+              Department is required </div>
             <div *ngIf="profile.department.dirty && profile.department.errors.department" class="error-msg">
-              Please valid department address </div>
+              Please enter Valid Department </div>
+          </mat-hint>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select formControlName="user_type" placeholder="User Type">
+            <mat-option value="1">Student</mat-option>
+            <mat-option value="2">Teacher</mat-option>
+            <mat-option value="3">Lab Admin</mat-option>
+            <mat-option value="4">Admin</mat-option>
+          </mat-select>
+          <mat-hint *ngIf="profile.user_type.touched && profile.user_type.errors" align="start">
+            <div *ngIf="profile.user_type.errors.required" class="error-msg">
+              user_type is required </div>
           </mat-hint>
         </mat-form-field>
       </form>

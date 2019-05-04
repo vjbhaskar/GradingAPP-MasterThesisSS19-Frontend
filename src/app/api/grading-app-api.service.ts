@@ -11,18 +11,34 @@ export class GradingAppApiService {
   };
 
   getAllUsers(){
-    return this.api.getRequestWithToken('api/users/');
+    return this.api.getRequestWithToken('api/user/');
   }
 
   createUser(data){
-    return this.api.postRequestWithToken(`api/users/`,data);
+    return this.api.postRequestWithToken(`api/user/`,data);
+  }
+
+  getUserDetails(id){
+    return this.api.getRequestWithToken(`api/user/${id}/`);
   }
 
   updateUser(id,data){
-    return this.api.patchRequestWithToken(`api/users/${id}/`,data);
+    return this.api.patchRequestWithToken(`api/user/${id}/`,data);
   }
 
   deleteUser(id){
-    return this.api.deleteReqeustWithToken(`api/users/${id}/`);
+    return this.api.deleteReqeustWithToken(`api/user/${id}/`);
+  }
+
+  getAllFiles(){
+    return this.api.getRequestWithToken('api/file/');
+  }
+
+  postFile(data){
+    return this.api.postRequest('api/file/', data);
+  }
+
+  updateFile(id,data){
+    return this.api.patchRequestWithToken(`api/file/${id}/`,data);
   }
 }

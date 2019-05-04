@@ -95,17 +95,17 @@
 
         <ng-container matColumnDef="fdnumber">
           <th mat-header-cell *matHeaderCellDef mat-sort-header="fdnumber"> FD Number </th>
-          <td mat-cell *matCellDef="let element"> <small>{{element.profile.fdnumber}}</small></td>
+          <td mat-cell *matCellDef="let element"> <small>{{element['profile'] ? element['profile']['fdnumber'] : 'NA'}}</small></td>
         </ng-container>
 
         <ng-container matColumnDef="department">
           <th mat-header-cell *matHeaderCellDef mat-sort-header="department"> Department </th>
-          <td mat-cell *matCellDef="let element"> <small>{{element.profile.department}}</small></td>
+          <td mat-cell *matCellDef="let element"> <small>{{element['profile'] ? element['profile']['department'] : 'NA'}}</small></td>
         </ng-container>
 
         <ng-container matColumnDef="createdDate">
           <th mat-header-cell *matHeaderCellDef mat-sort-header="createdDate"> Created Date</th>
-          <td mat-cell *matCellDef="let element"> {{element.date_joined | date:'short'}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.date_created | date:'short'}} </td>
         </ng-container>
 
         <ng-container matColumnDef="actions">

@@ -25,7 +25,7 @@ const routes: Routes = [
           component: UserManagementComponent
         },
         {
-          path: 'upload-files',
+          path: 'files',
           component: UploadFilesComponent
         },
     ]

@@ -1,3 +1,146 @@
-<p>
-  upload-files works!
-</p>
+<div class="app-content" fxLayout="column" *ngIf="!isLoading">
+  <div fxFlex class="search-bar">
+    <mat-accordion>
+      <mat-expansion-panel (opened)="searchPanelOpenState = true" [expanded]="searchPanelOpenState"
+        (closed)="searchPanelOpenState = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title fxLayout="row" fxLayoutAlign="center center">
+            <div class="app-name" fxFlex>
+              User Management
+            </div>
+            <div fxLayout='row' fxLayoutAlign="center center" class="open-search-button">
+              {{searchPanelOpenState ? 'Close' : 'Open'}} Search
+            </div>
+            <!-- <button mat-raised-button color="primary">{{searchPanelOpenState ? 'Close' : 'Open'}} Search</button> -->
+          </mat-panel-title>
+
+        </mat-expansion-panel-header>
+
+        <div fxLayout="column">
+          <div fxFlex>
+            <div fxLayout="row" fxLayoutAlign="space-between">
+              <mat-form-field fxFlex="30">
+                <input type="text" matInput [(ngModel)]="searchObj.username" placeholder="Username">
+              </mat-form-field>
+              <mat-form-field fxFlex="30">
+                <input type="text" matInput [(ngModel)]="searchObj.email" placeholder="Email">
+              </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between">
+              <mat-form-field fxFlex="30">
+                <input type="text" matInput [(ngModel)]="searchObj.firstName" placeholder="First Name">
+              </mat-form-field>
+              <mat-form-field fxFlex="30">
+                <input type="text" matInput [(ngModel)]="searchObj.lastName" placeholder="Last Name">
+              </mat-form-field>
+              <div fxFlex="30">
+                <div fxLayout="row">
+                  <button type="button" mat-raised-button class="cancel-button" (click)="clearSearch()">
+                    <mat-icon style="margin-right:5px;">close</mat-icon>Clear
+                  </button>
+                  <div fxFlex="5"></div>
+                  <button class="affirmative-button" type="button" mat-raised-button (click)="search()">
+                    <mat-icon style="margin-right:5px;">search</mat-icon>Search
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+
+  </div>
+
+  <div class="app-body" fxLayout="column">
+    <div class="filter-bar">
+      <div fxLayoutAlign="row" fxLayoutAlign="start center">
+
+        <mat-form-field fxFlex="60">
+          <input matInput (keyup)="applyFilter($event.target.value)"
+            placeholder="Filter by Username, Email, Firstname and Lastname">
+        </mat-form-field>
+        <mat-icon>filter_list</mat-icon>
+        <div fxFlex></div>
+        <div>
+          <button class="affirmative-button" mat-raised-button (click)="createNewFile()">
+            <mat-icon style="margin-right:5px;">add</mat-icon>Create New
+          </button>
+        </div>
+      </div>
+    </div>
+    <div fxFlex class="table-container">
+      <table mat-table [dataSource]="userDataSource" matSort (matSortChange)="sortData($event)">
+        
+        <ng-container matColumnDef="sno">
+          <th mat-header-cell *matHeaderCellDef> S.no </th>
+          <td mat-cell *matCellDef="let element; let i = index"> {{i+1}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="username"> File Name </th>
+          <td mat-cell *matCellDef="let element"> <a [href]="element.file_obj" download>{{element.name}}</a>  </td>
+        </ng-container>
+
+        <ng-container matColumnDef="username">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="username"> username </th>
+          <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="email"> Email </th>
+          <td mat-cell *matCellDef="let element"> {{element['user'].email}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="fdnumber">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="fdnumber"> FD Number </th>
+          <td mat-cell *matCellDef="let element"> <small>{{element['user']['profile'] ? element['user']['profile']['fdnumber'] : 'NA' }}</small></td>
+        </ng-container>
+
+        <ng-container matColumnDef="department">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="department"> Department </th>
+          <td mat-cell *matCellDef="let element"> <small>{{element['user']['profile'] ? element['user']['profile']['department'] : 'NA' }}</small></td>
+        </ng-container>
+
+        <ng-container matColumnDef="submitted">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="Submitted"> Submitted </th>
+          <td mat-cell *matCellDef="let element"> <small>{{element.is_submitted ? 'Yes': 'No'}}</small></td>
+        </ng-container>
+
+        <ng-container matColumnDef="createdDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="createdDate"> Created Date</th>
+          <td mat-cell *matCellDef="let element"> {{element.date_created | date:'short'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-icon title="View" (click)="editFile(element)"
+              class="table-action-icons table-action-icon-primary">remove_red_eye</mat-icon>
+            <mat-icon title="Edit" (click)="editFile(element)" class="table-action-icons table-action-icon-warn"
+              *ngIf="isAdmin">edit</mat-icon>
+            <mat-icon title="Delete" (click)="deleteUser(element)" class="table-action-icons table-action-icon-danger"
+              *ngIf="isAdmin">delete
+            </mat-icon>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <div fxLayout="row" class="table-pagination" fxLayoutAlign="center center">
+        <mat-paginator [length]="totalUsers" [pageIndex]="searchObj.page" [pageSize]="searchObj.size"
+          [pageSizeOptions]="pageSizeOptions" showFirstLastButtons (page)="pageEvent = paginationFunction($event)">
+        </mat-paginator>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="app-content" *ngIf="isLoading">
+  <app-loader></app-loader>
+</div>

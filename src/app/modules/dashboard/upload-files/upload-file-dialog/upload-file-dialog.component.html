@@ -1,0 +1,33 @@
+<div fxLayout="column">
+  <div fxFlex class="dialog-header">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div style="font-size:larger">{{editUser?'Edit':'Create New'}} File</div>
+      <mat-icon style="cursor:pointer" (click)="closeDialog()">close</mat-icon>
+    </div>
+  </div>
+  <div>
+    <form style="padding:20px 40px;" [formGroup]="uploadForm" (ngSubmit)="uploadFile()" fxLayout="column"
+      fxLayoutAlign="center none">
+        <div>
+          <label for="file-upload2" class="custom-file-upload">
+            <mat-icon>attach_file</mat-icon> <span>Anhang</span>
+          </label>
+          <input id="file-upload2" placeholder="Zulassung Certificate" style="margin-left:5px;"
+          (change)="onImageUpload($event)" type="file" class="form-control">
+         </div>
+        <div fxLayout="row" fxLayoutAlign="start center" style="margin-top:5px;">
+          <mat-checkbox formControlName="is_submitted"></mat-checkbox>
+          <div style="font-size:small;margin-left:8px;"> Submit </div>
+        </div>
+
+      <div fxLayout="row" fxLayoutAlign="end center" style="margin-top:10px;">
+        <div>
+          <small *ngIf="uploadForm.invalid" class="error-msg">All Fields are required</small><Br>
+          <button class="cancel-button" type="button" mat-raised-button (click)="closeDialog()">Cancel</button>
+          <button class="affirmative-button" type="submit" style="margin-left:15px;" [disabled]="uploadForm.invalid"
+            mat-raised-button>Save</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

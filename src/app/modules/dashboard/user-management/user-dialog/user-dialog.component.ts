@@ -21,6 +21,7 @@ export class UserDialogComponent implements OnInit {
     profile: this.fb.group({
       fdnumber: ['', Validators.required],
       department: ['', Validators.required],
+      user_type:['', Validators.required]
     }),
   });
   editUser: boolean = false;

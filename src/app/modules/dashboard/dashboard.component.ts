@@ -48,6 +48,19 @@ export class DashboardComponent implements OnInit {
           },
         ]
       },
+      {
+        'headerName': 'Files',
+        'icon': 'dashboard',
+        'isAccordion': false,
+        'apps': [
+          {
+            'name': 'Files',
+            'route': '/dashboard/files',
+            'icon': undefined,
+            'fontAwesomeIcon': 'fas fa-file-alt',
+          },
+        ]
+      },
     ]
 
   }

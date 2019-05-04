@@ -19,6 +19,8 @@ import { FeedComponent } from './modules/dashboard/feed/feed.component';
 import { UserManagementComponent } from './modules/dashboard/user-management/user-management.component';
 import { UserDialogComponent } from './modules/dashboard/user-management/user-dialog/user-dialog.component';
 import { ConfirmDialogComponent } from './modules/commons/confirm-dialog/confirm-dialog.component';
+import { UploadFileDialogComponent } from './modules/dashboard/upload-files/upload-file-dialog/upload-file-dialog.component';
+import { ConvertModelToFormData } from './helpers/services/convert-object-to-formdata.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +31,8 @@ import { ConfirmDialogComponent } from './modules/commons/confirm-dialog/confirm
     FeedComponent,
     UserManagementComponent,
     UserDialogComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    UploadFileDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -45,11 +48,13 @@ import { ConfirmDialogComponent } from './modules/commons/confirm-dialog/confirm
   ],
   entryComponents:[
     UserDialogComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    UploadFileDialogComponent
   ],
   providers: [ 
     HttpClient,
     GradingAppApiService,
+    ConvertModelToFormData,
     HelperService,
     CommonApiService,
     HomeComponent,],
