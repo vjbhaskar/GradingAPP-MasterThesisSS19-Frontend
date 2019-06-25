@@ -21,6 +21,18 @@ import { UserDialogComponent } from './modules/dashboard/user-management/user-di
 import { ConfirmDialogComponent } from './modules/commons/confirm-dialog/confirm-dialog.component';
 import { UploadFileDialogComponent } from './modules/dashboard/upload-files/upload-file-dialog/upload-file-dialog.component';
 import { ConvertModelToFormData } from './helpers/services/convert-object-to-formdata.service';
+import { LabComponent } from './modules/lab/lab.component';
+import { LabDialogComponent } from './modules/lab/lab-dialog/lab-dialog.component';
+import { IpComponent } from './modules/ip/ip.component';
+import { IpDialogComponent } from './modules/ip/ip-dialog/ip-dialog.component';
+import { SubjectComponent } from './modules/subject/subject.component';
+import { SubjectDialogComponent } from './modules/subject/subject-dialog/subject-dialog.component';
+import { ExamComponent } from './modules/exam/exam.component';
+import { ExamDialogComponent } from './modules/exam/exam-dialog/exam-dialog.component';
+import { DashboardAppsService } from './helpers/services/dashboard-apps.service';
+import { IpAssignDialogComponent } from './modules/ip/ip-assign-dialog/ip-assign-dialog.component';
+import { TimeSlotComponent } from './modules/time-slot/time-slot.component';
+import { TimeSlotDialogComponent } from './modules/time-slot/time-slot-dialog/time-slot-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +44,18 @@ import { ConvertModelToFormData } from './helpers/services/convert-object-to-for
     UserManagementComponent,
     UserDialogComponent,
     ConfirmDialogComponent,
-    UploadFileDialogComponent
+    UploadFileDialogComponent,
+    LabComponent,
+    LabDialogComponent,
+    IpComponent,
+    IpDialogComponent,
+    SubjectComponent,
+    SubjectDialogComponent,
+    ExamComponent,
+    ExamDialogComponent,
+    IpAssignDialogComponent,
+    TimeSlotComponent,
+    TimeSlotDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +72,13 @@ import { ConvertModelToFormData } from './helpers/services/convert-object-to-for
   entryComponents:[
     UserDialogComponent,
     ConfirmDialogComponent,
-    UploadFileDialogComponent
+    UploadFileDialogComponent,
+    LabDialogComponent,
+    IpDialogComponent,
+    SubjectDialogComponent,
+    ExamDialogComponent,
+    IpAssignDialogComponent,
+    TimeSlotDialogComponent
   ],
   providers: [ 
     HttpClient,
@@ -57,7 +86,9 @@ import { ConvertModelToFormData } from './helpers/services/convert-object-to-for
     ConvertModelToFormData,
     HelperService,
     CommonApiService,
-    HomeComponent,],
+    HomeComponent,
+    DashboardAppsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

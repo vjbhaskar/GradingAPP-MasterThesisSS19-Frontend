@@ -16,7 +16,7 @@ export class UserManagementComponent implements OnInit {
   userList: any = [];
   userDataSource: any;
   totalUsers = '';
-  displayedColumns = ['sno', 'username', 'email', 'fullName', 'fdnumber', 'department', 'createdDate', 'actions'];
+  displayedColumns = ['sno', 'username', 'email', 'fullName', 'department', 'createdDate', 'actions'];
   pageSizeOptions: number[] = [20, 30, 50];
   pageEvent: PageEvent;
   searchPanelOpenState: boolean = false;
@@ -165,20 +165,19 @@ export class UserManagementComponent implements OnInit {
   deleteUser(userObj) {
     let confirmData = {
       'title': 'Delete User',
-      'content': '<p>Are you sure to Delete this User? </p> <p> Deleting a user will delete all their associated information associated from the user and this action cannot be undone. </p> <p> Please type <b> <i> delete user </i> </b> in the box below to delete.</p>',
+      'content': '<p>Are you sure to Delete this User? </p> <p> Deleting a user will delete all their associated information associated from the user and this action cannot be undone. </p>',
       'isContentHtml': true,
-      'username':userObj.username,
-      'isUser': true,
 
     }
     this.helper.confirmDialog(confirmData,'400px','400px').subscribe(response => {
       if (response) {
 
         let idx = this.userList.indexOf(userObj);
-        this.api.deleteUser(userObj.username)
+        this.api.deleteUser(userObj.id)
           .subscribe(response => {
-
-            if (response.status == 200) {
+            console.log("response",response);
+            // getting response as null
+            if (!response) {
               this.userList.splice(idx, 1);
               this.userDataSource = new MatTableDataSource(this.userList);
               this.helper.showSnackbar('User Deleted Successfully', 'snackBar-success');

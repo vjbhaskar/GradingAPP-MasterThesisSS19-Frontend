@@ -1,21 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { PageEvent, MatDialog, MatTableDataSource, Sort } from '@angular/material';
-import { GradingAppApiService } from '../../../../app/api/grading-app-api.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { HelperService } from '../../../../app/helpers/services/helper.service';
-import { FixturesService } from '../../../../app/helpers/services/fixtures.service';
-import { UploadFileDialogComponent } from './upload-file-dialog/upload-file-dialog.component';
+import { HelperService } from './../../../app/helpers/services/helper.service';
+import { FixturesService } from './../../../app/helpers/services/fixtures.service';
+import { GradingAppApiService } from './../../../app/api/grading-app-api.service';
+import { createRequestParams } from './../../config/http-utils/create-query-params'
+import { LabDialogComponent } from './lab-dialog/lab-dialog.component';
 
 @Component({
-  selector: 'app-upload-files',
-  templateUrl: './upload-files.component.html',
-  styleUrls: ['./upload-files.component.scss']
+  selector: 'app-lab',
+  templateUrl: './lab.component.html',
+  styleUrls: ['./lab.component.scss']
 })
-export class UploadFilesComponent implements OnInit {
-  userList: any = [];
+export class LabComponent implements OnInit {
+
+  labList: any = [];
   userDataSource: any;
   totalUsers = '';
-  displayedColumns = ['sno','name', 'email','fdnumber', 'department', 'createdDate','submitted', 'actions'];
+  displayedColumns = ['sno', 'roomNumber','ips','createdDate', 'actions'];
   pageSizeOptions: number[] = [20, 30, 50];
   pageEvent: PageEvent;
   searchPanelOpenState: boolean = false;
@@ -35,18 +37,13 @@ export class UploadFilesComponent implements OnInit {
 
   ngOnInit() {
     this.loadInitialData();
-    
    // this.userObj = this.helper.getUserObj();
   //  console.log("user", this.userObj);
   }
 
   loadInitialData() {
     this.searchObj = {
-      username: '',
-      email: '',
-      firstName: '',
-      lastName: '',
-      authority: '',
+      roomNumber: '',
       size: 20,
       page: 0,
       sort: 'id,desc'
@@ -68,24 +65,20 @@ export class UploadFilesComponent implements OnInit {
    */
   search() {
     // let reqParams = createRequestParams(this.searchObj)
-    this.api.getAllFiles()
+    this.api.getAllLabs()
       .subscribe(response => {
         //console.log('response =', response.headers.get("X-Total-Count"));
-        this.userList = response;
-        console.log(this.userList);
-        this.userDataSource = new MatTableDataSource(this.userList);
-        this.totalUsers = this.userList.length;
+        this.labList = response;
+        console.log(this.labList);
+        this.userDataSource = new MatTableDataSource(this.labList);
+        this.totalUsers = this.labList.length;
         this.isLoading = false;
       })
   }
 
   clearSearch() {
     this.searchObj = {
-      username: '',
-      email: '',
-      firstName: '',
-      lastName: '',
-      authority: '',
+      roomNumber: '',
       size: 20,
       page: 0,
       sort: 'id,desc'
@@ -123,11 +116,10 @@ export class UploadFilesComponent implements OnInit {
   }
 
   // ------------------------ Create New User ---------------------
-  createNewFile() {
-    console.log("createNewFile");
-    this.dialog.open(UploadFileDialogComponent, {
+  createNewUser() {
+    this.dialog.open(LabDialogComponent, {
       width: '600px',
-      height: '500px',
+      height: '600px',
       disableClose: true
     })
       .afterClosed()
@@ -141,14 +133,14 @@ export class UploadFilesComponent implements OnInit {
 
   /**
    * 
-   * @param userData User object to be edited
+   * @param labData User object to be edited
    */
-  editFile(userData) {
-    this.dialog.open(UploadFileDialogComponent, {
+  editLab(labData) {
+    this.dialog.open(LabDialogComponent, {
       width: '600px',
-      height: '500px',
+      height: '600px',
       disableClose: true,
-      data: userData
+      data: labData
     })
       .afterClosed()
       .subscribe(response => {
@@ -161,27 +153,27 @@ export class UploadFilesComponent implements OnInit {
 
   /**
    * 
-   * @param userObj User object to be deleted
+   * @param labObj User object to be deleted
    */
-  deleteUser(userObj) {
+  deleteLab(labObj) {
     let confirmData = {
-      'title': 'Delete User',
-      'content': '<p>Are you sure to Delete this User? </p> <p> Deleting a user will delete all their associated information associated from the user and this action cannot be undone. </p> <p> Please type <b> <i> delete user </i> </b> in the box below to delete.</p>',
+      'title': 'Delete Lab',
+      'content': '<p>Are you sure to Delete this Lab? </p> <p> Deleting a Lab will delete all their associated information associated from the user and this action cannot be undone. </p>',
       'isContentHtml': true,
-      'username':userObj.username,
-      'isUser': true,
+      'username':labObj.room_building,
+      'isUser': false,
 
     }
     this.helper.confirmDialog(confirmData,'400px','400px').subscribe(response => {
       if (response) {
 
-        let idx = this.userList.indexOf(userObj);
-        this.api.deleteUser(userObj.username)
+        let idx = this.labList.indexOf(labObj);
+        this.api.deleteLab(labObj.id)
           .subscribe(response => {
 
-            if (response.status == 200) {
-              this.userList.splice(idx, 1);
-              this.userDataSource = new MatTableDataSource(this.userList);
+            if (response.status == 200 || response.status == 204) {
+              this.labList.splice(idx, 1);
+              this.userDataSource = new MatTableDataSource(this.labList);
               this.helper.showSnackbar('User Deleted Successfully', 'snackBar-success');
               this.search();
             } else {
@@ -192,8 +184,5 @@ export class UploadFilesComponent implements OnInit {
         console.log('no delete', response);
       }
     })
-
   }
-
-
 }

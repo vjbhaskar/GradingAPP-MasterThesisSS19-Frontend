@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { HelperService } from '../../../../../app/helpers/services/helper.service';
 import { FixturesService } from '../../../../../app/helpers/services/fixtures.service';
 import { GradingAppApiService } from '../../../../../app/api/grading-app-api.service';
+import { ConvertModelToFormData } from '../../../../../app/helpers/services/convert-object-to-formdata.service';
 
 @Component({
   selector: 'app-user-dialog',
@@ -14,24 +15,26 @@ export class UserDialogComponent implements OnInit {
 
   userForm = this.fb.group({
     username: ['', [Validators.required, Validators.pattern("^[a-z,A-Z,0-9]+$")]],
-    first_name: ['', Validators.required],
+    first_name: [''],
     password: [''],
-    last_name: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]],
+    last_name: [''],
+    user_type:['', Validators.required],
+    email: ['', [Validators.email]],
+    addType:['1'],
     profile: this.fb.group({
-      fdnumber: ['', Validators.required],
-      department: ['', Validators.required],
-      user_type:['', Validators.required]
+      department: ['',],
     }),
   });
   editUser: boolean = false;
   userId: any;
+  fileObj: any;
 
   constructor(public dialogRef: MatDialogRef<UserDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private api: GradingAppApiService,
     private helper: HelperService,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    private toFormData: ConvertModelToFormData) {
   }
 
   ngOnInit() {
@@ -61,16 +64,65 @@ export class UserDialogComponent implements OnInit {
     }
     // --------------------- Creating user -----------------
     else {
-      this.api.createUser(userData)
+      
+      if(this.userForm.controls['addType'].value == '2'){
+        let userData ={
+          'user_list':this.fileObj
+        }
+  
+        var data = this.toFormData.convert(userData);
+        this.api.createBulkUser(data)
         .subscribe(response => {
           if (response) {
+            this.helper.showSnackbar("Users Created successfully", 'snackBar-success');
             this.closeDialog(response);
           }
         }, error => {
           this.helper.showSnackbar(error.error.title, 'snackBar-error');
         })
+      } else{
+        this.api.createUser(userData)
+        .subscribe(response => {
+          if (response) {
+            this.helper.showSnackbar("User Created successfully", 'snackBar-success');
+            this.closeDialog(response);
+          }
+        }, error => {
+          this.helper.showSnackbar(error.error.title, 'snackBar-error');
+        })
+      }
+      
     }
 
+  }
+
+  /**
+   * Function to add multiple uploded files into an array
+   * @param event contains the file that has been uploaded
+   */
+  onImageUpload(event) {
+    if (event.target.files.length > 0) {
+      this.fileObj = event.target.files[0];
+    }
+  }
+
+  addTypeChanged() {
+    console.log("in here");
+    if (this.userForm.controls['addType'].value == '2') {
+      
+      console.log("in If");
+      this.userForm.get('username').clearValidators();
+      this.userForm.get('username').updateValueAndValidity();
+      this.userForm.get('user_type').clearValidators();
+      this.userForm.get('user_type').updateValueAndValidity();
+
+      //Open dialog
+    } else {
+      this.userForm.get('username').setValidators([Validators.required]);
+      this.userForm.get('username').updateValueAndValidity();
+      this.userForm.get('user_type').setValidators([Validators.required]);
+      this.userForm.get('user_type').updateValueAndValidity();
+    }
   }
 
   closeDialog(obj = {}) {

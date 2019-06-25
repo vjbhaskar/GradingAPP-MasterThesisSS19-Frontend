@@ -9,96 +9,122 @@
     <form style="padding:20px 40px;" [formGroup]="userForm" (ngSubmit)="saveUser()" fxLayout="column"
       fxLayoutAlign="center none">
 
-      <mat-form-field>
-        <input type="text" formControlName="username"  matInput placeholder="Username">
-        <mat-hint *ngIf="u.username.touched && u.username.errors" align="start">
-          <div *ngIf="u.username.errors.required" class="error-msg">
-            Username is required </div>
-          <div *ngIf="u.username.errors.pattern" class="error-msg">
-            Spaces and symbols are not allowed
+      <div fxLayout="column" style="margin-top: 10px;">
+        <span style="margin-bottom: 8px;"> Add Type</span>
+        <mat-radio-group formControlName="addType" (change)="addTypeChanged()">
+          <mat-radio-button value="1">
+            Single
+          </mat-radio-button>
+          <mat-radio-button style="margin-left:10px;" value="2">
+            Bulk
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <div fxLayout="column" *ngIf="userForm.controls['addType'].value == '1'" style="margin-top:20px;">
+        <div fxLayout="row" fxFlex>
+          <mat-form-field fxFlex="48">
+            <input type="text" formControlName="username" matInput placeholder="Username">
+            <mat-hint *ngIf="u.username.touched && u.username.errors" align="start">
+              <div *ngIf="u.username.errors.required" class="error-msg">
+                Username is required </div>
+            </mat-hint>
+          </mat-form-field>
+          <span fxFlex="4"></span>
+          <mat-form-field fxFlex="48">
+            <input type="password" formControlName="password" matInput placeholder="Password">
+            <mat-hint *ngIf="u.password.touched && u.password.errors" align="start">
+              <div *ngIf="u.password.errors.required" class="error-msg">
+                password is required </div>
+              <div *ngIf="u.password.errors.pattern" class="error-msg">
+                Spaces and symbols are not allowed
+              </div>
+            </mat-hint>
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxFlex>
+          <mat-form-field fxFlex="48">
+            <input type="text" formControlName="first_name" matInput placeholder="First Name">
+            <mat-hint *ngIf="u.first_name.touched && u.first_name.errors" align="start">
+              <div *ngIf="u.first_name.errors.required" class="error-msg">
+                First Name is required </div>
+            </mat-hint>
+          </mat-form-field>
+
+          <span fxFlex="4"></span>
+
+          <mat-form-field fxFlex="48">
+            <input type="text" formControlName="last_name" matInput placeholder="Last Name">
+            <mat-hint *ngIf="u.last_name.touched && u.last_name.errors" align="start">
+              <div *ngIf="u.last_name.errors.required" class="error-msg">
+                Last Name is required </div>
+            </mat-hint>
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxFlex>
+          <mat-form-field fxFlex="48">
+            <input type="text" formControlName="email" matInput placeholder="Email">
+            <mat-hint *ngIf="u.email.touched && u.email.errors" align="start">
+              <div *ngIf="u.email.errors.required" class="error-msg">
+                Email is required </div>
+              <div *ngIf="u.email.dirty && u.email.errors.email" class="error-msg">
+                Please valid email address </div>
+            </mat-hint>
+          </mat-form-field>
+
+          <span fxFlex="4"></span>
+
+          <mat-form-field fxFlex="48">
+            <mat-select formControlName="user_type" placeholder="User Type">
+              <mat-option value="1">Student</mat-option>
+              <mat-option value="2">Teacher</mat-option>
+              <mat-option value="3">Lab Admin</mat-option>
+              <mat-option value="4">Admin</mat-option>
+            </mat-select>
+            <mat-hint *ngIf="u.user_type.touched && u.user_type.errors" align="start">
+              <div *ngIf="u.user_type.errors.required" class="error-msg">
+                user_type is required </div>
+            </mat-hint>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxFlex>
+          <form formGroupName="profile" fxLayout="column" fxLayoutAlign="center none">
+            <mat-form-field fxFlex="48">
+              <input type="text" formControlName="department" matInput placeholder="Department">
+              <mat-hint *ngIf="profile.department.touched && profile.department.errors" align="start">
+                <div *ngIf="profile.department.errors.required" class="error-msg">
+                  Department is required </div>
+                <div *ngIf="profile.department.dirty && profile.department.errors.department" class="error-msg">
+                  Please enter Valid Department </div>
+              </mat-hint>
+            </mat-form-field>
+          </form>
+        </div>
+      </div>
+      <div *ngIf="userForm.controls['addType'].value == '2'" style="margin-top:20px;">
+        <div>
+            <div>
+              <p class="form-subheading">Upload Student List</p>
+              <div class="line-after-text" fxFlex></div>
+            </div>
+            <label for="file-upload2" class="custom-file-upload">
+              <mat-icon>attach_file</mat-icon> <span>Anhang</span>
+            </label>
+            <input id="file-upload2" placeholder="Zulassung Certificate" style="margin-left:5px;"
+              (change)="onImageUpload($event)" type="file" class="form-control">
           </div>
-        </mat-hint>
-      </mat-form-field>
+      </div>
 
-      <mat-form-field>
-        <input type="password" formControlName="password"  matInput placeholder="Password">
-        <mat-hint *ngIf="u.password.touched && u.password.errors" align="start">
-          <div *ngIf="u.password.errors.required" class="error-msg">
-            password is required </div>
-          <div *ngIf="u.password.errors.pattern" class="error-msg">
-            Spaces and symbols are not allowed
-          </div>
-        </mat-hint>
-      </mat-form-field>
 
-      <mat-form-field>
-        <input type="text" formControlName="first_name" matInput
-          placeholder="First Name">
-        <mat-hint *ngIf="u.first_name.touched && u.first_name.errors" align="start">
-          <div *ngIf="u.first_name.errors.required" class="error-msg">
-            First Name is required </div>
-        </mat-hint>
-      </mat-form-field>
-
-      <mat-form-field>
-        <input type="text" formControlName="last_name" matInput
-          placeholder="Last Name">
-        <mat-hint *ngIf="u.last_name.touched && u.last_name.errors" align="start">
-          <div *ngIf="u.last_name.errors.required" class="error-msg">
-            Last Name is required </div>
-        </mat-hint>
-      </mat-form-field>
-
-      <mat-form-field>
-        <input type="text" formControlName="email"  matInput placeholder="Email">
-        <mat-hint *ngIf="u.email.touched && u.email.errors" align="start">
-          <div *ngIf="u.email.errors.required" class="error-msg">
-            Email is required </div>
-          <div *ngIf="u.email.dirty && u.email.errors.email" class="error-msg">
-            Please valid email address </div>
-        </mat-hint>
-      </mat-form-field>
-      <form formGroupName="profile" fxLayout="column" fxLayoutAlign="center none">
-        <mat-form-field>
-          <input type="text" formControlName="fdnumber"  matInput placeholder="Fd Number">
-          <mat-hint *ngIf="profile.fdnumber.touched && profile.fdnumber.errors" align="start">
-            <div *ngIf="profile.fdnumber.errors.required" class="error-msg">
-              Email is required </div>
-            <div *ngIf="profile.fdnumber.dirty && profile.fdnumber.errors.fdnumber" class="error-msg">
-              Please valid FD Number address </div>
-          </mat-hint>
-        </mat-form-field>
-        <mat-form-field>
-          <input type="text" formControlName="department"  matInput placeholder="Department">
-          <mat-hint *ngIf="profile.department.touched && profile.department.errors" align="start">
-            <div *ngIf="profile.department.errors.required" class="error-msg">
-              Department is required </div>
-            <div *ngIf="profile.department.dirty && profile.department.errors.department" class="error-msg">
-              Please enter Valid Department </div>
-          </mat-hint>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-select formControlName="user_type" placeholder="User Type">
-            <mat-option value="1">Student</mat-option>
-            <mat-option value="2">Teacher</mat-option>
-            <mat-option value="3">Lab Admin</mat-option>
-            <mat-option value="4">Admin</mat-option>
-          </mat-select>
-          <mat-hint *ngIf="profile.user_type.touched && profile.user_type.errors" align="start">
-            <div *ngIf="profile.user_type.errors.required" class="error-msg">
-              user_type is required </div>
-          </mat-hint>
-        </mat-form-field>
-      </form>
-      
 
       <div fxLayoutAlign="row" fxLayoutAlign="start center">
-       
+
       </div>
 
       <div fxLayout="row" fxLayoutAlign="end center" style="margin-top:10px;">
         <div>
-          <small *ngIf="userForm.invalid" class="error-msg">All Fields are required</small><Br>
           <button class="cancel-button" type="button" mat-raised-button (click)="closeDialog()">Cancel</button>
           <button class="affirmative-button" type="submit" style="margin-left:15px;" [disabled]="userForm.invalid"
             mat-raised-button>Save</button>

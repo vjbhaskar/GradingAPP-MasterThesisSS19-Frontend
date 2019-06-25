@@ -41,4 +41,98 @@ export class GradingAppApiService {
   updateFile(id,data){
     return this.api.patchRequestWithToken(`api/file/${id}/`,data);
   }
+  getAllSubjects(){
+    return this.api.getRequestWithToken('api/subject/');
+  }
+  getAllLabs(){
+    return this.api.getRequestWithToken('api/lab/');
+  }
+  getStudents(){
+    return this.api.getRequestWithToken('api/user/students/');
+  }
+  getLabAdmins(){
+    return this.api.getRequestWithToken('api/user/labadmins/');
+  }
+  // createLab(data){
+  //   return this.api.postRequest('api/lab/', data);
+  // }
+
+  createLab(data){
+    return this.api.postRequest('api/labIp/bulk', data);
+  }
+  updateLab(id,data){
+    return this.api.patchRequestWithToken(`api/lab/${id}/`,data);
+  }
+
+  deleteLab(id){
+    return this.api.deleteReqeust(`api/lab/${id}/`);
+  }
+
+  getAllIps(){
+    return this.api.getRequestWithToken('api/labIp/');
+  }
+  createIp(data){
+    return this.api.postRequest('api/labIp/', data);
+  }
+  updateIp(id,data){
+    return this.api.patchRequestWithToken(`api/labIp/${id}/`,data);
+  }
+
+  deleteIp(id){
+    return this.api.deleteReqeust(`api/labIp/${id}/`);
+  }
+
+  createSubject(data){
+    return this.api.postRequest('api/subject/', data);
+  }
+
+  updateSubject(id,data){
+    return this.api.patchRequestWithToken(`api/subject/${id}/`,data);
+  }
+
+  deleteSubject(id){
+    return this.api.deleteReqeust(`api/subject/${id}/`);
+  }
+
+ 
+
+  createBulkUser(data){
+    return this.api.postRequest('api/user/bulkstudents/',data);
+  }
+  getAllExams(){
+    return this.api.getRequestWithToken('api/exam/');
+  }
+
+  createExam(data){
+    return this.api.postRequest('api/exam/', data);
+  }
+
+  updateExam(id,data){
+    return this.api.patchRequestWithToken(`api/exam/${id}/`,data);
+  }
+
+  deleteExam(id){
+    return this.api.deleteReqeust(`api/exam/${id}/`);
+  }
+
+  getLabById(id){
+    return this.api.getRequest(`api/lab/${id}`)
+  }
+
+  getAllTimeSlots(){
+    return this.api.getRequestWithToken('api/timeSlot/');
+  }
+
+  createTimeSlot(data){
+    return this.api.postRequest('api/timeSlot/', data);
+  }
+
+  deleteTimeSlot(id){
+    return this.api.deleteReqeust(`api/timeSlot/${id}`);
+  }
+
+  assignSingleIp(url,data){
+    return this.api.postRequest(url, data);
+  }
+  
 }

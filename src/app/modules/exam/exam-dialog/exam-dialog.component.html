@@ -1,0 +1,62 @@
+<div fxLayout="column">
+  <div fxFlex class="dialog-header">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div style="font-size:larger">{{editExam?'Edit':'Create New'}} Exam</div>
+      <mat-icon style="cursor:pointer" (click)="closeDialog()">close</mat-icon>
+    </div>
+  </div>
+  <div style="height:100%;overflow-y:auto">
+    <form style="padding:20px 40px;" [formGroup]="examForm" (ngSubmit)="saveExam()" fxLayout="column"
+      fxLayoutAlign="center none">
+
+      <mat-form-field>
+        <input type="text" formControlName="name"  matInput placeholder="Name">
+        <mat-hint *ngIf="u.name.touched && u.name.errors" align="start">
+          <div *ngIf="u.name.errors.required" class="error-msg">
+            Name is required </div>
+          <div *ngIf="u.name.errors.pattern" class="error-msg">
+            Spaces and symbols are not allowed
+          </div>
+        </mat-hint>
+      </mat-form-field>
+
+      
+      
+      <!-- <mat-form-field>
+        <mat-select formControlName="lab_id" placeholder="Lab">
+          <mat-option *ngFor="let lab of labs" [value]="lab.id">{{lab.room_building}}</mat-option>
+        </mat-select>
+        <mat-hint *ngIf="u.lab_id.touched && u.lab_id.errors" align="start">
+          <div *ngIf="u.lab_id.errors.required" class="error-msg">
+            Lab is required </div>
+        </mat-hint>
+      </mat-form-field> -->
+
+      <mat-form-field>
+        <mat-select formControlName="subject" placeholder="Subject">
+          <mat-option *ngFor="let sub of subjectList" [value]="sub">{{sub.name}}</mat-option>
+        </mat-select>
+        <mat-hint *ngIf="u.subject.touched && u.subject.errors" align="start">
+          <div *ngIf="u.subject.errors.required" class="error-msg">
+            Subject is required </div>
+        </mat-hint>
+      </mat-form-field>
+      
+
+      <div fxLayoutAlign="row" fxLayoutAlign="start center">
+       
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="end center" style="margin-top:10px;">
+        <div>
+          <small *ngIf="examForm.invalid" class="error-msg">All Fields are required</small><Br>
+          <button class="cancel-button" type="button" mat-raised-button (click)="closeDialog()">Cancel</button>
+          <button class="affirmative-button" type="submit" style="margin-left:15px;" [disabled]="examForm.invalid"
+            mat-raised-button>Save</button>
+        </div>
+
+      </div>
+
+    </form>
+  </div>
+</div>

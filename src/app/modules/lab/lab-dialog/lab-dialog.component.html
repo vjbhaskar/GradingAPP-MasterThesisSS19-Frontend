@@ -1,0 +1,97 @@
+<div fxLayout="column">
+  <div fxFlex class="dialog-header">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div style="font-size:larger">{{editLab?'Edit':'Create New'}} Lab</div>
+      <mat-icon style="cursor:pointer" (click)="closeDialog()">close</mat-icon>
+    </div>
+  </div>
+  <div style="height:100%;overflow-y:auto">
+    <form style="padding:20px 40px;" [formGroup]="labForm" (ngSubmit)="saveLab()" fxLayout="column"
+      fxLayoutAlign="center none">
+
+      <mat-form-field>
+        <input type="text" formControlName="room_building" matInput placeholder="Room Number">
+        <mat-hint *ngIf="u.room_building.touched && u.room_building.errors" align="start">
+          <div *ngIf="u.room_building.errors.required" class="error-msg">
+            Room Number is required </div>
+          <div *ngIf="u.room_building.errors.pattern" class="error-msg">
+            Spaces and symbols are not allowed
+          </div>
+        </mat-hint>
+      </mat-form-field>
+
+
+
+      <mat-form-field>
+        <mat-select formControlName="lab_admin" placeholder="Lab Admin">
+          <mat-option *ngFor="let usr of labAdmins" [value]="usr.id">{{usr.username}}</mat-option>
+        </mat-select>
+        <mat-hint *ngIf="u.lab_admin.touched && u.lab_admin.errors" align="start">
+          <div *ngIf="u.lab_admin.errors.required" class="error-msg">
+            lab Admin is required </div>
+        </mat-hint>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select formControlName="exam" placeholder="Exam">
+          <mat-option *ngFor="let exam of examsList" [value]="exam.id">{{exam.name}}</mat-option>
+        </mat-select>
+        <mat-hint *ngIf="u.exam.touched && u.exam.errors" align="start">
+          <div *ngIf="u.exam.errors.required" class="error-msg">
+            lab Admin is required </div>
+        </mat-hint>
+      </mat-form-field>
+
+      <div *ngIf="!editLab">
+        <div>
+          <p class="form-subheading">Upload IPs List</p>
+          <div class="line-after-text" fxFlex></div>
+        </div>
+        <label for="file-upload2" class="custom-file-upload">
+          <mat-icon>attach_file</mat-icon> <span>Anhang</span>
+        </label>
+        <input id="file-upload2" placeholder="Zulassung Certificate" style="margin-left:5px;"
+          (change)="onImageUpload($event)" type="file" class="form-control">
+      </div>
+
+      <div *ngIf="editLab">
+        <div>
+          <p class="form-subheading">IPs List</p>
+          <div class="line-after-text" fxFlex></div>
+        </div>
+        <div *ngIf="ipArr.length > 0">
+
+          <div *ngFor="let ip of ipArr" style="margin:10px;">
+            <div fxFlex="30">
+              IP
+            </div>
+            <span fxFlex="5"></span>
+            <div fxFlex="30">
+              {{ip.ip}}
+            </div>
+          </div>
+        </div>
+        <div *ngIf="ipArr.length == 0" fxLayoutAling="center center">
+          No Ips Assigned
+        </div>
+      </div>
+
+
+
+      <div fxLayoutAlign="row" fxLayoutAlign="start center">
+
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="end center" style="margin-top:10px;">
+        <div>
+          <small *ngIf="labForm.invalid" class="error-msg">All Fields are required</small><Br>
+          <button class="cancel-button" type="button" mat-raised-button (click)="closeDialog()">Cancel</button>
+          <button class="affirmative-button" type="submit" style="margin-left:15px;" [disabled]="labForm.invalid"
+            mat-raised-button>Save</button>
+        </div>
+
+      </div>
+
+    </form>
+  </div>
+</div>

@@ -1,0 +1,144 @@
+<div fxLayout="column">
+  <div fxFlex class="dialog-header">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div style="font-size:larger">{{editLab?'Edit':'Assign'}} IP</div>
+      <mat-icon style="cursor:pointer" (click)="closeDialog()">close</mat-icon>
+    </div>
+  </div>
+  <div style="height:100%;overflow-y:auto">
+    <form style="padding:20px 40px;" [formGroup]="assignlabIpForm" (ngSubmit)="saveLab()" fxLayout="column"
+      fxLayoutAlign="center none">
+      <div fxLayout="column" style="margin-top: 10px;">
+        <span style="margin-bottom: 8px;"> Assign Type</span>
+        <mat-radio-group formControlName="assignType" (change)="assignTypeChanged()">
+          <mat-radio-button value="1">
+            Single
+          </mat-radio-button>
+          <mat-radio-button style="margin-left:10px;" value="2">
+            Bulk
+          </mat-radio-button>
+          <mat-radio-button style="margin-left:10px;" value="3">
+            De Assign
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div *ngIf="assignlabIpForm.controls['assignType'].value == '1'">
+        <!-- Assing Single -->
+        <div fxLayout="row">
+          <mat-form-field fxFlex="45">
+            <mat-select formControlName="lab_id" placeholder="Lab" (selectionChange)="getLabIps()">
+              <mat-option *ngFor="let lab of labs" [value]="lab.id">{{lab.room_building}}</mat-option>
+            </mat-select>
+            <mat-hint *ngIf="u.lab_id.touched && u.lab_id.errors" align="start">
+              <div *ngIf="u.lab_id.errors.required" class="error-msg">
+                Lab is required </div>
+            </mat-hint>
+          </mat-form-field>
+          <span fxFlex="2"></span>
+          <mat-form-field fxFlex="45">
+            <mat-select formControlName="lab_ip_id" placeholder="Lab Ip">
+              <mat-option *ngFor="let labip of ips" [value]="labip.id">{{labip.ip}}</mat-option>
+            </mat-select>
+            <mat-hint *ngIf="u.lab_ip_id.touched && u.lab_ip_id.errors" align="start">
+              <div *ngIf="u.lab_ip_id.errors.required" class="error-msg">
+                Lab IP is required </div>
+            </mat-hint>
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row">
+          <mat-form-field fxFlex="45">
+            <mat-select formControlName="student_username" placeholder="Student">
+              <mat-option *ngFor="let std of students" [value]="std.username">{{std.username}}</mat-option>
+            </mat-select>
+            <mat-hint *ngIf="u.student_username.touched && u.student_username.errors" align="start">
+              <div *ngIf="u.student_username.errors.required" class="error-msg">
+                Student is required </div>
+            </mat-hint>
+          </mat-form-field>
+          <span fxFlex="2"></span>
+          <mat-form-field fxFlex="45">
+            <mat-select formControlName="exam_id" placeholder="Exam">
+              <mat-option *ngFor="let std of exams" [value]="std.id">{{std.name}}</mat-option>
+            </mat-select>
+            <mat-hint *ngIf="u.exam_id.touched && u.exam_id.errors" align="start">
+              <div *ngIf="u.exam_id.errors.required" class="error-msg">
+                Exam is required </div>
+            </mat-hint>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row">
+          <mat-form-field fxFlex="45">
+            <mat-select formControlName="timeslot_id" placeholder="Time Slot">
+              <mat-option *ngFor="let std of timeslots" [value]="std.id">{{std.name}} &nbsp; &nbsp;
+                {{std.start_time}}-{{std.end_time}}</mat-option>
+            </mat-select>
+            <mat-hint *ngIf="u.timeslot_id.touched && u.timeslot_id.errors" align="start">
+              <div *ngIf="u.timeslot_id.errors.required" class="error-msg">
+                Time Slot is required </div>
+            </mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div *ngIf="assignlabIpForm.controls['assignType'].value == '2'" style="margin-top:10px;">
+        <!-- Assign Bulk -->
+
+        <div>
+          <div>
+            <mat-form-field fxFlex="45">
+              <mat-select formControlName="bulkExam" placeholder="Exam">
+                <mat-option *ngFor="let std of exams" [value]="std.id">{{std.name}}</mat-option>
+              </mat-select>
+              <mat-hint *ngIf="u.bulkExam.touched && u.bulkExam.errors" align="start">
+                <div *ngIf="u.bulkExam.errors.required" class="error-msg">
+                  Exam is required </div>
+              </mat-hint>
+            </mat-form-field>
+          </div>
+          <div>
+            <p class="form-subheading">Upload Student List</p>
+            <div class="line-after-text" fxFlex></div>
+          </div>
+          <label for="file-upload2" class="custom-file-upload">
+            <mat-icon>attach_file</mat-icon> <span>Anhang</span>
+          </label>
+          <input id="file-upload2" placeholder="Student list" style="margin-left:5px;" (change)="onImageUpload($event)"
+            type="file" class="form-control">
+        </div>
+
+      </div>
+
+      <div *ngIf="assignlabIpForm.controls['assignType'].value == '3'" style="margin-top:10px;">
+        <!-- Deassign -->
+        <div>
+          <mat-form-field fxFlex="45">
+            <mat-select formControlName="deassignExam" placeholder="Exam">
+              <mat-option *ngFor="let std of exams" [value]="std.id">{{std.name}}</mat-option>
+            </mat-select>
+            <mat-hint *ngIf="u.deassignExam.touched && u.deassignExam.errors" align="start">
+              <div *ngIf="u.deassignExam.errors.required" class="error-msg">
+                Exam is required </div>
+            </mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+
+
+      <div fxLayoutAlign="row" fxLayoutAlign="start center">
+
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="end center" style="margin-top:10px;">
+        <div>
+          <small *ngIf="assignlabIpForm.invalid" class="error-msg">All Fields are required</small><Br>
+          <button class="cancel-button" type="button" mat-raised-button (click)="closeDialog()">Cancel</button>
+          <button class="affirmative-button" type="submit" style="margin-left:15px;"
+            [disabled]="assignlabIpForm.invalid" mat-raised-button>Save</button>
+        </div>
+
+      </div>
+
+    </form>
+  </div>
+</div>

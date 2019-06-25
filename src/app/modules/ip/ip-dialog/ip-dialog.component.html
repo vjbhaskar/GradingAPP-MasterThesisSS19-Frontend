@@ -1,0 +1,62 @@
+<div fxLayout="column">
+  <div fxFlex class="dialog-header">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div style="font-size:larger">{{editLab?'Edit':'Create New'}} Lab</div>
+      <mat-icon style="cursor:pointer" (click)="closeDialog()">close</mat-icon>
+    </div>
+  </div>
+  <div style="height:100%;overflow-y:auto">
+    <form style="padding:20px 40px;" [formGroup]="labIpForm" (ngSubmit)="saveLab()" fxLayout="column"
+      fxLayoutAlign="center none">
+
+      <mat-form-field>
+        <input type="text" formControlName="ip"  matInput placeholder="IP">
+        <mat-hint *ngIf="u.ip.touched && u.ip.errors" align="start">
+          <div *ngIf="u.ip.errors.required" class="error-msg">
+           Ip is required </div>
+          <div *ngIf="u.ip.errors.pattern" class="error-msg">
+            Spaces and symbols are not allowed
+          </div>
+        </mat-hint>
+      </mat-form-field>
+
+      
+      
+      <mat-form-field>
+        <mat-select formControlName="lab_id" placeholder="Lab">
+          <mat-option *ngFor="let lab of labs" [value]="lab.id">{{lab.room_building}}</mat-option>
+        </mat-select>
+        <mat-hint *ngIf="u.lab_id.touched && u.lab_id.errors" align="start">
+          <div *ngIf="u.lab_id.errors.required" class="error-msg">
+            Lab is required </div>
+        </mat-hint>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select formControlName="student_id" placeholder="Student">
+          <mat-option *ngFor="let std of students" [value]="std.id">{{std.username}}</mat-option>
+        </mat-select>
+        <mat-hint *ngIf="u.student_id.touched && u.student_id.errors" align="start">
+          <div *ngIf="u.student_id.errors.required" class="error-msg">
+            Student is required </div>
+        </mat-hint>
+      </mat-form-field>
+      
+
+      <div fxLayoutAlign="row" fxLayoutAlign="start center">
+       
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="end center" style="margin-top:10px;">
+        <div>
+          <small *ngIf="labIpForm.invalid" class="error-msg">All Fields are required</small><Br>
+          <button class="cancel-button" type="button" mat-raised-button (click)="closeDialog()">Cancel</button>
+          <button class="affirmative-button" type="submit" style="margin-left:15px;" [disabled]="labIpForm.invalid"
+            mat-raised-button>Save</button>
+        </div>
+
+      </div>
+
+    </form>
+  </div>
+</div>

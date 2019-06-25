@@ -15,13 +15,15 @@ import { ConvertModelToFormData } from '../../../../helpers/services/convert-obj
 export class UploadFileDialogComponent implements OnInit {
 
   uploadForm = this.fb.group({
-    is_submitted: [false]
+    is_submitted: [false],
+    subject_id: ['', [Validators.required] ]
   });
   editUser: boolean = false;
   userId: any;
   fileObj: any;
   userObj: any;
   fileName: any;
+  subjectsList: any;
   constructor(public dialogRef: MatDialogRef<UserDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private api: GradingAppApiService,
@@ -32,6 +34,10 @@ export class UploadFileDialogComponent implements OnInit {
 
   ngOnInit() {
     this.userObj = this.helper.getUserObj();
+    this.api.getAllSubjects().subscribe(response => {
+      //console.log('response =', response.headers.get("X-Total-Count"));
+      this.subjectsList = response;
+    })
     if (this.data) {
       //this.userForm.patchValue(this.data);
       this.userId = this.data.id;

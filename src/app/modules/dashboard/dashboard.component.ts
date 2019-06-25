@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { HelperService } from 'src/app/helpers/services/helper.service';
+import { HelperService } from '../../../app/helpers/services/helper.service';
+import { DashboardAppsService } from '../../../app/helpers/services/dashboard-apps.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,7 +16,8 @@ export class DashboardComponent implements OnInit {
   userData: any;
   constructor(private router: Router,
     private helperService: HelperService,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private dashboardAppService: DashboardAppsService) {
 
     this.router.events.subscribe((res) => {
       this.activeLink = '.' + this.router.url;
@@ -24,44 +26,14 @@ export class DashboardComponent implements OnInit {
     })
 
     // this.dashboardApps = this.fixture.dashboardSidenavApps();
-    this.dashboardApps = [
-      {
-        'headerName': 'Dashboard',
-        'icon': 'dashboard',
-        'isAccordion': false,
-        'apps': [{
-          'name': 'Dashboard',
-          'icon': 'dashboard',
-          'route': '/dashboard/feed',
-        }]
-      },
-      {
-        'headerName': 'User Management',
-        'icon': 'dashboard',
-        'isAccordion': false,
-        'apps': [
-          {
-            'name': 'User Management',
-            'route': '/dashboard/user-management',
-            'icon': undefined,
-            'fontAwesomeIcon': 'fas fa-users-cog',
-          },
-        ]
-      },
-      {
-        'headerName': 'Files',
-        'icon': 'dashboard',
-        'isAccordion': false,
-        'apps': [
-          {
-            'name': 'Files',
-            'route': '/dashboard/files',
-            'icon': undefined,
-            'fontAwesomeIcon': 'fas fa-file-alt',
-          },
-        ]
-      },
-    ]
+    this.userData = this.helperService.getUserObj()
+    if(this.userData['user_type'] == '1'){
+      this.dashboardApps = this.dashboardAppService.studentApps();
+    } else  if(this.userData['user_type'] == '3'){
+      this.dashboardApps = this.dashboardAppService.labAdminApps();
+    }  if(this.userData['user_type'] == '4'){
+      this.dashboardApps = this.dashboardAppService.adminApps();
+    }
 
   }
 

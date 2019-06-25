@@ -6,7 +6,7 @@
         <mat-expansion-panel-header>
           <mat-panel-title fxLayout="row" fxLayoutAlign="center center">
             <div class="app-name" fxFlex>
-              User Management
+              Labs Management
             </div>
             <div fxLayout='row' fxLayoutAlign="center center" class="open-search-button">
               {{searchPanelOpenState ? 'Close' : 'Open'}} Search
@@ -20,31 +20,8 @@
           <div fxFlex>
             <div fxLayout="row" fxLayoutAlign="space-between">
               <mat-form-field fxFlex="30">
-                <input type="text" matInput [(ngModel)]="searchObj.username" placeholder="Username">
+                <input type="text" matInput [(ngModel)]="searchObj.roomNumber" placeholder="Room Number">
               </mat-form-field>
-              <mat-form-field fxFlex="30">
-                <input type="text" matInput [(ngModel)]="searchObj.email" placeholder="Email">
-              </mat-form-field>
-            </div>
-            <div fxLayout="row" fxLayoutAlign="space-between">
-              <mat-form-field fxFlex="30">
-                <input type="text" matInput [(ngModel)]="searchObj.firstName" placeholder="First Name">
-              </mat-form-field>
-              <mat-form-field fxFlex="30">
-                <input type="text" matInput [(ngModel)]="searchObj.lastName" placeholder="Last Name">
-              </mat-form-field>
-              <div fxFlex="30">
-                <div fxLayout="row">
-                  <button type="button" mat-raised-button class="cancel-button" (click)="clearSearch()">
-                    <mat-icon style="margin-right:5px;">close</mat-icon>Clear
-                  </button>
-                  <div fxFlex="5"></div>
-                  <button class="affirmative-button" type="button" mat-raised-button (click)="search()">
-                    <mat-icon style="margin-right:5px;">search</mat-icon>Search
-                  </button>
-                </div>
-              </div>
-
             </div>
           </div>
         </div>
@@ -78,24 +55,14 @@
           <td mat-cell *matCellDef="let element; let i = index"> {{i+1}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="username">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header="username"> username </th>
-          <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+        <ng-container matColumnDef="roomNumber">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="roomNumber">Room Number </th>
+          <td mat-cell *matCellDef="let element"> {{element.room_building}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="email">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header="email"> Email </th>
-          <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="fullName">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header="firstName"> Full Name </th>
-          <td mat-cell *matCellDef="let element"> <small>{{element.first_name}} {{element.last_name}} </small></td>
-        </ng-container>
-        
-        <ng-container matColumnDef="department">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header="department"> Department </th>
-          <td mat-cell *matCellDef="let element"> <small>{{element['profile'] ? element['profile']['department'] : 'NA'}}</small></td>
+        <ng-container matColumnDef="ips">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="ips"> Ips Assigned </th>
+          <td mat-cell *matCellDef="let element"> {{element.lab_ips.length}} </td>
         </ng-container>
 
         <ng-container matColumnDef="createdDate">
@@ -106,12 +73,12 @@
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef> Actions </th>
           <td mat-cell *matCellDef="let element">
-            <mat-icon title="View" (click)="editUser(element)"
+            <mat-icon title="View" (click)="editLab(element)"
               class="table-action-icons table-action-icon-primary">remove_red_eye</mat-icon>
-            <mat-icon title="Edit" (click)="editUser(element)" class="table-action-icons table-action-icon-warn"
+            <mat-icon title="Edit" (click)="editLab(element)" class="table-action-icons table-action-icon-warn"
               *ngIf="isAdmin">edit</mat-icon>
-            <mat-icon title="Delete" (click)="deleteUser(element)" class="table-action-icons table-action-icon-danger"
-              >delete
+            <mat-icon title="Delete" (click)="deleteLab(element)" class="table-action-icons table-action-icon-danger"
+            >delete
             </mat-icon>
           </td>
         </ng-container>

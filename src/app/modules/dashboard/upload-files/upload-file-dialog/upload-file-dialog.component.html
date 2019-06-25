@@ -8,17 +8,45 @@
   <div>
     <form style="padding:20px 40px;" [formGroup]="uploadForm" (ngSubmit)="uploadFile()" fxLayout="column"
       fxLayoutAlign="center none">
+      <div>
         <div>
-          <label for="file-upload2" class="custom-file-upload">
-            <mat-icon>attach_file</mat-icon> <span>Anhang</span>
-          </label>
-          <input id="file-upload2" placeholder="Zulassung Certificate" style="margin-left:5px;"
+          <p class="form-subheading">Upload Exam File</p>
+          <div class="line-after-text" fxFlex></div>
+        </div>
+        <label for="file-upload2" class="custom-file-upload">
+          <mat-icon>attach_file</mat-icon> <span>Anhang</span>
+        </label>
+        <input id="file-upload2" placeholder="Zulassung Certificate" style="margin-left:5px;"
           (change)="onImageUpload($event)" type="file" class="form-control">
-         </div>
+      </div>
+      <div>
+        <div>
+          <p class="form-subheading">Subject</p>
+          <div class="line-after-text" fxFlex></div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center" style="margin-top:5px;">
+          <mat-form-field>
+              <mat-select formControlName="subject_id"   placeholder="User Type">
+                <mat-option *ngFor="let subject of subjectsList" [value]="subject.id" style="text-transform: uppercase;">{{subject.name}}</mat-option>
+              </mat-select>
+              <mat-hint *ngIf="u.subject_id.touched && u.subject_id.errors" align="start">
+                <div *ngIf="u.subject_id.errors.required" class="error-msg">
+                  Subject is required </div>
+              </mat-hint>
+            </mat-form-field>
+        </div>
+      </div>
+      <div>
+        <div>
+          <p class="form-subheading">Submit Files</p>
+          <div class="line-after-text" fxFlex></div>
+        </div>
         <div fxLayout="row" fxLayoutAlign="start center" style="margin-top:5px;">
           <mat-checkbox formControlName="is_submitted"></mat-checkbox>
           <div style="font-size:small;margin-left:8px;"> Submit </div>
         </div>
+      </div>
+
 
       <div fxLayout="row" fxLayoutAlign="end center" style="margin-top:10px;">
         <div>
