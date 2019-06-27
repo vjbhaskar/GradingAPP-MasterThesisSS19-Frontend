@@ -134,5 +134,9 @@ export class GradingAppApiService {
   assignSingleIp(url,data){
     return this.api.postRequest(url, data);
   }
+
+  getLoggedIp(data){
+    return this.api.postRequest('api/getIp/', data);
+  }
   
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HelperService } from '../../../app/helpers/services/helper.service';
 import { DashboardAppsService } from '../../../app/helpers/services/dashboard-apps.service';
+import { GradingAppApiService } from '../../../app/api/grading-app-api.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,7 +18,8 @@ export class DashboardComponent implements OnInit {
   constructor(private router: Router,
     private helperService: HelperService,
     private route: ActivatedRoute,
-    private dashboardAppService: DashboardAppsService) {
+    private dashboardAppService: DashboardAppsService,
+    private api: GradingAppApiService) {
 
     this.router.events.subscribe((res) => {
       this.activeLink = '.' + this.router.url;
@@ -29,6 +31,7 @@ export class DashboardComponent implements OnInit {
     this.userData = this.helperService.getUserObj()
     if(this.userData['user_type'] == '1'){
       this.dashboardApps = this.dashboardAppService.studentApps();
+      
     } else  if(this.userData['user_type'] == '3'){
       this.dashboardApps = this.dashboardAppService.labAdminApps();
     }  if(this.userData['user_type'] == '4'){

@@ -2,7 +2,7 @@
 
   <div fxFlex style="margin:20px;">
     <div class="feed-data" fxLayout="row wrap" fxLayoutAlign="space-between">
-      <mat-card class="feed-cards" fxFlex="33">
+      <mat-card class="feed-cards" fxFlex="33" >
         <mat-card-content>
           <div class="card-head-icon-button" style="background-image: linear-gradient(60deg,#669cbb,#4368a0);">
             <i class="fas fa-user-tag"></i>
@@ -29,52 +29,69 @@
         </mat-card-content>
       </mat-card>
 
-      <mat-card class="feed-cards" fxFlex="63">
+      <mat-card class="feed-cards" fxFlex="63" *ngIf="userData['user_type'] == '1' && userData['exam']">
         <mat-card-content>
           <div class="card-head-icon-button" style=" background-image:linear-gradient(60deg,#66bb6a,#2b502d);">
             <i class="fas fa-user"></i>
           </div>
           <div fxLayout="row" fxLayoutAlign="start none">
-            <div fxFlex="23" style="text-align:center">
+            <div fxFlex="33" style="text-align:center" >
               <h3 class="feed-name">
-                Admin
+                Exam
               </h3>
-              <h2 class="feed-value">
-                118
-              </h2>
+              <h3  class="feed-value">
+               {{userData['exam']['name']}}
+              </h3 >
             </div>
             <div fxFlex="1" style="border-right:1px solid lightgrey"></div>
-            <div fxFlex="23" style="text-align:center">
+            <div fxFlex="33" style="text-align:center">
               <h3 class="feed-name">
-                Student
+                Logged In IP
               </h3>
-              <h2 class="feed-value">
-                200
-              </h2>
-            </div>
-
-            <div fxFlex="1" style="border-right:1px solid lightgrey"></div>
-            <div fxFlex="23" style="text-align:center">
-              <h3 class="feed-name">
-                Dept
-              </h3>
-              <h2 class="feed-value">
-               5
-              </h2>
+              <h3  class="feed-value">
+                  {{loggedInIp}}
+              </h3 >
             </div>
 
             <div fxFlex="1" style="border-right:1px solid lightgrey"></div>
-            <div fxFlex="23" style="text-align:center">
+            <div fxFlex="33" style="text-align:center">
               <h3 class="feed-name">
-               Next Deadline
+                Assigned IP
               </h3>
-              <h2 class="feed-value">
-                5 Days
-              </h2>
+              <h3  class="feed-value">
+                  {{userData['ip']['ip']}}
+              </h3 >
             </div>
           </div>
         </mat-card-content>
       </mat-card>
+
+      <mat-card class="feed-cards" fxFlex="33" *ngIf="userData['user_type'] == '1'" style="margin-top:30px;">
+          <mat-card-content>
+            <div class="card-head-icon-button" style="background-image: linear-gradient(60deg,#669cbb,#4368a0);">
+              <i class="fas fa-user-tag"></i>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start none">
+              <div fxFlex="49" style="text-align:center">
+                <h3 class="feed-name">
+                  Lab
+                </h3>
+                <h2 class="feed-value">
+                 {{labData.room_building}}
+                </h2>
+              </div>
+              <div fxFlex="1" style="border-right:1px solid lightgrey"></div>
+              <div fxFlex="50" style="text-align:center">
+                <h3 class="feed-name">
+                Time Slot
+                </h3>
+                <h2 class="feed-value">
+                 {{userData['time_slot']['start_time'] +':'+ userData['time_slot']['end_time']}}
+                </h2>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
 
 
 
