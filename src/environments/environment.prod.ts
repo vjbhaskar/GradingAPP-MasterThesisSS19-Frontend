@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: 'https://vjbhaskar.com/api/'
+  baseUrl: 'https://mt-grading-app.herokuapp.com/'
 };
