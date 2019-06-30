@@ -16,7 +16,6 @@ export class UploadFileDialogComponent implements OnInit {
 
   uploadForm = this.fb.group({
     is_submitted: [false],
-    subject_id: ['', [Validators.required] ]
   });
   editUser: boolean = false;
   userId: any;

@@ -89,16 +89,6 @@
           <td mat-cell *matCellDef="let element"> {{element.username}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="email">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header="email"> Email </th>
-          <td mat-cell *matCellDef="let element"> {{element['user'].email}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="fdnumber">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header="fdnumber"> FD Number </th>
-          <td mat-cell *matCellDef="let element"> <small>{{element['user']['profile'] ? element['user']['profile']['fdnumber'] : 'NA' }}</small></td>
-        </ng-container>
-
         <ng-container matColumnDef="department">
           <th mat-header-cell *matHeaderCellDef mat-sort-header="department"> Department </th>
           <td mat-cell *matCellDef="let element"> <small>{{element['user']['profile'] ? element['user']['profile']['department'] : 'NA' }}</small></td>
@@ -110,7 +100,7 @@
         </ng-container>
 
         <ng-container matColumnDef="createdDate">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header="createdDate"> Created Date</th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="createdDate"> Uploaded Date</th>
           <td mat-cell *matCellDef="let element"> {{element.date_created | date:'short'}} </td>
         </ng-container>
 

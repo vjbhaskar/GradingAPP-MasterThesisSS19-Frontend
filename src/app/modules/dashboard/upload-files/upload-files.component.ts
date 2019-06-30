@@ -15,7 +15,7 @@ export class UploadFilesComponent implements OnInit {
   fileList: any = [];
   userDataSource: any;
   totalUsers = '';
-  displayedColumns = ['sno','name', 'email','fdnumber', 'department', 'createdDate','submitted', 'actions'];
+  displayedColumns = ['sno','name', 'department', 'createdDate','submitted', 'actions'];
   pageSizeOptions: number[] = [20, 30, 50];
   pageEvent: PageEvent;
   searchPanelOpenState: boolean = false;
