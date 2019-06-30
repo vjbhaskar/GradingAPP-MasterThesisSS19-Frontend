@@ -1,0 +1,122 @@
+<div class="app-content" fxLayout="column" *ngIf="!isLoading">
+  <div fxFlex class="search-bar">
+    <mat-accordion>
+      <mat-expansion-panel (opened)="searchPanelOpenState = true" [expanded]="searchPanelOpenState"
+        (closed)="searchPanelOpenState = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title fxLayout="row" fxLayoutAlign="center center">
+            <div class="app-name" fxFlex>
+              Ips Management
+            </div>
+            <div fxLayout='row' fxLayoutAlign="center center" class="open-search-button">
+              {{searchPanelOpenState ? 'Close' : 'Open'}} Search
+            </div>
+            <!-- <button mat-raised-button color="primary">{{searchPanelOpenState ? 'Close' : 'Open'}} Search</button> -->
+          </mat-panel-title>
+
+        </mat-expansion-panel-header>
+
+        <div fxLayout="column">
+          <div fxFlex>
+            <div fxLayout="row" fxLayoutAlign="space-between">
+              <mat-form-field fxFlex="30">
+                <input type="text" matInput [(ngModel)]="searchObj.roomNumber" placeholder="Room Number">
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+
+  </div>
+
+  <div class="app-body" fxLayout="column">
+    <div class="filter-bar" style="margin-bottom:10px;">
+      <div fxLayoutAlign="row" fxLayoutAlign="start center">
+
+        <!-- <mat-form-field fxFlex="60">
+          <input matInput (keyup)="applyFilter($event.target.value)"
+            placeholder="Filter by Username, Email, Firstname and Lastname">
+        </mat-form-field>
+        <mat-icon>filter_list</mat-icon> -->
+        <div fxFlex></div>
+        <!-- <div>
+          <button class="affirmative-button" mat-raised-button (click)="createNewUser()">
+            <mat-icon style="margin-right:5px;">add</mat-icon>Create New
+          </button>
+          <span fxFlex="2"></span>
+          <button class="affirmative-button" mat-raised-button (click)="assignUser()">
+            <mat-icon style="margin-right:5px;">add</mat-icon>Assign Single
+          </button>
+          
+        </div> -->
+      </div>
+    </div>
+    <div fxFlex class="table-container">
+      <table mat-table [dataSource]="userDataSource" matSort (matSortChange)="sortData($event)">
+        <ng-container matColumnDef="sno">
+          <th mat-header-cell *matHeaderCellDef> S.no </th>
+          <td mat-cell *matCellDef="let element; let i = index"> {{i+1}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="username">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="username">Username </th>
+          <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="ip">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="ip"> IP </th>
+          <td mat-cell *matCellDef="let element"> {{element.ip}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="login">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="login"> loginIP </th>
+          <td mat-cell *matCellDef="let element"> {{element['login'] ? element['login'] : 'NA'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="file">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="file"> file </th>
+          <td mat-cell *matCellDef="let element"> 
+              <div *ngFor="let fileinst of element.file; let i = index"> 
+                  <a [href]="fileinst" download> {{i}} </a>  
+              </div>
+              
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="createdDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="createdDate"> Created Date</th>
+          <td mat-cell *matCellDef="let element"> {{element.date_created | date:'short'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-icon title="View" (click)="editIp(element)"
+              class="table-action-icons table-action-icon-primary">remove_red_eye</mat-icon>
+            <mat-icon title="Edit" (click)="editIp(element)" class="table-action-icons table-action-icon-warn"
+              *ngIf="isAdmin">edit</mat-icon>
+            <mat-icon title="Delete" (click)="deleteIp(element)" class="table-action-icons table-action-icon-danger"
+              >delete
+            </mat-icon>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <div fxLayout="row" class="table-pagination" fxLayoutAlign="center center">
+        <mat-paginator [length]="totalUsers" [pageIndex]="searchObj.page" [pageSize]="searchObj.size"
+          [pageSizeOptions]="pageSizeOptions" showFirstLastButtons (page)="pageEvent = paginationFunction($event)">
+        </mat-paginator>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="app-content" *ngIf="isLoading">
+  <app-loader></app-loader>
+</div>

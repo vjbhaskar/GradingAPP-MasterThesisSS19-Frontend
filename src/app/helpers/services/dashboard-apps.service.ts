@@ -153,54 +153,15 @@ export class DashboardAppsService {
         ]
       }, 
       {
-        'headerName': 'Exam',
+        'headerName': 'Assigned Exam',
         'icon': 'dashboard',
         'isAccordion': false,
         'apps': [
           {
-            'name': 'Exam',
-            'route': '/dashboard/exam',
+            'name': 'Assigned Exam',
+            'route': '/dashboard/assignedExam',
             'icon': undefined,
             'fontAwesomeIcon': 'fab fa-leanpub',
-          },
-        ]
-      },
-      {
-        'headerName': 'Subjects',
-        'icon': 'dashboard',
-        'isAccordion': false,
-        'apps': [
-          {
-            'name': 'Subjects',
-            'route': '/dashboard/subjects',
-            'icon': undefined,
-            'fontAwesomeIcon': 'fas fa-book-open',
-          },
-        ]
-      },
-      {
-        'headerName': 'Labs',
-        'icon': 'dashboard',
-        'isAccordion': false,
-        'apps': [
-          {
-            'name': 'Labs',
-            'route': '/dashboard/labs',
-            'icon': undefined,
-            'fontAwesomeIcon': 'fas fa-tv',
-          },
-        ]
-      },
-      {
-        'headerName': 'IPs',
-        'icon': 'dashboard',
-        'isAccordion': false,
-        'apps': [
-          {
-            'name': 'IPs',
-            'route': '/dashboard/ips',
-            'icon': undefined,
-            'fontAwesomeIcon': 'fas fa-grip-horizontal',
           },
         ]
       },

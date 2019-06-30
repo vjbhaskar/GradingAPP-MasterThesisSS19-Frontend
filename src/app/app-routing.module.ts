@@ -10,6 +10,7 @@ import { IpComponent } from './modules/ip/ip.component';
 import { SubjectComponent } from './modules/subject/subject.component';
 import { ExamComponent } from './modules/exam/exam.component';
 import { TimeSlotComponent } from './modules/time-slot/time-slot.component';
+import { AssignedExamsComponent } from './modules/assigned-exams/assigned-exams.component';
 
 
 const routes: Routes = [
@@ -53,6 +54,10 @@ const routes: Routes = [
           path: 'timeslots',
           component: TimeSlotComponent
         },
+        {
+          path:'assignedExam',
+          component: AssignedExamsComponent
+        }
     ]
   },
   {

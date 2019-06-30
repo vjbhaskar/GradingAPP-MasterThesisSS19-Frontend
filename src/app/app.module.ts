@@ -33,6 +33,7 @@ import { DashboardAppsService } from './helpers/services/dashboard-apps.service'
 import { IpAssignDialogComponent } from './modules/ip/ip-assign-dialog/ip-assign-dialog.component';
 import { TimeSlotComponent } from './modules/time-slot/time-slot.component';
 import { TimeSlotDialogComponent } from './modules/time-slot/time-slot-dialog/time-slot-dialog.component';
+import { AssignedExamsComponent } from './modules/assigned-exams/assigned-exams.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,6 +57,7 @@ import { TimeSlotDialogComponent } from './modules/time-slot/time-slot-dialog/ti
     IpAssignDialogComponent,
     TimeSlotComponent,
     TimeSlotDialogComponent,
+    AssignedExamsComponent,
   ],
   imports: [
     BrowserModule,

@@ -139,4 +139,7 @@ export class GradingAppApiService {
     return this.api.postRequest('api/getIp/', data);
   }
   
+  getAdminIp(data){
+    return this.api.postRequestWithToken('api/labIp/adminips',data)
+  }
 }
