@@ -52,7 +52,7 @@
         <div>
           <small *ngIf="uploadForm.invalid" class="error-msg">All Fields are required</small><Br>
           <button class="cancel-button" type="button" mat-raised-button (click)="closeDialog()">Cancel</button>
-          <button class="affirmative-button" type="submit" style="margin-left:15px;" [disabled]="uploadForm.invalid"
+          <button class="affirmative-button" type="submit" style="margin-left:15px;" [disabled]="uploadForm.invalid && isLoading"
             mat-raised-button>Save</button>
         </div>
       </div>
