@@ -3,6 +3,7 @@ import { MatSnackBar, MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ConfirmDialogComponent } from '../../modules/commons/confirm-dialog/confirm-dialog.component';
+import { GradingAppApiService } from '../../../app/api/grading-app-api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class HelperService {
   constructor(
     private snackbar: MatSnackBar,
     private router: Router,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog,
+    private api: GradingAppApiService) { }
 
   showSnackbar(msg: string, colorClass: string) {
     this.snackbar.open(msg, 'Close', {
@@ -32,6 +34,20 @@ export class HelperService {
     }
 
   };
+
+    /**
+   * Updates the user details and updates session storage
+   */
+  updateUserData() {
+    return new Observable((observer) => {
+      let obj = this.getUserObj();
+      this.api.getUserDetails(obj['id']).subscribe(response => {
+        let stringifiedText = JSON.stringify(response);
+          sessionStorage.setItem('userObj', stringifiedText);
+        return observer.next(response);
+      })
+    })
+  }
 
   confirmDialog(data: any,variableWidth?,variableHeight?) {
     let widthpx = variableWidth ? variableWidth : '400px';

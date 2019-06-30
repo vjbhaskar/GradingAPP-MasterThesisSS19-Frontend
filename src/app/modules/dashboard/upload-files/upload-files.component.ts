@@ -12,7 +12,7 @@ import { UploadFileDialogComponent } from './upload-file-dialog/upload-file-dial
   styleUrls: ['./upload-files.component.scss']
 })
 export class UploadFilesComponent implements OnInit {
-  userList: any = [];
+  fileList: any = [];
   userDataSource: any;
   totalUsers = '';
   displayedColumns = ['sno','name', 'email','fdnumber', 'department', 'createdDate','submitted', 'actions'];
@@ -34,9 +34,10 @@ export class UploadFilesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.userObj = this.helper.getUserObj();
     this.loadInitialData();
     
-   // this.userObj = this.helper.getUserObj();
+  
   //  console.log("user", this.userObj);
   }
 
@@ -68,15 +69,23 @@ export class UploadFilesComponent implements OnInit {
    */
   search() {
     // let reqParams = createRequestParams(this.searchObj)
-    this.api.getAllFiles()
+    if(this.userObj['user_type'] == '1'){
+      this.fileList = this.userObj['files'];
+        this.userDataSource = new MatTableDataSource(this.fileList);
+        this.totalUsers = this.fileList.length;
+        this.isLoading = false;
+    } else{
+      this.api.getAllFiles()
       .subscribe(response => {
         //console.log('response =', response.headers.get("X-Total-Count"));
-        this.userList = response;
-        console.log(this.userList);
-        this.userDataSource = new MatTableDataSource(this.userList);
-        this.totalUsers = this.userList.length;
+        this.fileList = response;
+        console.log(this.fileList);
+        this.userDataSource = new MatTableDataSource(this.fileList);
+        this.totalUsers = this.fileList.length;
         this.isLoading = false;
       })
+    }
+    
   }
 
   clearSearch() {
@@ -133,7 +142,14 @@ export class UploadFilesComponent implements OnInit {
       .afterClosed()
       .subscribe(response => {
         if (response) {
-          this.search();
+          if(this.userObj['user_type'] == '1'){
+            this.helper.updateUserData().subscribe(resp => {
+              this.userObj = this.helper.getUserObj();
+              this.search();
+            })
+          } else{
+            this.search();
+          }
         }
       });
   }
@@ -161,28 +177,27 @@ export class UploadFilesComponent implements OnInit {
 
   /**
    * 
-   * @param userObj User object to be deleted
+   * @param fileObj User object to be deleted
    */
-  deleteUser(userObj) {
+  deleteFile(fileObj) {
+    console.log("FileOBj",fileObj);
     let confirmData = {
-      'title': 'Delete User',
-      'content': '<p>Are you sure to Delete this User? </p> <p> Deleting a user will delete all their associated information associated from the user and this action cannot be undone. </p> <p> Please type <b> <i> delete user </i> </b> in the box below to delete.</p>',
+      'title': 'Delete File',
+      'content': '<p>Are you sure to Delete this File? </p> <p> Deleting a File will delete all their associated information associated from the user and this action cannot be undone. </p>',
       'isContentHtml': true,
-      'username':userObj.username,
-      'isUser': true,
 
     }
     this.helper.confirmDialog(confirmData,'400px','400px').subscribe(response => {
       if (response) {
 
-        let idx = this.userList.indexOf(userObj);
-        this.api.deleteUser(userObj.username)
+        let idx = this.fileList.indexOf(fileObj);
+        this.api.deleteFile(fileObj.id)
           .subscribe(response => {
 
-            if (response.status == 200) {
-              this.userList.splice(idx, 1);
-              this.userDataSource = new MatTableDataSource(this.userList);
-              this.helper.showSnackbar('User Deleted Successfully', 'snackBar-success');
+            if (response.status == 200 || response.status == 204) {
+              this.fileList.splice(idx, 1);
+              this.userDataSource = new MatTableDataSource(this.fileList);
+              this.helper.showSnackbar('File Deleted Successfully', 'snackBar-success');
               this.search();
             } else {
               this.helper.showSnackbar('Something Went Wrong. Please Refresh', 'snackBar-error');

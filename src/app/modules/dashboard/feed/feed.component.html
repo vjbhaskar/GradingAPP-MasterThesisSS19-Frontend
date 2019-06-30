@@ -2,7 +2,7 @@
 
   <div fxFlex style="margin:20px;">
     <div class="feed-data" fxLayout="row wrap" fxLayoutAlign="space-between">
-      <mat-card class="feed-cards" fxFlex="33" >
+      <!-- <mat-card class="feed-cards" fxFlex="33" >
         <mat-card-content>
           <div class="card-head-icon-button" style="background-image: linear-gradient(60deg,#669cbb,#4368a0);">
             <i class="fas fa-user-tag"></i>
@@ -27,8 +27,33 @@
             </div>
           </div>
         </mat-card-content>
-      </mat-card>
-
+      </mat-card> -->
+      <mat-card class="feed-cards" fxFlex="33" *ngIf="userData['user_type'] == '3'" >
+          <mat-card-content>
+            <div class="card-head-icon-button" style="background-image: linear-gradient(60deg,#669cbb,#4368a0);">
+              <i class="fas fa-user-tag"></i>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start none">
+              <div fxFlex="49" style="text-align:center">
+                <h3 class="feed-name">
+                  Pending Tasks
+                </h3>
+                <h2 class="feed-value">
+                 6
+                </h2>
+              </div>
+              <div fxFlex="1" style="border-right:1px solid lightgrey"></div>
+              <div fxFlex="50" style="text-align:center">
+                <h3 class="feed-name">
+                Current Exercise
+                </h3>
+                <h2 class="feed-value">
+                  2
+                </h2>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
       <mat-card class="feed-cards" fxFlex="63" *ngIf="userData['user_type'] == '1' && userData['exam']">
         <mat-card-content>
           <div class="card-head-icon-button" style=" background-image:linear-gradient(60deg,#66bb6a,#2b502d);">
@@ -65,8 +90,34 @@
           </div>
         </mat-card-content>
       </mat-card>
-
-      <mat-card class="feed-cards" fxFlex="33" *ngIf="userData['user_type'] == '1'" style="margin-top:30px;">
+      <mat-card class="feed-cards" fxFlex="45" *ngIf="userData['user_type'] == '1' && noExam">
+          <mat-card-content>
+            <div class="card-head-icon-button" style=" background-image:linear-gradient(60deg,#66bb6a,#2b502d);">
+              <i class="fas fa-user"></i>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start none">
+              <div fxFlex="45" style="text-align:center" >
+                <h3 class="feed-name">
+                  Exam
+                </h3>
+                <h3  class="feed-value">
+                 You Have not been assigned to any exam
+                </h3 >
+              </div>
+              <div fxFlex="1" style="border-right:1px solid lightgrey"></div>
+              <div fxFlex="45" style="text-align:center">
+                <h3 class="feed-name">
+                  Logged In IP
+                </h3>
+                <h3  class="feed-value">
+                   Contact Lab admin
+                </h3 >
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      
+      <mat-card class="feed-cards" fxFlex="33" *ngIf="userData['user_type'] == '1' && labData" style="margin-top:30px;">
           <mat-card-content>
             <div class="card-head-icon-button" style="background-image: linear-gradient(60deg,#669cbb,#4368a0);">
               <i class="fas fa-user-tag"></i>

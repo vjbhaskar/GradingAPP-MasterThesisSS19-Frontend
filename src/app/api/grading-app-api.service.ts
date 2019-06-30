@@ -41,6 +41,11 @@ export class GradingAppApiService {
   updateFile(id,data){
     return this.api.patchRequestWithToken(`api/file/${id}/`,data);
   }
+
+  deleteFile(id){
+    return this.api.deleteReqeust(`api/file/${id}/`);
+  }
+
   getAllSubjects(){
     return this.api.getRequestWithToken('api/subject/');
   }

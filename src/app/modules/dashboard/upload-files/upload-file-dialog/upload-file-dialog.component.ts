@@ -24,6 +24,7 @@ export class UploadFileDialogComponent implements OnInit {
   userObj: any;
   fileName: any;
   subjectsList: any;
+  subjectId: any;
   constructor(public dialogRef: MatDialogRef<UserDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private api: GradingAppApiService,
@@ -34,10 +35,9 @@ export class UploadFileDialogComponent implements OnInit {
 
   ngOnInit() {
     this.userObj = this.helper.getUserObj();
-    this.api.getAllSubjects().subscribe(response => {
-      //console.log('response =', response.headers.get("X-Total-Count"));
-      this.subjectsList = response;
-    })
+    if(this.userObj['user_type'] == '1' && this.userObj['exam']){
+      this.subjectId = this.userObj['exam']['subject'];
+    }
     if (this.data) {
       //this.userForm.patchValue(this.data);
       this.userId = this.data.id;
@@ -63,7 +63,7 @@ export class UploadFileDialogComponent implements OnInit {
     userData['name'] =  this.fileName;
     userData['creator_id'] = this.userObj.id;
     userData['file_obj']= this.fileObj;
-
+    userData['subject_id']= this.subjectId;
     var data = this.toFormData.convert(userData);
     if (this.editUser) {
       for (let key in userData) {
