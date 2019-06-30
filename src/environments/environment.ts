@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   baseUrl: 'http://localhost:8000/'
-  // baseUrl: 'https://mt-grading-app.herokuapp.com/'
+  // baseUrl: 'https://api-gradingapp.herokuapp.com/'
 };
 
 /*

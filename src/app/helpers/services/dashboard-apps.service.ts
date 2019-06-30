@@ -55,7 +55,7 @@ export class DashboardAppsService {
             'name': 'Subjects',
             'route': '/dashboard/subjects',
             'icon': undefined,
-            'fontAwesomeIcon': 'fas fa-list-ol',
+            'fontAwesomeIcon': 'fas fa-book-open',
           },
         ]
       }, 
@@ -68,7 +68,7 @@ export class DashboardAppsService {
             'name': 'Exam',
             'route': '/dashboard/exam',
             'icon': undefined,
-            'fontAwesomeIcon': 'fas fa-list-ol',
+            'fontAwesomeIcon': 'fab fa-leanpub',
           },
         ]
       },
@@ -94,7 +94,7 @@ export class DashboardAppsService {
             'name': 'Time Slot',
             'route': '/dashboard/timeslots',
             'icon': undefined,
-            'fontAwesomeIcon': 'fas fa-list-ol',
+            'fontAwesomeIcon': 'far fa-clock',
           },
         ]
       },
@@ -107,7 +107,7 @@ export class DashboardAppsService {
             'name': 'IPs',
             'route': '/dashboard/ips',
             'icon': undefined,
-            'fontAwesomeIcon': 'fas fa-list-ol',
+            'fontAwesomeIcon': 'fas fa-grip-horizontal',
           },
         ]
       },
@@ -161,7 +161,7 @@ export class DashboardAppsService {
             'name': 'Exam',
             'route': '/dashboard/exam',
             'icon': undefined,
-            'fontAwesomeIcon': 'fas fa-list-ol',
+            'fontAwesomeIcon': 'fab fa-leanpub',
           },
         ]
       },
@@ -174,7 +174,7 @@ export class DashboardAppsService {
             'name': 'Subjects',
             'route': '/dashboard/subjects',
             'icon': undefined,
-            'fontAwesomeIcon': 'fas fa-list-ol',
+            'fontAwesomeIcon': 'fas fa-book-open',
           },
         ]
       },
@@ -200,7 +200,7 @@ export class DashboardAppsService {
             'name': 'IPs',
             'route': '/dashboard/ips',
             'icon': undefined,
-            'fontAwesomeIcon': 'fas fa-list-ol',
+            'fontAwesomeIcon': 'fas fa-grip-horizontal',
           },
         ]
       },

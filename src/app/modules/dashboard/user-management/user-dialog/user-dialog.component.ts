@@ -28,6 +28,7 @@ export class UserDialogComponent implements OnInit {
   editUser: boolean = false;
   userId: any;
   fileObj: any;
+  isLoading: boolean = false;
 
   constructor(public dialogRef: MatDialogRef<UserDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -46,6 +47,8 @@ export class UserDialogComponent implements OnInit {
   }
 
   saveUser() {
+    this.isLoading = true;
+    this.userForm.disable();
     let userData = this.userForm.value;
     console.log('edit user =');
     // ------------------- Updating user ---------------
@@ -56,9 +59,13 @@ export class UserDialogComponent implements OnInit {
       this.api.updateUser(this.userId,this.data)
         .subscribe(response => {
           if (response) {
+            this.isLoading = false;
+            this.userForm.enable();
             this.closeDialog(response);
           }
         }, error => {
+          this.isLoading = false;
+          this.userForm.enable();
           this.helper.showSnackbar(error.error.title, 'snackBar-error');
         })
     }
@@ -74,6 +81,8 @@ export class UserDialogComponent implements OnInit {
         this.api.createBulkUser(data)
         .subscribe(response => {
           if (response) {
+            this.isLoading = false;
+            this.userForm.enable();
             this.helper.showSnackbar("Users Created successfully", 'snackBar-success');
             this.closeDialog(response);
           }
@@ -84,10 +93,14 @@ export class UserDialogComponent implements OnInit {
         this.api.createUser(userData)
         .subscribe(response => {
           if (response) {
+            this.isLoading = false;
+            this.userForm.enable();
             this.helper.showSnackbar("User Created successfully", 'snackBar-success');
             this.closeDialog(response);
           }
         }, error => {
+          this.isLoading = false;
+          this.userForm.enable();
           this.helper.showSnackbar(error.error.title, 'snackBar-error');
         })
       }

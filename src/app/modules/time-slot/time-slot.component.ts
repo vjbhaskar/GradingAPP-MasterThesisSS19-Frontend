@@ -17,7 +17,7 @@ export class TimeSlotComponent implements OnInit {
   timeslotList: any = [];
   timeslotDataSource: any;
   totalTimeslots = '';
-  displayedColumns = ['sno', 'name', 'labs', 'start', 'end', 'createdDate', 'actions'];
+  displayedColumns = ['sno', 'name', 'labs', 'date', 'start', 'end', 'createdDate', 'actions'];
   pageSizeOptions: number[] = [20, 30, 50];
   pageEvent: PageEvent;
   searchPanelOpenState: boolean = false;

@@ -126,7 +126,7 @@
       <div fxLayout="row" fxLayoutAlign="end center" style="margin-top:10px;">
         <div>
           <button class="cancel-button" type="button" mat-raised-button (click)="closeDialog()">Cancel</button>
-          <button class="affirmative-button" type="submit" style="margin-left:15px;" [disabled]="userForm.invalid"
+          <button class="affirmative-button" type="submit" style="margin-left:15px;" [disabled]="userForm.invalid && isLoading"
             mat-raised-button>Save</button>
         </div>
 

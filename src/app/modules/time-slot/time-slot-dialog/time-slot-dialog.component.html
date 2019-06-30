@@ -20,6 +20,12 @@
           </mat-hint>
         </mat-form-field>
 
+        <mat-form-field fxFlex="30">
+          <input matInput [matDatepicker]="picker" formControlName="date" placeholder="Date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
         <mat-form-field>
             <input type="text" formControlName="start_time"  matInput placeholder="Start Time">
             <mat-hint *ngIf="u.start_time.touched && u.start_time.errors" align="start">
