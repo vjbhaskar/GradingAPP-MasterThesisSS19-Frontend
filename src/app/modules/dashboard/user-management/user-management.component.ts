@@ -47,7 +47,7 @@ export class UserManagementComponent implements OnInit {
       firstName: '',
       lastName: '',
       authority: '',
-      size: 20,
+      size: 30,
       page: 0,
       sort: 'id,desc'
     }
@@ -86,7 +86,7 @@ export class UserManagementComponent implements OnInit {
       firstName: '',
       lastName: '',
       authority: '',
-      size: 20,
+      size: 30,
       page: 0,
       sort: 'id,desc'
     }

@@ -18,7 +18,7 @@ export class IpComponent implements OnInit {
   userDataSource: any;
   totalUsers = '';
   displayedColumns = ['sno', 'ip','lab','student','createdDate', 'actions'];
-  pageSizeOptions: number[] = [20, 30, 50];
+  pageSizeOptions: number[] = [30, 40, 50];
   pageEvent: PageEvent;
   searchPanelOpenState: boolean = false;
   searchObj: any = {};
@@ -44,7 +44,7 @@ export class IpComponent implements OnInit {
   loadInitialData() {
     this.searchObj = {
       roomNumber: '',
-      size: 20,
+      size: 30,
       page: 0,
       sort: 'id,desc'
     }
@@ -79,7 +79,7 @@ export class IpComponent implements OnInit {
   clearSearch() {
     this.searchObj = {
       roomNumber: '',
-      size: 20,
+      size: 30,
       page: 0,
       sort: 'id,desc'
     }

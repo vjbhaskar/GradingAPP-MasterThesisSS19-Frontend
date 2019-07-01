@@ -19,7 +19,7 @@ export class AssignedExamsComponent implements OnInit {
   userDataSource: any;
   totalUsers = '';
   displayedColumns = ['sno', 'username','ip','login', 'file', 'createdDate', 'actions'];
-  pageSizeOptions: number[] = [20, 30, 50];
+  pageSizeOptions: number[] = [30, 40, 50];
   pageEvent: PageEvent;
   searchPanelOpenState: boolean = false;
   searchObj: any = {};
@@ -47,7 +47,7 @@ export class AssignedExamsComponent implements OnInit {
   loadInitialData() {
     this.searchObj = {
       roomNumber: '',
-      size: 20,
+      size: 30,
       page: 0,
       sort: 'id,desc'
     }
@@ -87,7 +87,7 @@ export class AssignedExamsComponent implements OnInit {
   clearSearch() {
     this.searchObj = {
       roomNumber: '',
-      size: 20,
+      size: 30,
       page: 0,
       sort: 'id,desc'
     }
