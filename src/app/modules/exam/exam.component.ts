@@ -17,7 +17,7 @@ export class ExamComponent implements OnInit {
   subjectList: any = [];
   subjectDataSource: any;
   totalSubjects = '';
-  displayedColumns = ['sno', 'subject','createdDate', 'actions'];
+  displayedColumns = ['sno', 'name', 'exercise', 'subject','createdDate', 'actions'];
   pageSizeOptions: number[] = [20, 30, 50];
   pageEvent: PageEvent;
   searchPanelOpenState: boolean = false;
@@ -88,7 +88,7 @@ export class ExamComponent implements OnInit {
 
 
   /**
-   * 
+   *
    * @param event When pagination event occurs gets pagination object
    */
   paginationFunction(event?: PageEvent) {
@@ -99,7 +99,7 @@ export class ExamComponent implements OnInit {
   }
 
   /**
-   * 
+   *
    * @param event When Sorting event occurs gets column name and direction
    */
   sortData(event: Sort) {
@@ -108,7 +108,7 @@ export class ExamComponent implements OnInit {
   }
 
   /**
-   * 
+   *
    * @param filterValue string to be filtered
    */
   applyFilter(filterValue: string) {
@@ -129,10 +129,10 @@ export class ExamComponent implements OnInit {
         }
       });
   }
-  
+
 
   /**
-   * 
+   *
    * @param subjectData subject object to be edited
    */
   editSubject(subjectData) {
@@ -152,7 +152,7 @@ export class ExamComponent implements OnInit {
   }
 
   /**
-   * 
+   *
    * @param subjectObj User object to be deleted
    */
   deleteExam(examObj) {

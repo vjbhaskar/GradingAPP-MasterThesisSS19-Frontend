@@ -14,10 +14,12 @@ export class ExamDialogComponent implements OnInit {
   examForm = this.fb.group({
     name: ['', [Validators.required]],
     subject: ['', [Validators.required]],
+    exerciseName: ['', ],
   });
   editExam: boolean = false;
   examId: any;
-  subjectList: []
+  subjectList: [];
+  exerciseArr: any = [];
 
   constructor(public dialogRef: MatDialogRef<ExamDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -38,7 +40,11 @@ export class ExamDialogComponent implements OnInit {
   }
 
   saveExam() {
-    let examData = this.examForm.value;
+    let examData = {
+      name:  this.examForm.controls['name'].value,
+      subject: this.examForm.controls['subject'].value,
+      exercises : this.exerciseArr
+    }
     console.log('edit lab =');
     // ------------------- Updating Exam ---------------
     if (this.editExam) {
@@ -70,6 +76,14 @@ export class ExamDialogComponent implements OnInit {
 
   closeDialog(obj = {}) {
     this.dialogRef.close(obj);
+  }
+
+  addExercise(){
+    var obj = {
+      name: this.examForm.controls['exerciseName'].value,
+    }
+    this.examForm.controls['exerciseName'].setValue("");
+    this.exerciseArr.push(obj);
   }
 
   get u() { return this.examForm.controls; }

@@ -20,8 +20,8 @@
         </mat-hint>
       </mat-form-field>
 
-      
-      
+
+
       <!-- <mat-form-field>
         <mat-select formControlName="lab_id" placeholder="Lab">
           <mat-option *ngFor="let lab of labs" [value]="lab.id">{{lab.room_building}}</mat-option>
@@ -41,17 +41,39 @@
             Subject is required </div>
         </mat-hint>
       </mat-form-field>
-      
+
+      <div>
+        <p class="form-subheading">Exercise</p>
+        <div class="line-after-text" fxFlex></div>
+      </div>
+      <div fxLayout="row">
+        <mat-form-field fxFlex="40">
+          <input type="text" formControlName="exerciseName"  matInput placeholder="Exercise Name">
+        </mat-form-field>
+        <span fxFlex></span>
+        <div>
+          <button  type="button" class=" affirmative-button mat-raised-button"  (click)="addExercise()">Add</button>
+        </div>
+
+      </div>
+
+      <div *ngFor="let exercise of exerciseArr">
+
+      <div  fxLayout="row" style="padding:5px;">
+          <mat-icon>play_arrow </mat-icon> <p style="margin-top:5px;">{{exercise.name}}</p>
+      </div>
+
+      </div>
 
       <div fxLayoutAlign="row" fxLayoutAlign="start center">
-       
+
       </div>
 
       <div fxLayout="row" fxLayoutAlign="end center" style="margin-top:10px;">
         <div>
           <small *ngIf="examForm.invalid" class="error-msg">All Fields are required</small><Br>
           <button class="cancel-button" type="button" mat-raised-button (click)="closeDialog()">Cancel</button>
-          <button class="affirmative-button" type="submit" style="margin-left:15px;" [disabled]="examForm.invalid"
+          <button class="affirmative-button" type="submit" style="margin-left:15px;" [disabled]="examForm.invalid || exerciseArr.length == 0 "
             mat-raised-button>Save</button>
         </div>
 

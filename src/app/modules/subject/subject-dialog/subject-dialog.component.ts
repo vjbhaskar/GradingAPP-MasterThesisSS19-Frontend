@@ -63,7 +63,7 @@ export class SubjectDialogComponent implements OnInit {
       this.api.createSubject(labIpData)
         .subscribe(response => {
           if (response) {
-            
+
             this.helper.showSnackbar("Subject Created successfully", 'snackBar-success');
             this.closeDialog(response);
           }
