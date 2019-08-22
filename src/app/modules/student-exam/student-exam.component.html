@@ -1,0 +1,37 @@
+<div fxLayout="column" *ngIf="!isNoExam && !isLoading" style="padding:10px;">
+  <h1 class="form-subheading">{{examData.name}}</h1>
+  <mat-card *ngFor="let exercise of examData.exercise;let i = index" style="margin:20px;">
+    <mat-card-title>
+      {{exercise.name}}
+    </mat-card-title>
+    <mat-card-content>
+      Special Instructions: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets con
+      <div style="margin-top:10px;">
+        <i> TBD:: Get the uploaded files already and map to exercise; Sanity check? Risky for malicious code...? </i>
+      </div>
+      <div *ngFor="let file of fileList">
+        <div fxLayout="row"  *ngIf="checkFileExists(exercise,file)" style="padding: 15px;">
+          <p>Uploaded solution:</p>
+          <a [href]="file.file_obj" style="margin: 14px 5px;" download>{{file.name}}</a>
+          <div style="margin-top:auto;margin-bottom:auto;margin-left:5px;">
+            <mat-icon title="Delete" (click)="deleteFile(file,i)"  style="cursor:pointer;color:red;"
+          >delete </mat-icon>
+          </div>
+
+        </div>
+      </div>
+        <div style="margin-top:10px;" *ngIf="!flagArray[i]['hasFile']" >
+          <button class="affirmative-button" mat-raised-button (click)="createNewFile(exercise)" >
+              <mat-icon style="margin-right:5px;">add</mat-icon> Upload Solution
+          </button>
+      </div>
+
+
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div fxLayout="column" *ngIf="isNoExam" fxLayoutAlign="center center" style="height:100%">
+
+  No exam assigned
+  </div>

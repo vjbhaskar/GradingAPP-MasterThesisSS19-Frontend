@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { PageEvent, MatDialog, MatTableDataSource, Sort } from '@angular/material';
+import { Component, OnInit, Inject } from '@angular/core';
+import { PageEvent, MatDialog, MatTableDataSource, Sort, MAT_DIALOG_DATA } from '@angular/material';
 import { GradingAppApiService } from '../../../../app/api/grading-app-api.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HelperService } from '../../../../app/helpers/services/helper.service';
@@ -27,18 +27,12 @@ export class UploadFilesComponent implements OnInit {
 
   constructor(private dialog: MatDialog,
     private api: GradingAppApiService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
     private helper: HelperService,
-    private fixtures: FixturesService
-  ) { }
+  ) {   }
 
   ngOnInit() {
     this.userObj = this.helper.getUserObj();
     this.loadInitialData();
-    
-  
-  //  console.log("user", this.userObj);
   }
 
   loadInitialData() {
@@ -53,14 +47,6 @@ export class UploadFilesComponent implements OnInit {
       sort: 'id,desc'
     }
 
-    // this.activatedRoute.queryParams.subscribe(params => {
-    //   for (let key in params) {
-    //     this.searchObj[key] = params[key]
-    //     if (key != 'size' && key != 'page' && key != 'sort') {
-    //       this.searchPanelOpenState = true;
-    //     }
-    //   }
-    // });
     this.search();
   }
 
@@ -68,7 +54,6 @@ export class UploadFilesComponent implements OnInit {
    * Search Function
    */
   search() {
-    // let reqParams = createRequestParams(this.searchObj)
     if(this.userObj['user_type'] == '1'){
       this.fileList = this.userObj['files'];
         this.userDataSource = new MatTableDataSource(this.fileList);
@@ -85,7 +70,7 @@ export class UploadFilesComponent implements OnInit {
         this.isLoading = false;
       })
     }
-    
+
   }
 
   clearSearch() {
@@ -104,7 +89,7 @@ export class UploadFilesComponent implements OnInit {
 
 
   /**
-   * 
+   *
    * @param event When pagination event occurs gets pagination object
    */
   paginationFunction(event?: PageEvent) {
@@ -115,7 +100,7 @@ export class UploadFilesComponent implements OnInit {
   }
 
   /**
-   * 
+   *
    * @param event When Sorting event occurs gets column name and direction
    */
   sortData(event: Sort) {
@@ -124,7 +109,7 @@ export class UploadFilesComponent implements OnInit {
   }
 
   /**
-   * 
+   *
    * @param filterValue string to be filtered
    */
   applyFilter(filterValue: string) {
@@ -153,10 +138,10 @@ export class UploadFilesComponent implements OnInit {
         }
       });
   }
-  
+
 
   /**
-   * 
+   *
    * @param userData User object to be edited
    */
   editFile(userData) {
@@ -176,7 +161,7 @@ export class UploadFilesComponent implements OnInit {
   }
 
   /**
-   * 
+   *
    * @param fileObj User object to be deleted
    */
   deleteFile(fileObj) {

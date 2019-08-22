@@ -34,6 +34,7 @@ import { IpAssignDialogComponent } from './modules/ip/ip-assign-dialog/ip-assign
 import { TimeSlotComponent } from './modules/time-slot/time-slot.component';
 import { TimeSlotDialogComponent } from './modules/time-slot/time-slot-dialog/time-slot-dialog.component';
 import { AssignedExamsComponent } from './modules/assigned-exams/assigned-exams.component';
+import { StudentExamComponent } from './modules/student-exam/student-exam.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,6 +59,7 @@ import { AssignedExamsComponent } from './modules/assigned-exams/assigned-exams.
     TimeSlotComponent,
     TimeSlotDialogComponent,
     AssignedExamsComponent,
+    StudentExamComponent,
   ],
   imports: [
     BrowserModule,

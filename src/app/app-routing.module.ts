@@ -11,6 +11,7 @@ import { SubjectComponent } from './modules/subject/subject.component';
 import { ExamComponent } from './modules/exam/exam.component';
 import { TimeSlotComponent } from './modules/time-slot/time-slot.component';
 import { AssignedExamsComponent } from './modules/assigned-exams/assigned-exams.component';
+import { StudentExamComponent } from './modules/student-exam/student-exam.component';
 
 
 const routes: Routes = [
@@ -57,7 +58,13 @@ const routes: Routes = [
         {
           path:'assignedExam',
           component: AssignedExamsComponent
+        },
+        {
+          path:'student-exam',
+          component: StudentExamComponent
         }
+
+
     ]
   },
   {

@@ -58,7 +58,7 @@ export class DashboardAppsService {
             'fontAwesomeIcon': 'fas fa-book-open',
           },
         ]
-      }, 
+      },
       {
         'headerName': 'Exam',
         'icon': 'dashboard',
@@ -151,7 +151,7 @@ export class DashboardAppsService {
             'fontAwesomeIcon': 'fas fa-file-alt',
           },
         ]
-      }, 
+      },
       {
         'headerName': 'Assigned Exam',
         'icon': 'dashboard',
@@ -181,18 +181,31 @@ export class DashboardAppsService {
         }]
       },
       {
-        'headerName': 'Files',
+        'headerName': 'Exam',
         'icon': 'dashboard',
         'isAccordion': false,
         'apps': [
           {
-            'name': 'Files',
-            'route': '/dashboard/files',
+            'name': 'Exam',
+            'route': '/dashboard/student-exam',
             'icon': undefined,
-            'fontAwesomeIcon': 'fas fa-file-alt',
+            'fontAwesomeIcon': 'fab fa-leanpub',
           },
         ]
-      },  
+      },
+      // {
+      //   'headerName': 'Files',
+      //   'icon': 'dashboard',
+      //   'isAccordion': false,
+      //   'apps': [
+      //     {
+      //       'name': 'Files',
+      //       'route': '/dashboard/files',
+      //       'icon': undefined,
+      //       'fontAwesomeIcon': 'fas fa-file-alt',
+      //     },
+      //   ]
+      // },
     ]
   }
 }

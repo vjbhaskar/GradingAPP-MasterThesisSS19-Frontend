@@ -99,7 +99,7 @@ export class GradingAppApiService {
     return this.api.deleteReqeust(`api/subject/${id}/`);
   }
 
- 
+
 
   createBulkUser(data){
     return this.api.postRequest('api/user/bulkstudents/',data);
@@ -143,8 +143,11 @@ export class GradingAppApiService {
   getLoggedIp(data){
     return this.api.postRequest('api/getIp/', data);
   }
-  
+
   getAdminIp(data){
     return this.api.postRequestWithToken('api/labIp/adminips',data)
+  }
+  getExamDetails(id){
+    return this.api.getRequest(`api/exam/${id}/`)
   }
 }
