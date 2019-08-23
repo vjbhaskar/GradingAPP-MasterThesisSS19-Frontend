@@ -13,7 +13,6 @@ export class ConfirmDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any, ) { }
 
   ngOnInit() {
-    console.log('data =', this.data);
     if(this.data['isUser']){
       this.canDelete = false;
     }
@@ -28,7 +27,6 @@ export class ConfirmDialogComponent implements OnInit {
   }
 
   closeDialog(val) {
-    console.log('bool =', val);
     this.dialogRef.close(val);
   }
 

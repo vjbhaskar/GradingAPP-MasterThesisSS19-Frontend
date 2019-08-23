@@ -16,6 +16,8 @@ export class UploadFileDialogComponent implements OnInit {
 
   uploadForm = this.fb.group({
     is_submitted: [false],
+    uploadType: ["",[Validators.required]],
+    textareaVal:[""]
   });
   editUser: boolean = false;
   userId: any;
@@ -56,7 +58,6 @@ export class UploadFileDialogComponent implements OnInit {
   onImageUpload(event) {
     if (event.target.files.length > 0) {
       this.fileObj = event.target.files[0];
-      console.log(this.fileObj);
       this.fileName = this.fileObj.name;
     }
   }
@@ -71,6 +72,13 @@ export class UploadFileDialogComponent implements OnInit {
     userData['subject_id']= this.subjectId;
     if(this.exerciseData){
       userData['exercise']= this.exerciseData['id'];
+    }
+    if(this.uploadForm.controls['uploadType'].value == 'snippet'){
+      userData['snippet']= this.uploadForm.controls['textareaVal'].value
+      userData['is_snippet'] = "True";
+      userData['name'] =  this.userObj.username+"_"+"temp";
+    } else{
+      userData['is_snippet'] = "False";
     }
     var data = this.toFormData.convert(userData);
     if (this.editUser) {
@@ -89,7 +97,6 @@ export class UploadFileDialogComponent implements OnInit {
     }
     // --------------------- Creating user -----------------
     else {
-    console.log("userDatauserDatauserDatauserData",data);
       this.api.postFile(data)
         .subscribe(response => {
           if (response) {

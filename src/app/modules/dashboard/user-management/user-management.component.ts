@@ -36,8 +36,6 @@ export class UserManagementComponent implements OnInit {
 
   ngOnInit() {
     this.loadInitialData();
-   // this.userObj = this.helper.getUserObj();
-  //  console.log("user", this.userObj);
   }
 
   loadInitialData() {
@@ -70,9 +68,7 @@ export class UserManagementComponent implements OnInit {
     // let reqParams = createRequestParams(this.searchObj)
     this.api.getAllUsers()
       .subscribe(response => {
-        //console.log('response =', response.headers.get("X-Total-Count"));
         this.userList = response;
-        console.log(this.userList);
         this.userDataSource = new MatTableDataSource(this.userList);
         this.totalUsers = this.userList.length;
         this.isLoading = false;
@@ -95,7 +91,7 @@ export class UserManagementComponent implements OnInit {
 
 
   /**
-   * 
+   *
    * @param event When pagination event occurs gets pagination object
    */
   paginationFunction(event?: PageEvent) {
@@ -106,7 +102,7 @@ export class UserManagementComponent implements OnInit {
   }
 
   /**
-   * 
+   *
    * @param event When Sorting event occurs gets column name and direction
    */
   sortData(event: Sort) {
@@ -115,7 +111,7 @@ export class UserManagementComponent implements OnInit {
   }
 
   /**
-   * 
+   *
    * @param filterValue string to be filtered
    */
   applyFilter(filterValue: string) {
@@ -136,10 +132,10 @@ export class UserManagementComponent implements OnInit {
         }
       });
   }
-  
+
 
   /**
-   * 
+   *
    * @param userData User object to be edited
    */
   editUser(userData) {
@@ -159,7 +155,7 @@ export class UserManagementComponent implements OnInit {
   }
 
   /**
-   * 
+   *
    * @param userObj User object to be deleted
    */
   deleteUser(userObj) {
@@ -175,7 +171,6 @@ export class UserManagementComponent implements OnInit {
         let idx = this.userList.indexOf(userObj);
         this.api.deleteUser(userObj.id)
           .subscribe(response => {
-            console.log("response",response);
             // getting response as null
             if (!response) {
               this.userList.splice(idx, 1);

@@ -43,7 +43,6 @@ export class SubjectDialogComponent implements OnInit {
 
   saveSubject() {
     let labIpData = this.subjectForm.value;
-    console.log('edit lab =');
     // ------------------- Updating Subject ---------------
     if (this.editSubject) {
       for (let key in labIpData) {

@@ -5,9 +5,9 @@
       {{exercise.name}}
     </mat-card-title>
     <mat-card-content>
-      Special Instructions: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets con
+      Special Instructions: {{exercise.description ? exercise.description : 'N-A'}}
       <div style="margin-top:10px;">
-        <i> TBD:: Get the uploaded files already and map to exercise; Sanity check? Risky for malicious code...? </i>
+        <i> Please verify twice before uploading your solution </i>
       </div>
       <div *ngFor="let file of fileList">
         <div fxLayout="row"  *ngIf="checkFileExists(exercise,file)" style="padding: 15px;">
@@ -20,10 +20,13 @@
 
         </div>
       </div>
-        <div style="margin-top:10px;" *ngIf="!flagArray[i]['hasFile']" >
-          <button class="affirmative-button" mat-raised-button (click)="createNewFile(exercise)" >
+        <div fxLayout="column" style="margin-top:10px;" *ngIf="!flagArray[i]['hasFile']" >
+
+          <div fxFlex="20">
+            <button class="affirmative-button" mat-raised-button (click)="createNewFile(exercise, i)" >
               <mat-icon style="margin-right:5px;">add</mat-icon> Upload Solution
-          </button>
+            </button>
+          </div>
       </div>
 
 

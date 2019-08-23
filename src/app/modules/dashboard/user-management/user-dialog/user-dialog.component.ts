@@ -50,7 +50,6 @@ export class UserDialogComponent implements OnInit {
     this.isLoading = true;
     this.userForm.disable();
     let userData = this.userForm.value;
-    console.log('edit user =');
     // ------------------- Updating user ---------------
     if (this.editUser) {
       for (let key in userData) {
@@ -71,12 +70,12 @@ export class UserDialogComponent implements OnInit {
     }
     // --------------------- Creating user -----------------
     else {
-      
+
       if(this.userForm.controls['addType'].value == '2'){
         let userData ={
           'user_list':this.fileObj
         }
-  
+
         var data = this.toFormData.convert(userData);
         this.api.createBulkUser(data)
         .subscribe(response => {
@@ -104,7 +103,7 @@ export class UserDialogComponent implements OnInit {
           this.helper.showSnackbar(error.error.title, 'snackBar-error');
         })
       }
-      
+
     }
 
   }
@@ -120,10 +119,7 @@ export class UserDialogComponent implements OnInit {
   }
 
   addTypeChanged() {
-    console.log("in here");
     if (this.userForm.controls['addType'].value == '2') {
-      
-      console.log("in If");
       this.userForm.get('username').clearValidators();
       this.userForm.get('username').updateValueAndValidity();
       this.userForm.get('user_type').clearValidators();

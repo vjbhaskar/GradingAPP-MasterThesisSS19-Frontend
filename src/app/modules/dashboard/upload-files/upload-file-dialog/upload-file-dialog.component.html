@@ -15,7 +15,22 @@
 
 
         </div>
-        <label for="file-upload2" class="custom-file-upload">
+
+        <div fxLayout="row">
+          <mat-form-field fxFlex="20">
+            <mat-select placeholder="Select Upload Type" formControlName="uploadType" >
+              <mat-option value="snippet">Snippet</mat-option>
+              <mat-option value="file">File</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <mat-form-field *ngIf="u.uploadType.value == 'snippet'">
+          <textarea matInput formControlName="textareaVal" placeholder="Paste your snippet here" ></textarea>
+        </mat-form-field>
+
+
+        <label for="file-upload2" class="custom-file-upload"  *ngIf="u.uploadType.value == 'file'">
           <mat-icon>attach_file</mat-icon> <span>Anhang</span>
         </label>
         <input id="file-upload2" placeholder="Zulassung Certificate" style="margin-left:5px;"

@@ -37,7 +37,7 @@ export class StudentExamComponent implements OnInit {
 
         this.examData.exercise.forEach((element,index) => {
           var obj = {
-            hasFile: false
+            hasFile: false,
           };
           this.flagArray.push(obj);
 
@@ -46,7 +46,6 @@ export class StudentExamComponent implements OnInit {
             this.flagArray[index]['hasFile'] = true;
            }
          });
-         console.log("rihanna",index,this.examData.exercise.length);
          if(index == this.examData.exercise.length-1){
           this.isLoading = false;
           element['processDone']= true;
@@ -60,8 +59,7 @@ export class StudentExamComponent implements OnInit {
     }
   }
 
-  createNewFile(exerciseData) {
-    console.log("createNewFile",exerciseData);
+  createNewFile(exerciseData,index) {
     this.dialog.open(UploadFileDialogComponent, {
       width: '600px',
       height: '500px',
@@ -75,6 +73,7 @@ export class StudentExamComponent implements OnInit {
             this.helper.updateUserData().subscribe(resp => {
               this.userObj = this.helper.getUserObj();
               this.fileList = this.userObj['files'];
+              this.flagArray[index]['hasFile'] = true;
              // this.search();
             })
           } else{
@@ -99,7 +98,6 @@ export class StudentExamComponent implements OnInit {
    * @param fileObj User object to be deleted
    */
   deleteFile(fileObj,index) {
-    console.log("FileOBj",fileObj);
     let confirmData = {
       'title': 'Delete File',
       'content': '<p>Are you sure to Delete this File? </p> <p> Deleting a File will delete all their associated information associated from the user and this action cannot be undone. </p>',

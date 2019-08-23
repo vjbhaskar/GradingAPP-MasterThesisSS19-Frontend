@@ -37,8 +37,6 @@ export class TimeSlotComponent implements OnInit {
 
   ngOnInit() {
     this.loadInitialData();
-   // this.userObj = this.helper.getUserObj();
-  //  console.log("user", this.userObj);
   }
 
   loadInitialData() {
@@ -67,9 +65,7 @@ export class TimeSlotComponent implements OnInit {
     // let reqParams = createRequestParams(this.searchObj)
     this.api.getAllTimeSlots()
       .subscribe(response => {
-        //console.log('response =', response.headers.get("X-Total-Count"));
         this.timeslotList = response;
-        console.log(this.timeslotList);
         this.timeslotDataSource = new MatTableDataSource(this.timeslotList);
         this.totalTimeslots = this.timeslotList.length;
         this.isLoading = false;
@@ -88,7 +84,7 @@ export class TimeSlotComponent implements OnInit {
 
 
   /**
-   * 
+   *
    * @param event When pagination event occurs gets pagination object
    */
   paginationFunction(event?: PageEvent) {
@@ -99,7 +95,7 @@ export class TimeSlotComponent implements OnInit {
   }
 
   /**
-   * 
+   *
    * @param event When Sorting event occurs gets column name and direction
    */
   sortData(event: Sort) {
@@ -108,7 +104,7 @@ export class TimeSlotComponent implements OnInit {
   }
 
   /**
-   * 
+   *
    * @param filterValue string to be filtered
    */
   applyFilter(filterValue: string) {
@@ -129,10 +125,10 @@ export class TimeSlotComponent implements OnInit {
         }
       });
   }
-  
+
 
   /**
-   * 
+   *
    * @param subjectData subject object to be edited
    */
   editTimeslot(subjectData) {
@@ -152,7 +148,7 @@ export class TimeSlotComponent implements OnInit {
   }
 
   /**
-   * 
+   *
    * @param timeSlotObj User object to be deleted
    */
   deleteTimeslot(timeSlotObj) {

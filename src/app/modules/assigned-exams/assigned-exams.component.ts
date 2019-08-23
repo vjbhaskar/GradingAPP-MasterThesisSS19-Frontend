@@ -38,10 +38,7 @@ export class AssignedExamsComponent implements OnInit {
 
   ngOnInit() {
     this.userObj = this.helper.getUserObj();
-    console.log("dabba",this.userObj);
     this.loadInitialData();
-    
-  //  console.log("user", this.userObj);
   }
 
   loadInitialData() {
@@ -68,16 +65,12 @@ export class AssignedExamsComponent implements OnInit {
    */
   search() {
     // let reqParams = createRequestParams(this.searchObj)
-    console.log("this user",this.userObj);
     let data = {
       username: this.userObj['username']
     }
     this.api.getAdminIp(data)
       .subscribe(response => {
-        //console.log('response =', response.headers.get("X-Total-Count"));
-        console.log("searcj res[",response);
         this.userList = response['data'];
-        console.log(this.userList);
         this.userDataSource = new MatTableDataSource(this.userList);
         this.totalUsers = this.userList.length;
         this.isLoading = false;
@@ -96,7 +89,7 @@ export class AssignedExamsComponent implements OnInit {
 
 
   /**
-   * 
+   *
    * @param event When pagination event occurs gets pagination object
    */
   paginationFunction(event?: PageEvent) {
@@ -107,7 +100,7 @@ export class AssignedExamsComponent implements OnInit {
   }
 
   /**
-   * 
+   *
    * @param event When Sorting event occurs gets column name and direction
    */
   sortData(event: Sort) {
@@ -116,7 +109,7 @@ export class AssignedExamsComponent implements OnInit {
   }
 
   /**
-   * 
+   *
    * @param filterValue string to be filtered
    */
   applyFilter(filterValue: string) {
@@ -139,7 +132,7 @@ export class AssignedExamsComponent implements OnInit {
   }
 
     /**
-   * 
+   *
    * Assign single user
    */
   assignUser() {
@@ -156,10 +149,10 @@ export class AssignedExamsComponent implements OnInit {
 
       });
   }
-  
+
 
   /**
-   * 
+   *
    * @param userData User object to be edited
    */
   editIp(userData) {
@@ -177,10 +170,10 @@ export class AssignedExamsComponent implements OnInit {
 
       });
   }
-  
+
 
   /**
-   * 
+   *
    * @param ipObj User object to be deleted
    */
   deleteIp(ipObj) {

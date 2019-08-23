@@ -61,7 +61,6 @@ export class IpAssignDialogComponent implements OnInit {
 
   saveLab() {
     let labIpData = this.assignlabIpForm.value;
-    console.log('edit lab =');
     let url ="";
     if (this.assignlabIpForm.controls['assignType'].value == '1') {
       url = "api/assign_single_ip/"
@@ -69,18 +68,18 @@ export class IpAssignDialogComponent implements OnInit {
       url ="api/assign_students/"
       let data = {
         'student_list':this.fileObj,
-        'exam_id': this.assignlabIpForm.controls['bulkExam'].value 
+        'exam_id': this.assignlabIpForm.controls['bulkExam'].value
       }
 
       labIpData = this.toFormData.convert(data);
     } else if(this.assignlabIpForm.controls['assignType'].value == '3'){
       url ="api/de_assign_students/"
       labIpData = {
-        "exam_id":this.assignlabIpForm.controls['deassignExam'].value 
+        "exam_id":this.assignlabIpForm.controls['deassignExam'].value
       }
-      
+
     }
-    
+
     this.api.assignSingleIp(url,labIpData)
       .subscribe(response => {
         if (response) {
@@ -93,16 +92,12 @@ export class IpAssignDialogComponent implements OnInit {
   }
 
   getLabIps(){
-    console.log("this.assignlabIpForm.controls['lab_id'].value",this.assignlabIpForm.controls['lab_id'].value);
     this.api.getLabById(this.assignlabIpForm.controls['lab_id'].value).subscribe(resp =>{
-      console.log("reponse",resp);
       this.ips = resp['body']['lab_ips'];
-      console.log(resp['body']['lab_ips']);
     })
   }
 
   assignTypeChanged() {
-    console.log("in here");
     if (this.assignlabIpForm.controls['assignType'].value == '1') {
       this.assignlabIpForm.get('lab_id').setValidators([Validators.required]);
       this.assignlabIpForm.get('lab_id').updateValueAndValidity();
@@ -114,11 +109,10 @@ export class IpAssignDialogComponent implements OnInit {
       this.assignlabIpForm.get('exam_id').updateValueAndValidity();
       this.assignlabIpForm.get('timeslot_id').setValidators([Validators.required]);
       this.assignlabIpForm.get('timeslot_id').updateValueAndValidity();
-    
-     
+
+
       //Open dialog
     } else {
-      console.log("in else");
       this.assignlabIpForm.get('lab_id').clearValidators();
       this.assignlabIpForm.get('lab_id').updateValueAndValidity();
       this.assignlabIpForm.get('lab_ip_id').clearValidators();

@@ -31,7 +31,7 @@ export class DashboardComponent implements OnInit {
     this.userData = this.helperService.getUserObj()
     if(this.userData['user_type'] == '1'){
       this.dashboardApps = this.dashboardAppService.studentApps();
-      
+
     } else  if(this.userData['user_type'] == '3'){
       this.dashboardApps = this.dashboardAppService.labAdminApps();
     }  if(this.userData['user_type'] == '4'){
@@ -41,7 +41,6 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("in dashboard Init");
     // this.route.data
     //   .subscribe((data: { userData: any }) => {
     //     sessionStorage.setItem('userObj', JSON.stringify(data.userData.body));

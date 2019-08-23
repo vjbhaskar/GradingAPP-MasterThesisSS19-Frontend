@@ -16,7 +16,7 @@ export class LabDialogComponent implements OnInit {
   labForm = this.fb.group({
     room_building: ['', [Validators.required]],
     lab_admin: [''],
-    exam:[''] 
+    exam:['']
   });
   editLab: boolean = false;
   labId: any;
@@ -42,32 +42,26 @@ export class LabDialogComponent implements OnInit {
     })
     if (this.data) {
       this.labForm.patchValue(this.data);
-      console.log("labForm", this.labForm.value);
       this.labId = this.data.id;
       this.editLab = true;
       this.ipArr = this.data['lab_ips'];
       this.labForm.controls['lab_admin'].setValue(this.data['lab_admin']['id'])
-      
+
     }
   }
 
   saveLab() {
-    //let labData = this.labForm.value;
-    console.log('edit lab =');
     // ------------------- Updating Lab ---------------
-    if (this.editLab) {   
+    if (this.editLab) {
       let labData = {
         'room_building':this.labForm.controls['room_building'].value,
         'ip_list': this.fileObj,
         'isNoLabAdmin': 1,
         'lab_admin': this.labForm.controls['lab_admin'].value,
       }
-      console.log("labData1",labData);
       if(this.labForm.controls['lab_admin'].value){
-        console.log("false");
         labData['isNoLabAdmin'] = 2;
       } else{
-        console.log("else");
         labData['isNoLabAdmin'] = 1;
       }
 
@@ -83,7 +77,6 @@ export class LabDialogComponent implements OnInit {
     }
     // --------------------- Creating Lab -----------------
     else {
-      console.log("this.labForm.controls['lab_admin'].value ",this.labForm.controls['lab_admin'].value );
       let labData1 = {
         'room_building':this.labForm.controls['room_building'].value,
         'ip_list': this.fileObj,
@@ -91,12 +84,9 @@ export class LabDialogComponent implements OnInit {
         'lab_admin': this.labForm.controls['lab_admin'].value,
         'exam_id': this.labForm.controls['exam'].value,
       }
-      console.log("labData1",labData1);
       if(this.labForm.controls['lab_admin'].value){
-        console.log("false");
         labData1['isNoLabAdmin'] = 2;
       } else{
-        console.log("else");
         labData1['isNoLabAdmin'] = 1;
       }
 

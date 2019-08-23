@@ -17,14 +17,13 @@ export class FeedComponent implements OnInit {
 
   ngOnInit() {
     this.userData = this.helperService.getUserObj();
-    console.log("first userdata",this.userData);
     if(this.userData['user_type'] == '1' && this.userData['exam']){
       this.noExam = false;
       let data = {
         "username":this.userData['username'],
         "ip":{}
       };
-      
+
 
       this.api.getLabById(this.userData['ip']['lab']).subscribe(resp => {
         this.labData = resp['body'];
@@ -42,12 +41,11 @@ export class FeedComponent implements OnInit {
       // })
 
       this.helperService.getLoggedInIP().subscribe(ip => {
-        console.log("IP in feed",ip);
         data['ip'] = ip;
         this.api.getLoggedIp(data).subscribe( resp =>{
           this.loggedInIp = resp['body']['data'];
         })
-      }) 
+      })
     }
   }
 

@@ -11,7 +11,7 @@ import * as jwt_decode from "jwt-decode";
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  
+
   loginForm = new FormGroup({
     username: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required])
@@ -38,25 +38,22 @@ export class HomeComponent implements OnInit {
   }
 
   login(){
-    console.log("in login");
     this.loginForm.disable();
     this.api.login(this.loginForm.value).subscribe(response => {
       if (response.body.token) {
         //let stringifiedText = JSON.stringify(response.id_token);
         sessionStorage.setItem('token', response.body.token);
         let tokenInfo = this.getDecodedAccessToken(response.body.token);
-        console.log("tokenInfo",tokenInfo);
-        
+
         this.api.getUserDetails(tokenInfo.user_id).subscribe(resp => {
-          console.log("resp",resp);
           let stringifiedText = JSON.stringify(resp);
           sessionStorage.setItem('userObj', stringifiedText);
           this.helper.showSnackbar('Login Successfull', 'snackBar-success');
           this.router.navigate(["dashboard/feed"]);
           this.loginForm.enable();
         })
-        
-        
+
+
 
       }
     }, error => {

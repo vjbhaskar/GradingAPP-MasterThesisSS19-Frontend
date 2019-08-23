@@ -15,6 +15,7 @@ export class ExamDialogComponent implements OnInit {
     name: ['', [Validators.required]],
     subject: ['', [Validators.required]],
     exerciseName: ['', ],
+    exerciseDescription: ['', ]
   });
   editExam: boolean = false;
   examId: any;
@@ -45,7 +46,6 @@ export class ExamDialogComponent implements OnInit {
       subject: this.examForm.controls['subject'].value,
       exercises : this.exerciseArr
     }
-    console.log('edit lab =');
     // ------------------- Updating Exam ---------------
     if (this.editExam) {
       for (let key in examData) {
@@ -81,8 +81,10 @@ export class ExamDialogComponent implements OnInit {
   addExercise(){
     var obj = {
       name: this.examForm.controls['exerciseName'].value,
+      description: this.examForm.controls['exerciseDescription'].value
     }
     this.examForm.controls['exerciseName'].setValue("");
+    this.examForm.controls['exerciseDescription'].setValue("");
     this.exerciseArr.push(obj);
   }
 

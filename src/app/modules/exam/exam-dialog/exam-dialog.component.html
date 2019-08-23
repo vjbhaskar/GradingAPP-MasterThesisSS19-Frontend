@@ -50,6 +50,10 @@
         <mat-form-field fxFlex="40">
           <input type="text" formControlName="exerciseName"  matInput placeholder="Exercise Name">
         </mat-form-field>
+        <mat-form-field fxFlex="40">
+          <textarea type="text" formControlName="exerciseDescription"  matInput placeholder="Exercise Name" > </textarea>
+        </mat-form-field>
+
         <span fxFlex></span>
         <div>
           <button  type="button" class=" affirmative-button mat-raised-button"  (click)="addExercise()">Add</button>

@@ -45,7 +45,6 @@ export class IpDialogComponent implements OnInit {
 
   saveLab() {
     let labIpData = this.labIpForm.value;
-    console.log('edit lab =');
     // ------------------- Updating Lab ---------------
     if (this.editLab) {
       for (let key in labIpData) {

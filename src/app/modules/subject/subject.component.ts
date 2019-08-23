@@ -37,8 +37,6 @@ export class SubjectComponent implements OnInit {
 
   ngOnInit() {
     this.loadInitialData();
-   // this.userObj = this.helper.getUserObj();
-  //  console.log("user", this.userObj);
   }
 
   loadInitialData() {
@@ -67,9 +65,7 @@ export class SubjectComponent implements OnInit {
     // let reqParams = createRequestParams(this.searchObj)
     this.api.getAllSubjects()
       .subscribe(response => {
-        //console.log('response =', response.headers.get("X-Total-Count"));
         this.subjectList = response;
-        console.log(this.subjectList);
         this.subjectDataSource = new MatTableDataSource(this.subjectList);
         this.totalSubjects = this.subjectList.length;
         this.isLoading = false;
@@ -88,7 +84,7 @@ export class SubjectComponent implements OnInit {
 
 
   /**
-   * 
+   *
    * @param event When pagination event occurs gets pagination object
    */
   paginationFunction(event?: PageEvent) {
@@ -99,7 +95,7 @@ export class SubjectComponent implements OnInit {
   }
 
   /**
-   * 
+   *
    * @param event When Sorting event occurs gets column name and direction
    */
   sortData(event: Sort) {
@@ -108,7 +104,7 @@ export class SubjectComponent implements OnInit {
   }
 
   /**
-   * 
+   *
    * @param filterValue string to be filtered
    */
   applyFilter(filterValue: string) {
@@ -129,10 +125,10 @@ export class SubjectComponent implements OnInit {
         }
       });
   }
-  
+
 
   /**
-   * 
+   *
    * @param subjectData subject object to be edited
    */
   editSubject(subjectData) {
@@ -152,7 +148,7 @@ export class SubjectComponent implements OnInit {
   }
 
   /**
-   * 
+   *
    * @param subjectObj User object to be deleted
    */
   deleteSubject(subjectObj) {

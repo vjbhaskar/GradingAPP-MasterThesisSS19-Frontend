@@ -37,8 +37,6 @@ export class LabComponent implements OnInit {
 
   ngOnInit() {
     this.loadInitialData();
-   // this.userObj = this.helper.getUserObj();
-  //  console.log("user", this.userObj);
   }
 
   loadInitialData() {
@@ -67,9 +65,7 @@ export class LabComponent implements OnInit {
     // let reqParams = createRequestParams(this.searchObj)
     this.api.getAllLabs()
       .subscribe(response => {
-        //console.log('response =', response.headers.get("X-Total-Count"));
         this.labList = response;
-        console.log(this.labList);
         this.userDataSource = new MatTableDataSource(this.labList);
         this.totalUsers = this.labList.length;
         this.isLoading = false;
@@ -88,7 +84,7 @@ export class LabComponent implements OnInit {
 
 
   /**
-   * 
+   *
    * @param event When pagination event occurs gets pagination object
    */
   paginationFunction(event?: PageEvent) {
@@ -99,7 +95,7 @@ export class LabComponent implements OnInit {
   }
 
   /**
-   * 
+   *
    * @param event When Sorting event occurs gets column name and direction
    */
   sortData(event: Sort) {
@@ -108,7 +104,7 @@ export class LabComponent implements OnInit {
   }
 
   /**
-   * 
+   *
    * @param filterValue string to be filtered
    */
   applyFilter(filterValue: string) {
@@ -129,10 +125,10 @@ export class LabComponent implements OnInit {
         }
       });
   }
-  
+
 
   /**
-   * 
+   *
    * @param labData User object to be edited
    */
   editLab(labData) {
@@ -152,7 +148,7 @@ export class LabComponent implements OnInit {
   }
 
   /**
-   * 
+   *
    * @param labObj User object to be deleted
    */
   deleteLab(labObj) {

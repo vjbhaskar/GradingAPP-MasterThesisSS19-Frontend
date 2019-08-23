@@ -48,18 +48,14 @@ export class TimeSlotDialogComponent implements OnInit {
   saveTimeSlot() {
     let timeslotData = this.timeslotForm.value;
     var fullDate = this.timeslotForm.controls['date'].value
-    console.log(fullDate);
     var twoDigitMonth = fullDate.getMonth() + "";
     if (twoDigitMonth.length == 1)
         twoDigitMonth = "0" + twoDigitMonth;
     var twoDigitDate = fullDate.getDate() + "";
     if (twoDigitDate.length == 1)
         twoDigitDate = "0" + twoDigitDate;
-    var currentDate = fullDate.getFullYear()  + "-" + twoDigitMonth + "-" + twoDigitDate; 
+    var currentDate = fullDate.getFullYear()  + "-" + twoDigitMonth + "-" + twoDigitDate;
     timeslotData['date'] = currentDate
-    console.log(timeslotData['date']);
-
-    console.log('edit lab =');
     // ------------------- Updating Subject ---------------
     if (this.editTimeslot) {
       for (let key in timeslotData) {
@@ -79,7 +75,7 @@ export class TimeSlotDialogComponent implements OnInit {
       this.api.createTimeSlot(timeslotData)
         .subscribe(response => {
           if (response) {
-            
+
             this.helper.showSnackbar("Subject Created successfully", 'snackBar-success');
             this.closeDialog(response);
           }

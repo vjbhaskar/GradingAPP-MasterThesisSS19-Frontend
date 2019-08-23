@@ -62,9 +62,7 @@ export class UploadFilesComponent implements OnInit {
     } else{
       this.api.getAllFiles()
       .subscribe(response => {
-        //console.log('response =', response.headers.get("X-Total-Count"));
         this.fileList = response;
-        console.log(this.fileList);
         this.userDataSource = new MatTableDataSource(this.fileList);
         this.totalUsers = this.fileList.length;
         this.isLoading = false;
@@ -118,7 +116,6 @@ export class UploadFilesComponent implements OnInit {
 
   // ------------------------ Create New User ---------------------
   createNewFile() {
-    console.log("createNewFile");
     this.dialog.open(UploadFileDialogComponent, {
       width: '600px',
       height: '500px',
@@ -165,7 +162,6 @@ export class UploadFilesComponent implements OnInit {
    * @param fileObj User object to be deleted
    */
   deleteFile(fileObj) {
-    console.log("FileOBj",fileObj);
     let confirmData = {
       'title': 'Delete File',
       'content': '<p>Are you sure to Delete this File? </p> <p> Deleting a File will delete all their associated information associated from the user and this action cannot be undone. </p>',
