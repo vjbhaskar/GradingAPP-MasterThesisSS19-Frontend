@@ -150,4 +150,7 @@ export class GradingAppApiService {
   getExamDetails(id){
     return this.api.getRequest(`api/exam/${id}/`)
   }
+  printSingleFile(data){
+    return this.api.postRequest('api/printSingleFile/', data);
+  }
 }

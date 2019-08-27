@@ -73,7 +73,7 @@
     </div>
     <div fxFlex class="table-container">
       <table mat-table [dataSource]="userDataSource" matSort (matSortChange)="sortData($event)">
-        
+
         <ng-container matColumnDef="sno">
           <th mat-header-cell *matHeaderCellDef> S.no </th>
           <td mat-cell *matCellDef="let element; let i = index"> {{i+1}} </td>
@@ -107,8 +107,8 @@
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef> Actions </th>
           <td mat-cell *matCellDef="let element">
-            <mat-icon title="View" (click)="editFile(element)"
-              class="table-action-icons table-action-icon-primary">remove_red_eye</mat-icon>
+            <mat-icon title="View" (click)="printSingleFile(element)"
+              class="table-action-icons table-action-icon-primary">print</mat-icon>
             <mat-icon title="Edit" (click)="editFile(element)" class="table-action-icons table-action-icon-warn"
               *ngIf="isAdmin">edit</mat-icon>
             <mat-icon title="Delete" (click)="deleteFile(element)" class="table-action-icons table-action-icon-danger"

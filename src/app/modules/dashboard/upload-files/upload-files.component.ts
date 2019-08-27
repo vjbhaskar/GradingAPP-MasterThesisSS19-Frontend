@@ -191,5 +191,22 @@ export class UploadFilesComponent implements OnInit {
 
   }
 
+  printSingleFile(fileObj){
+    console.log("fileObj.id",fileObj.id);
+    let dataObj = {
+      file_id: fileObj.id
+    }
+    this.isLoading = true;
+    this.api.printSingleFile(dataObj)
+      .subscribe(response => {
+        this.search();
+
+        this.isLoading = false;
+        this.helper.showSnackbar('File Generated Successfully', 'snackBar-success');
+      }, error =>{
+        this.helper.showSnackbar('Something Went Wrong. Please Refresh', 'snackBar-error');
+      })
+  }
+
 
 }
