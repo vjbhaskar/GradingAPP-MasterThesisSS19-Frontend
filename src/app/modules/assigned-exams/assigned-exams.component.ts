@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HelperService } from 'src/app/helpers/services/helper.service';
 import { FixturesService } from 'src/app/helpers/services/fixtures.service';
 import { IpDialogComponent } from '../ip/ip-dialog/ip-dialog.component';
-import { IpAssignDialogComponent } from '../ip/ip-assign-dialog/ip-assign-dialog.component';
+import { AssignedExamsDialogComponent } from './assigned-exams-dialog/assigned-exams-dialog.component';
 
 @Component({
   selector: 'app-assigned-exams',
@@ -18,7 +18,7 @@ export class AssignedExamsComponent implements OnInit {
   userList: any = [];
   userDataSource: any;
   totalUsers = '';
-  displayedColumns = ['sno', 'username','ip','login', 'file', 'createdDate', 'actions'];
+  displayedColumns = ['sno', 'username','ip','login', 'file', 'actions'];
   pageSizeOptions: number[] = [30, 40, 50];
   pageEvent: PageEvent;
   searchPanelOpenState: boolean = false;
@@ -116,58 +116,46 @@ export class AssignedExamsComponent implements OnInit {
     this.userDataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  // ------------------------ Create New User ---------------------
-  createNewUser() {
-    this.dialog.open(IpDialogComponent, {
+  BulkPrintFiles(){
+    let obj = {
+      type:'bulk',
+      content:this.userList
+    }
+
+    this.printFiles(obj);
+  }
+
+
+  singleFilePrint(userObj){
+    let obj = {
+      type:'single',
+      content:userObj
+    }
+
+    this.printFiles(obj);
+  }
+
+
+
+  printFiles(dataObj) {
+    this.dialog.open(AssignedExamsDialogComponent, {
       width: '600px',
-      height: '600px',
-      disableClose: true
+      height: '500px',
+      disableClose: true,
+      data:dataObj
     })
       .afterClosed()
       .subscribe(response => {
         if (response) {
-          this.search();
+          if(this.userObj['user_type'] == '1'){
+            this.helper.updateUserData().subscribe(resp => {
+              this.userObj = this.helper.getUserObj();
+              this.search();
+            })
+          } else{
+            this.search();
+          }
         }
-      });
-  }
-
-    /**
-   *
-   * Assign single user
-   */
-  assignUser() {
-    this.dialog.open(IpAssignDialogComponent, {
-      width: '600px',
-      height: '600px',
-      disableClose: true,
-    })
-      .afterClosed()
-      .subscribe(response => {
-        if (response.status == 200) {
-          this.search();
-        }
-
-      });
-  }
-
-
-  /**
-   *
-   * @param userData User object to be edited
-   */
-  editIp(userData) {
-    this.dialog.open(IpDialogComponent, {
-      width: '600px',
-      height: '600px',
-      disableClose: true,
-      data: userData
-    })
-      .afterClosed()
-      .subscribe(response => {
-        if (response.status == 200) {
-          this.search();
-        }
-
       });
   }
 
@@ -204,6 +192,28 @@ export class AssignedExamsComponent implements OnInit {
       }
     })
 
+  }
+
+  printSingleFile(userFiles){
+    this.dialog.open(AssignedExamsDialogComponent, {
+      width: '600px',
+      height: '500px',
+      disableClose: true,
+      data:{type:'single',content:userFiles}
+    })
+      .afterClosed()
+      .subscribe(response => {
+        if (response) {
+          if(this.userObj['user_type'] == '1'){
+            this.helper.updateUserData().subscribe(resp => {
+              this.userObj = this.helper.getUserObj();
+              this.search();
+            })
+          } else{
+            this.search();
+          }
+        }
+      });
   }
 }
 

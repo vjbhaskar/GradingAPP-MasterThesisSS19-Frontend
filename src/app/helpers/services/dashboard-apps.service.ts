@@ -47,6 +47,19 @@ export class DashboardAppsService {
         ]
       },
       {
+        'headerName': 'Print Files List',
+        'icon': 'dashboard',
+        'isAccordion': false,
+        'apps': [
+          {
+            'name': 'Print Files List',
+            'route': '/dashboard/all-print-files',
+            'icon': undefined,
+            'fontAwesomeIcon': 'fas fa-print',
+          },
+        ]
+      },
+      {
         'headerName': 'Subjects',
         'icon': 'dashboard',
         'isAccordion': false,
@@ -149,6 +162,19 @@ export class DashboardAppsService {
             'route': '/dashboard/files',
             'icon': undefined,
             'fontAwesomeIcon': 'fas fa-file-alt',
+          },
+        ]
+      },
+      {
+        'headerName': 'Print Files List',
+        'icon': 'dashboard',
+        'isAccordion': false,
+        'apps': [
+          {
+            'name': 'Print Files List',
+            'route': '/dashboard/all-print-files',
+            'icon': undefined,
+            'fontAwesomeIcon': 'fas fa-print',
           },
         ]
       },

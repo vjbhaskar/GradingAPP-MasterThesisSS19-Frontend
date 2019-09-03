@@ -12,6 +12,7 @@ import { ExamComponent } from './modules/exam/exam.component';
 import { TimeSlotComponent } from './modules/time-slot/time-slot.component';
 import { AssignedExamsComponent } from './modules/assigned-exams/assigned-exams.component';
 import { StudentExamComponent } from './modules/student-exam/student-exam.component';
+import { PrintFilesComponent } from './modules/print-files/print-files.component';
 
 
 const routes: Routes = [
@@ -62,6 +63,10 @@ const routes: Routes = [
         {
           path:'student-exam',
           component: StudentExamComponent
+        },
+        {
+          path:'all-print-files',
+          component: PrintFilesComponent
         }
 
 

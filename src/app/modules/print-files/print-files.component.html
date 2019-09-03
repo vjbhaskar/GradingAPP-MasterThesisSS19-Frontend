@@ -6,7 +6,7 @@
         <mat-expansion-panel-header>
           <mat-panel-title fxLayout="row" fxLayoutAlign="center center">
             <div class="app-name" fxFlex>
-              File Management
+              Print Files List
             </div>
             <div fxLayout='row' fxLayoutAlign="center center" class="open-search-button">
               {{searchPanelOpenState ? 'Close' : 'Open'}} Search
@@ -64,11 +64,11 @@
         </mat-form-field>
         <mat-icon>filter_list</mat-icon>
         <div fxFlex></div>
-        <div>
-          <button class="affirmative-button" mat-raised-button (click)="createNewFile()">
-            <mat-icon style="margin-right:5px;">add</mat-icon>Create New
+        <!-- <div>
+          <button class="affirmative-button" mat-raised-button (click)="printFiles()">
+            <mat-icon style="margin-right:5px;">print</mat-icon>Print Files
           </button>
-        </div>
+        </div> -->
       </div>
     </div>
     <div fxFlex class="table-container">
@@ -107,10 +107,11 @@
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef> Actions </th>
           <td mat-cell *matCellDef="let element">
-            <mat-icon title="View" (click)="printSingleFile(element)"
+              <a [href]="element.file_obj" [download]="element.file_obj" target="blank">  <mat-icon title="Download" class="table-action-icons table-action-icon-primary">get_app</mat-icon> </a>
+            <!-- <mat-icon title="View" (click)="printSingleFile(element)"
               class="table-action-icons table-action-icon-primary">print</mat-icon>
             <mat-icon title="Edit" (click)="editFile(element)" class="table-action-icons table-action-icon-warn"
-              *ngIf="isAdmin">edit</mat-icon>
+              *ngIf="isAdmin">edit</mat-icon> -->
             <mat-icon title="Delete" (click)="deleteFile(element)" class="table-action-icons table-action-icon-danger"
               >delete
             </mat-icon>

@@ -1,0 +1,39 @@
+<div fxLayout="column">
+  <div fxFlex class="dialog-header">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div style="font-size:larger">Print File</div>
+      <mat-icon style="cursor:pointer" (click)="closeDialog()">close</mat-icon>
+    </div>
+  </div>
+  <div>
+    <div style="padding:20px 40px;" fxLayout="column" *ngIf="!isLoading && isSinglePrint" fxLayoutAlign="center none">
+      <div fxLayout="row">
+          <p class="form-subheading">{{studentObj.username}} Files</p>
+          <div class="line-after-text" fxFlex></div>
+      </div>
+      <div>
+        <div fxLayout="column">
+          <div *ngFor="let file of studentObj.file_names; let i= index" fxLayout="row">
+            <p>{{file}}</p>
+            <span fxFlex="15"></span>
+            <a [href]="studentObj.file[i]" [download]="studentObj.file[i]" target="blank" style="margin-top: auto;margin-bottom: auto;">
+              <mat-icon title="Download" class="table-action-icons table-action-icon-primary" >get_app</mat-icon>
+            </a>
+          </div>
+        </div>
+
+
+      </div>
+      <div *ngIf="!isSinglePrint">
+        <div *ngIf="isLoading">
+          <p class="loader-wait">
+            Please wait while the file is generated
+          </p>
+          <app-loader></app-loader>
+        </div>
+        <div *ngIf="!isLoading">
+          File generated please check Print files tab
+        </div>
+      </div>
+    </div>
+  </div>

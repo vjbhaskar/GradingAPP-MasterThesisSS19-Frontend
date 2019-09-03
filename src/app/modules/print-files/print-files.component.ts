@@ -1,17 +1,14 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { PageEvent, MatDialog, MatTableDataSource, Sort, MAT_DIALOG_DATA } from '@angular/material';
-import { GradingAppApiService } from '../../../../app/api/grading-app-api.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { HelperService } from '../../../../app/helpers/services/helper.service';
-import { FixturesService } from '../../../../app/helpers/services/fixtures.service';
-import { UploadFileDialogComponent } from './upload-file-dialog/upload-file-dialog.component';
+import { Component, OnInit } from '@angular/core';
+import { PageEvent, MatDialog, MatTableDataSource, Sort } from '@angular/material';
+import { GradingAppApiService } from '../../../app/api/grading-app-api.service';
+import { HelperService } from '../../../app/helpers/services/helper.service';
 
 @Component({
-  selector: 'app-upload-files',
-  templateUrl: './upload-files.component.html',
-  styleUrls: ['./upload-files.component.scss']
+  selector: 'app-print-files',
+  templateUrl: './print-files.component.html',
+  styleUrls: ['./print-files.component.scss']
 })
-export class UploadFilesComponent implements OnInit {
+export class PrintFilesComponent implements OnInit {
   fileList: any = [];
   userDataSource: any;
   totalUsers = '';
@@ -60,7 +57,7 @@ export class UploadFilesComponent implements OnInit {
         this.totalUsers = this.fileList.length;
         this.isLoading = false;
     } else{
-      this.api.getAllFiles()
+      this.api.getAllPrintFiles()
       .subscribe(response => {
         this.fileList = response;
         this.userDataSource = new MatTableDataSource(this.fileList);
@@ -114,48 +111,6 @@ export class UploadFilesComponent implements OnInit {
     this.userDataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  // ------------------------ Create New User ---------------------
-  createNewFile() {
-    this.dialog.open(UploadFileDialogComponent, {
-      width: '600px',
-      height: '500px',
-      disableClose: true
-    })
-      .afterClosed()
-      .subscribe(response => {
-        if (response) {
-          if(this.userObj['user_type'] == '1'){
-            this.helper.updateUserData().subscribe(resp => {
-              this.userObj = this.helper.getUserObj();
-              this.search();
-            })
-          } else{
-            this.search();
-          }
-        }
-      });
-  }
-
-
-  /**
-   *
-   * @param userData User object to be edited
-   */
-  editFile(userData) {
-    this.dialog.open(UploadFileDialogComponent, {
-      width: '600px',
-      height: '500px',
-      disableClose: true,
-      data: userData
-    })
-      .afterClosed()
-      .subscribe(response => {
-        if (response.status == 200) {
-          this.search();
-        }
-
-      });
-  }
 
   /**
    *
@@ -172,7 +127,7 @@ export class UploadFilesComponent implements OnInit {
       if (response) {
 
         let idx = this.fileList.indexOf(fileObj);
-        this.api.deleteFile(fileObj.id)
+        this.api.deletePrintFile(fileObj.id)
           .subscribe(response => {
 
             if (response.status == 200 || response.status == 204) {
@@ -194,9 +149,7 @@ export class UploadFilesComponent implements OnInit {
   printSingleFile(fileObj){
     console.log("fileObj.id",fileObj.id);
     let dataObj = {
-      file_id: fileObj.id,
-      user_id: this.userObj.username,
-      print_type:'single'
+      file_id: fileObj.id
     }
     this.isLoading = true;
     this.api.printSingleFile(dataObj)

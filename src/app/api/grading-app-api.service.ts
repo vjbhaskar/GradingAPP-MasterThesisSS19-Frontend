@@ -153,4 +153,12 @@ export class GradingAppApiService {
   printSingleFile(data){
     return this.api.postRequest('api/printSingleFile/', data);
   }
+
+  getAllPrintFiles(){
+    return this.api.getRequestWithToken('api/print_files/');
+  }
+
+  deletePrintFile(id){
+    return this.api.deleteReqeust(`api/print_files/${id}/`);
+  }
 }

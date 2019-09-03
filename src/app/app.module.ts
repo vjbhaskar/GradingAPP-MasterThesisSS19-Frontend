@@ -35,6 +35,8 @@ import { TimeSlotComponent } from './modules/time-slot/time-slot.component';
 import { TimeSlotDialogComponent } from './modules/time-slot/time-slot-dialog/time-slot-dialog.component';
 import { AssignedExamsComponent } from './modules/assigned-exams/assigned-exams.component';
 import { StudentExamComponent } from './modules/student-exam/student-exam.component';
+import { PrintFilesComponent } from './modules/print-files/print-files.component';
+import { AssignedExamsDialogComponent } from './modules/assigned-exams/assigned-exams-dialog/assigned-exams-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,6 +62,8 @@ import { StudentExamComponent } from './modules/student-exam/student-exam.compon
     TimeSlotDialogComponent,
     AssignedExamsComponent,
     StudentExamComponent,
+    PrintFilesComponent,
+    AssignedExamsDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -82,9 +86,10 @@ import { StudentExamComponent } from './modules/student-exam/student-exam.compon
     SubjectDialogComponent,
     ExamDialogComponent,
     IpAssignDialogComponent,
-    TimeSlotDialogComponent
+    TimeSlotDialogComponent,
+    AssignedExamsDialogComponent
   ],
-  providers: [ 
+  providers: [
     HttpClient,
     GradingAppApiService,
     ConvertModelToFormData,
