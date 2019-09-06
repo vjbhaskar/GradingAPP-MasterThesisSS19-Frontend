@@ -15,10 +15,11 @@
         <div fxLayout="column">
           <div *ngFor="let file of studentObj.file_names; let i= index" fxLayout="row">
             <p>{{file}}</p>
-            <span fxFlex="15"></span>
+            <span fxFlex></span>
             <a [href]="studentObj.file[i]" [download]="studentObj.file[i]" target="blank" style="margin-top: auto;margin-bottom: auto;">
-              <mat-icon title="Download" class="table-action-icons table-action-icon-primary" >get_app</mat-icon>
+              <mat-icon title="Download" class="file-action-button" >get_app</mat-icon>
             </a>
+            <mat-icon title="Print" class="file-action-button" (click)="printSingle(studentObj.file_ids[i])">print</mat-icon>
           </div>
         </div>
 

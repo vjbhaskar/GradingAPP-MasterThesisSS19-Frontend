@@ -69,14 +69,24 @@ export class AssignedExamsDialogComponent implements OnInit {
       if(index === this.allFiles.length -1){
         console.log("last",fileArr);
         obj['file_list'] = fileArr
-        this.printSingleFile(obj)
+        this.printFile(obj)
       }
 
     });
   }
 
+  printSingle(fileId){
+    console.log(fileId)
+    let obj = {
+      print_type:"single",
+      user_id:this.userObj.username,
+      file_id:fileId
+      }
+      this.printFile(obj)
+  }
 
-  printSingleFile(dataObj){
+
+  printFile(dataObj){
 
     this.isLoading = true;
     this.api.printSingleFile(dataObj)
