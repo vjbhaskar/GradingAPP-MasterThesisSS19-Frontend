@@ -29,7 +29,7 @@ export class StudentExamComponent implements OnInit {
   }
 
   processData(){
-    if( this.userObj){
+    if(this.userObj && this.userObj['exam']){
       this.fileList = this.userObj['files'];
       this.api.getExamDetails( this.userObj['exam']['id']).subscribe(resp => {
         this.isNoExam = false;

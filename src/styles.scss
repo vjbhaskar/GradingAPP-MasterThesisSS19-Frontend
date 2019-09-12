@@ -2,6 +2,7 @@
 
 @import '~@angular/material/theming';
 @import './app-colors.scss';
+@import '~material-design-icons/iconfont/material-icons.css';
 html, body{
     margin:0px;
     padding:0px;
@@ -27,7 +28,7 @@ table{
 .table-container{
     overflow-x:hidden;
     font-size:.875rem;
-   
+
     .table-pagination{
         border-bottom:1px solid lightgrey;
         border-left: 1px solid lightgrey;
@@ -39,7 +40,7 @@ table{
     }
 
     .table-action-icons{
-       
+
         font-size: small !important;
         color: white !important;
         padding: 3px !important;
@@ -50,27 +51,27 @@ table{
         cursor: pointer !important;
         box-shadow: 2px 2px 1px lightgrey;
     }
-    
+
     .table-action-icon-danger{
         background:red;
     }
-    
+
     .table-action-icon-warn{
         background:orange;
     }
-    
+
     .table-action-icon-primary{
         background: #002e62;
     }
-    
+
     .mat-row:nth-child(even){
         background-color: #fdfdfd;
     }
-    
+
     .mat-row:nth-child(odd){
         background-color:white;
     }
-    
+
     .mat-header-row{
         background:#d0e6ff;
     }
@@ -94,7 +95,7 @@ table{
     .mat-row:hover{
         background: rgb(240, 226, 163);
     }
-    
+
     .mat-paginator{
         font-size: 14px !important;
     }
@@ -201,7 +202,7 @@ app-user-settings{
         font-weight: 600;
     }
     .mat-simple-snackbar-action{
-        button{    
+        button{
             border: 1px solid black;
             color: white;
             box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
