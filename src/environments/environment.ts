@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://192.168.31.243:8000/'
+  baseUrl: 'http://localhost:8000/'
+  //   baseUrl: 'http://192.168.31.243/rest/'
   // baseUrl: 'https://api-gradingapp.herokuapp.com/'
 };
 
