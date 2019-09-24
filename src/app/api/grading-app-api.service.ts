@@ -35,7 +35,7 @@ export class GradingAppApiService {
   }
 
   postFile(data){
-    return this.api.postRequest('api/file/', data);
+    return this.api.postRequestWithToken('api/file/', data);
   }
 
   updateFile(id,data){
@@ -63,7 +63,7 @@ export class GradingAppApiService {
   // }
 
   createLab(data){
-    return this.api.postRequest('api/labIp/bulk', data);
+    return this.api.postRequestWithToken('api/labIp/bulk', data);
   }
   updateLab(id,data){
     return this.api.patchRequestWithToken(`api/lab/${id}/`,data);
@@ -77,7 +77,7 @@ export class GradingAppApiService {
     return this.api.getRequestWithToken('api/labIp/');
   }
   createIp(data){
-    return this.api.postRequest('api/labIp/', data);
+    return this.api.postRequestWithToken('api/labIp/', data);
   }
   updateIp(id,data){
     return this.api.patchRequestWithToken(`api/labIp/${id}/`,data);
@@ -137,11 +137,11 @@ export class GradingAppApiService {
   }
 
   assignSingleIp(url,data){
-    return this.api.postRequest(url, data);
+    return this.api.postRequestWithToken(url, data);
   }
 
   getLoggedIp(data){
-    return this.api.postRequest('api/getIp/', data);
+    return this.api.postRequestWithToken('api/getIp/', data);
   }
 
   getAdminIp(data){
@@ -151,7 +151,7 @@ export class GradingAppApiService {
     return this.api.getRequest(`api/exam/${id}/`)
   }
   printSingleFile(data){
-    return this.api.postRequest('api/printSingleFile/', data);
+    return this.api.postRequestWithToken('api/printSingleFile/', data);
   }
 
   getAllPrintFiles(){
