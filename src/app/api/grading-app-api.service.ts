@@ -88,7 +88,7 @@ export class GradingAppApiService {
   }
 
   createSubject(data){
-    return this.api.postRequest('api/subject/', data);
+    return this.api.postRequestWithToken('api/subject/', data);
   }
 
   updateSubject(id,data){
@@ -102,14 +102,14 @@ export class GradingAppApiService {
 
 
   createBulkUser(data){
-    return this.api.postRequest('api/user/bulkstudents/',data);
+    return this.api.postRequestWithToken('api/user/bulkstudents/',data);
   }
   getAllExams(){
     return this.api.getRequestWithToken('api/exam/');
   }
 
   createExam(data){
-    return this.api.postRequest('api/exam/', data);
+    return this.api.postRequestWithToken('api/exam/', data);
   }
 
   updateExam(id,data){
@@ -129,7 +129,7 @@ export class GradingAppApiService {
   }
 
   createTimeSlot(data){
-    return this.api.postRequest('api/timeSlot/', data);
+    return this.api.postRequestWithToken('api/timeSlot/', data);
   }
 
   deleteTimeSlot(id){
