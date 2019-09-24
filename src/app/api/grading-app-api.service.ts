@@ -102,7 +102,7 @@ export class GradingAppApiService {
 
 
   createBulkUser(data){
-    return this.api.postRequest('api/user/bulkstudents/',data);
+    return this.api.postRequestWithToken('api/user/bulkstudents/',data);
   }
   getAllExams(){
     return this.api.getRequestWithToken('api/exam/');

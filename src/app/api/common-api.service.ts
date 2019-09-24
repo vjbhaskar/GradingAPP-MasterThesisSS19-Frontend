@@ -14,7 +14,6 @@ export class CommonApiService {
 
   private httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json'
     })
   };
 
@@ -29,7 +28,7 @@ export class CommonApiService {
       }), catchError((error: Error) => throwError(error)));
   }
 
-  
+
   //Function to make get api call with token
   getRequestWithToken(url: any): Observable<any> {
 
@@ -56,9 +55,9 @@ export class CommonApiService {
         .pipe(map(response => {
           return response;
         }), catchError((error: Error) => throwError(error)));
-  
+
     }
-    
+
     //Function to make PUT api call
   putRequestWithToken(url: any, data: any): Observable<any> {
     this.httpOptions.headers = this.httpOptions.headers.set('Authorization', 'JWT ' + sessionStorage.getItem('token'));
