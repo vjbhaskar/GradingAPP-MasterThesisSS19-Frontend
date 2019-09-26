@@ -20,8 +20,8 @@
         </mat-hint>
       </mat-form-field>
 
-      
-      
+
+
       <mat-form-field>
         <mat-select formControlName="lab_id" placeholder="Lab">
           <mat-option *ngFor="let lab of labs" [value]="lab.id">{{lab.room_building}}</mat-option>
@@ -32,7 +32,7 @@
         </mat-hint>
       </mat-form-field>
 
-      <mat-form-field>
+      <!-- <mat-form-field>
         <mat-select formControlName="student_id" placeholder="Student">
           <mat-option *ngFor="let std of students" [value]="std.id">{{std.username}}</mat-option>
         </mat-select>
@@ -40,11 +40,11 @@
           <div *ngIf="u.student_id.errors.required" class="error-msg">
             Student is required </div>
         </mat-hint>
-      </mat-form-field>
-      
+      </mat-form-field> -->
+
 
       <div fxLayoutAlign="row" fxLayoutAlign="start center">
-       
+
       </div>
 
       <div fxLayout="row" fxLayoutAlign="end center" style="margin-top:10px;">

@@ -93,7 +93,7 @@ export class IpAssignDialogComponent implements OnInit {
 
   getLabIps(){
     this.api.getLabById(this.assignlabIpForm.controls['lab_id'].value).subscribe(resp =>{
-      this.ips = resp['body']['lab_ips'];
+      this.ips = resp['lab_ips'];
     })
   }
 

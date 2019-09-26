@@ -33,7 +33,7 @@ export class StudentExamComponent implements OnInit {
       this.fileList = this.userObj['files'];
       this.api.getExamDetails( this.userObj['exam']['id']).subscribe(resp => {
         this.isNoExam = false;
-        this.examData = resp.body;
+        this.examData = resp;
 
         this.examData.exercise.forEach((element,index) => {
           var obj = {

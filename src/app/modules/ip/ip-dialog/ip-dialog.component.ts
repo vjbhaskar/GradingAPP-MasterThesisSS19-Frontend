@@ -15,7 +15,7 @@ export class IpDialogComponent implements OnInit {
   labIpForm = this.fb.group({
     ip: ['', [Validators.required]],
     lab_id: ['', Validators.required],
-    student_id: ['', Validators.required],
+    //student_id: ['', Validators.required],
   });
   editLab: boolean = false;
   labIpId: any;

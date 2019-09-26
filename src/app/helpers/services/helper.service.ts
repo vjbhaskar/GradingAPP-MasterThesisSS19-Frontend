@@ -71,9 +71,28 @@ export class HelperService {
 
   }
   getLoggedInIP(){
-    var findIP = new Promise(r=>{var w=window,a=new (w['RTCPeerConnection']||w['mozRTCPeerConnection']||w['webkitRTCPeerConnection'])({iceServers:[]}),b=()=>{};a.createDataChannel("");a.createOffer(c=>a.setLocalDescription(c,b,b),b);a.onicecandidate=c=>{try{c.candidate.candidate.match(/([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/g).forEach(r)}catch(e){}}})
+    console.log("debba");
+    var findIP = new Promise(r=>{
+      console.log(r);
+      var w = window
+        , a = new (w['RTCPeerConnection'] || w['mozRTCPeerConnection'] || w['webkitRTCPeerConnection'])({
+          iceServers: []
+      })
+        , b = ()=>{}
+      ;
+      a.createDataChannel("");
+      a.createOffer(c=>a.setLocalDescription(c, b, b), b);
+      a.onicecandidate = c=>{
+          try {
+              c.candidate.candidate.match(/([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/g).forEach(r)
+          } catch (e) {}
+      }
+  }
+  )
+    console.log("debbafindIP",findIP);
     return new Observable((observer) => {
       findIP.then(function(ip) {
+        console.log("debba",ip);
         return observer.next(ip);
       })
     })
