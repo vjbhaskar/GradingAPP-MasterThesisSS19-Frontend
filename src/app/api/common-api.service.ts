@@ -12,12 +12,15 @@ export class CommonApiService {
 
   private API_ENDPOINT = window.location.origin + environment.baseUrl;
 
+
+
   private httpOptions = {
     headers: new HttpHeaders({
     })
   };
 
   constructor(private http: HttpClient) {
+    console.log("API Service",this.API_ENDPOINT);
   }
 
   //Function to make GET api call
@@ -41,6 +44,7 @@ export class CommonApiService {
 
   //Function to make POST api call
   postRequest(url: any, data: any): Observable<any> {
+    console.log("url",this.API_ENDPOINT + url);
     return this.http.post(this.API_ENDPOINT + url, data, { observe: 'response' })
       .pipe(map(response => {
         return response;

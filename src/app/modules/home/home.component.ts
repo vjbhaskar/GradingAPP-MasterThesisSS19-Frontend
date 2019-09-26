@@ -22,10 +22,11 @@ export class HomeComponent implements OnInit {
   constructor(private api: GradingAppApiService,
     private helper: HelperService,
     private router: Router
-    ) { }
+    ) {
+    }
 
   ngOnInit() {
-    console.log("in home");
+    console.log("in home",window.location.origin);
   }
 
   getDecodedAccessToken(token: string): any {
