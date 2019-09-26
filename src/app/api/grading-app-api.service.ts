@@ -43,7 +43,7 @@ export class GradingAppApiService {
   }
 
   deleteFile(id){
-    return this.api.deleteReqeust(`api/file/${id}/`);
+    return this.api.deleteReqeustWithToken(`api/file/${id}/`);
   }
 
   getAllSubjects(){
@@ -70,7 +70,7 @@ export class GradingAppApiService {
   }
 
   deleteLab(id){
-    return this.api.deleteReqeust(`api/lab/${id}/`);
+    return this.api.deleteReqeustWithToken(`api/lab/${id}/`);
   }
 
   getAllIps(){
@@ -84,7 +84,7 @@ export class GradingAppApiService {
   }
 
   deleteIp(id){
-    return this.api.deleteReqeust(`api/labIp/${id}/`);
+    return this.api.deleteReqeustWithToken(`api/labIp/${id}/`);
   }
 
   createSubject(data){
@@ -96,7 +96,7 @@ export class GradingAppApiService {
   }
 
   deleteSubject(id){
-    return this.api.deleteReqeust(`api/subject/${id}/`);
+    return this.api.deleteReqeustWithToken(`api/subject/${id}/`);
   }
 
 
@@ -117,7 +117,7 @@ export class GradingAppApiService {
   }
 
   deleteExam(id){
-    return this.api.deleteReqeust(`api/exam/${id}/`);
+    return this.api.deleteReqeustWithToken(`api/exam/${id}/`);
   }
 
   getLabById(id){
@@ -133,7 +133,7 @@ export class GradingAppApiService {
   }
 
   deleteTimeSlot(id){
-    return this.api.deleteReqeust(`api/timeSlot/${id}`);
+    return this.api.deleteReqeustWithToken(`api/timeSlot/${id}`);
   }
 
   assignSingleIp(url,data){
@@ -159,6 +159,6 @@ export class GradingAppApiService {
   }
 
   deletePrintFile(id){
-    return this.api.deleteReqeust(`api/print_files/${id}/`);
+    return this.api.deleteReqeustWithToken(`api/print_files/${id}/`);
   }
 }
