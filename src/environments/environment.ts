@@ -4,9 +4,10 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:8000/'
-  //   baseUrl: 'http://192.168.31.243/rest/'
-  // baseUrl: 'https://api-gradingapp.herokuapp.com/'
+ // baseUrl: 'http://localhost:8000/'
+   // baseUrl: 'http://192.168.31.243/rest/'
+   baseUrl: '/rest/'
+   // baseUrl: 'https://api-gradingapp.herokuapp.com/'
 };
 
 /*
