@@ -31,6 +31,7 @@ export class IpAssignDialogComponent implements OnInit {
   exams: any;
   ips: any;
   fileObj: any;
+  isLoading: boolean = false;
   constructor(public dialogRef: MatDialogRef<IpAssignDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private api: GradingAppApiService,
@@ -60,6 +61,7 @@ export class IpAssignDialogComponent implements OnInit {
   }
 
   saveLab() {
+    this.isLoading = true;
     let labIpData = this.assignlabIpForm.value;
     let url ="";
     if (this.assignlabIpForm.controls['assignType'].value == '1') {
@@ -82,10 +84,12 @@ export class IpAssignDialogComponent implements OnInit {
 
     this.api.assignSingleIp(url,labIpData)
       .subscribe(response => {
+        this.isLoading = false;
         if (response) {
           this.closeDialog(response);
         }
       }, error => {
+        this.isLoading = false;
         this.helper.showSnackbar(error.error.title, 'snackBar-error');
       })
 

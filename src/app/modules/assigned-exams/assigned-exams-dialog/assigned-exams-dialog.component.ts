@@ -40,13 +40,11 @@ export class AssignedExamsDialogComponent implements OnInit {
 
     if (this.data['type'] == 'single') {
       this.userFiles =  this.data['content'];
-      console.log("In single", this.data['content']);
       this.studentObj = this.data['content'];
       this.isSinglePrint = true;
 
     } else{
       this.isLoading = true;
-      console.log("In bulk", this.data['content']);
       this.allFiles =  this.data['content'];
       this.printBulk();
     }
@@ -67,7 +65,6 @@ export class AssignedExamsDialogComponent implements OnInit {
       });
 
       if(index === this.allFiles.length -1){
-        console.log("last",fileArr);
         obj['file_list'] = fileArr
         this.printFile(obj)
       }
@@ -76,7 +73,6 @@ export class AssignedExamsDialogComponent implements OnInit {
   }
 
   printSingle(fileId){
-    console.log(fileId)
     let obj = {
       print_type:"single",
       user_id:this.userObj.username,

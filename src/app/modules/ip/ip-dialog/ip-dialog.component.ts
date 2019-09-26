@@ -21,6 +21,7 @@ export class IpDialogComponent implements OnInit {
   labIpId: any;
   labs : any;
   students: any;
+  isLoading: boolean = false;
 
   constructor(public dialogRef: MatDialogRef<IpDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -44,6 +45,7 @@ export class IpDialogComponent implements OnInit {
   }
 
   saveLab() {
+    this.isLoading = true;
     let labIpData = this.labIpForm.value;
     // ------------------- Updating Lab ---------------
     if (this.editLab) {
@@ -52,10 +54,13 @@ export class IpDialogComponent implements OnInit {
       }
       this.api.updateIp(this.labIpId,this.data)
         .subscribe(response => {
+
+          this.isLoading = false;
           if (response) {
             this.closeDialog(response);
           }
         }, error => {
+          this.isLoading = false;
           this.helper.showSnackbar(error.error.title, 'snackBar-error');
         })
     }
@@ -63,10 +68,12 @@ export class IpDialogComponent implements OnInit {
     else {
       this.api.createIp(labIpData)
         .subscribe(response => {
+          this.isLoading = false;
           if (response) {
             this.closeDialog(response);
           }
         }, error => {
+          this.isLoading = false;
           this.helper.showSnackbar(error.error.title, 'snackBar-error');
         })
     }

@@ -7,7 +7,7 @@
   </div>
   <div style="height:100%;overflow-y:auto">
     <form style="padding:20px 40px;" [formGroup]="assignlabIpForm" (ngSubmit)="saveLab()" fxLayout="column"
-      fxLayoutAlign="center none">
+      fxLayoutAlign="center none" *ngIf="!isLoading">
       <div fxLayout="column" style="margin-top: 10px;">
         <span style="margin-bottom: 8px;"> Assign Type</span>
         <mat-radio-group formControlName="assignType" (change)="assignTypeChanged()">
@@ -140,5 +140,6 @@
       </div>
 
     </form>
+    <app-loader *ngIf="isLoading"></app-loader>
   </div>
 </div>

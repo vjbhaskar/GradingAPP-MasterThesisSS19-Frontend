@@ -67,9 +67,7 @@ export class ExamComponent implements OnInit {
     // let reqParams = createRequestParams(this.searchObj)
     this.api.getAllExams()
       .subscribe(response => {
-        //console.log('response =', response.headers.get("X-Total-Count"));
         this.subjectList = response;
-        console.log(this.subjectList);
         this.subjectDataSource = new MatTableDataSource(this.subjectList);
         this.totalSubjects = this.subjectList.length;
         this.isLoading = false;
@@ -170,7 +168,7 @@ export class ExamComponent implements OnInit {
         this.api.deleteExam(examObj.id)
           .subscribe(response => {
 
-            if (response.status == 200 || response.status == 204) {
+            if (!response) {
               this.subjectList.splice(idx, 1);
               this.subjectDataSource = new MatTableDataSource(this.subjectList);
               this.helper.showSnackbar('Exam Deleted Successfully', 'snackBar-success');

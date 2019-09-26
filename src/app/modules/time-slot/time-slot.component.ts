@@ -165,7 +165,7 @@ export class TimeSlotComponent implements OnInit {
         this.api.deleteTimeSlot(timeSlotObj.id)
           .subscribe(response => {
 
-            if (response.status == 200 || response.status == 204) {
+            if (!response) {
               this.timeslotList.splice(idx, 1);
               this.timeslotDataSource = new MatTableDataSource(this.timeslotList);
               this.helper.showSnackbar('Subject Deleted Successfully', 'snackBar-success');

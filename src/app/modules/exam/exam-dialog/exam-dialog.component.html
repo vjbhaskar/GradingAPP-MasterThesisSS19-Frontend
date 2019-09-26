@@ -51,12 +51,12 @@
           <input type="text" formControlName="exerciseName"  matInput placeholder="Exercise Name">
         </mat-form-field>
         <mat-form-field fxFlex="40">
-          <textarea type="text" formControlName="exerciseDescription"  matInput placeholder="Exercise Name" > </textarea>
+          <textarea type="text" formControlName="exerciseDescription"  matInput placeholder="Exercise Description" > </textarea>
         </mat-form-field>
 
         <span fxFlex></span>
         <div>
-          <button  type="button" class=" affirmative-button mat-raised-button"  (click)="addExercise()">Add</button>
+          <button  type="button" class=" affirmative-button mat-raised-button"   (click)="addExercise()">Add</button>
         </div>
 
       </div>
@@ -64,7 +64,7 @@
       <div *ngFor="let exercise of exerciseArr">
 
       <div  fxLayout="row" style="padding:5px;">
-          <mat-icon>play_arrow </mat-icon> <p style="margin-top:5px;">{{exercise.name}}</p>
+          <mat-icon>play_arrow </mat-icon> <p style="margin-top:5px;">{{exercise.name}} -  {{exercise.description}}</p>
       </div>
 
       </div>

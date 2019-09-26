@@ -167,7 +167,7 @@ export class LabComponent implements OnInit {
         this.api.deleteLab(labObj.id)
           .subscribe(response => {
 
-            if (response.status == 200 || response.status == 204) {
+            if (!response) {
               this.labList.splice(idx, 1);
               this.userDataSource = new MatTableDataSource(this.labList);
               this.helper.showSnackbar('User Deleted Successfully', 'snackBar-success');

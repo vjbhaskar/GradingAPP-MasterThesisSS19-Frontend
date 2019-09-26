@@ -165,7 +165,7 @@ export class SubjectComponent implements OnInit {
         this.api.deleteSubject(subjectObj.id)
           .subscribe(response => {
 
-            if (response.status == 200 || response.status == 204) {
+            if (!response) {
               this.subjectList.splice(idx, 1);
               this.subjectDataSource = new MatTableDataSource(this.subjectList);
               this.helper.showSnackbar('Subject Deleted Successfully', 'snackBar-success');

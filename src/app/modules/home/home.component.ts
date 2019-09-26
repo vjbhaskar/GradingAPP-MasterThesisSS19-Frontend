@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
     }
 
   ngOnInit() {
-    console.log("in home",window.location.origin);
+    console.info("Do not open Dev Tools, Your tampering has been logged!!!");
   }
 
   getDecodedAccessToken(token: string): any {

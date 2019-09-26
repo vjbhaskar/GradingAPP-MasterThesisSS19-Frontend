@@ -174,8 +174,8 @@ export class UploadFilesComponent implements OnInit {
         let idx = this.fileList.indexOf(fileObj);
         this.api.deleteFile(fileObj.id)
           .subscribe(response => {
-
-            if (response.status == 200 || response.status == 204) {
+              console.log(response);
+              if (!response) {
               this.fileList.splice(idx, 1);
               this.userDataSource = new MatTableDataSource(this.fileList);
               this.helper.showSnackbar('File Deleted Successfully', 'snackBar-success');
@@ -192,7 +192,6 @@ export class UploadFilesComponent implements OnInit {
   }
 
   printSingleFile(fileObj){
-    console.log("fileObj.id",fileObj.id);
     let dataObj = {
       file_id: fileObj.id,
       user_id: this.userObj.username,

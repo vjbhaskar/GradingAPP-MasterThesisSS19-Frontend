@@ -8,7 +8,7 @@
   <div>
     <form style="padding:20px 40px;" [formGroup]="uploadForm" (ngSubmit)="uploadFile()" fxLayout="column"
       fxLayoutAlign="center none">
-      <div>
+      <div fxLayout="column">
         <div>
           <p class="form-subheading">Upload Exam File</p>
           <div class="line-after-text" fxFlex></div>
@@ -17,7 +17,7 @@
         </div>
 
         <div fxLayout="row">
-          <mat-form-field fxFlex="20">
+          <mat-form-field fxFlex="40">
             <mat-select placeholder="Select Upload Type" formControlName="uploadType" >
               <mat-option value="snippet">Snippet</mat-option>
               <mat-option value="file">File</mat-option>
@@ -25,18 +25,20 @@
           </mat-form-field>
         </div>
 
-        <mat-form-field *ngIf="u.uploadType.value == 'snippet'">
-          <textarea matInput formControlName="textareaVal" placeholder="Paste your snippet here" ></textarea>
+        <mat-form-field *ngIf="u.uploadType.value == 'snippet'" fxFlex="100">
+          <textarea matInput formControlName="textareaVal" rows="6" placeholder="Paste your snippet here" ></textarea>
         </mat-form-field>
 
+        <div *ngIf="u.uploadType.value == 'file'">
+          <label for="file-upload2" class="custom-file-upload"  >
+            <mat-icon>attach_file</mat-icon> <span>Anhang</span>
+          </label>
+          <input id="file-upload2" placeholder="Zulassung Certificate" style="margin-left:5px;"
+            (change)="onImageUpload($event)" type="file" class="form-control">
 
-        <label for="file-upload2" class="custom-file-upload"  *ngIf="u.uploadType.value == 'file'">
-          <mat-icon>attach_file</mat-icon> <span>Anhang</span>
-        </label>
-        <input id="file-upload2" placeholder="Zulassung Certificate" style="margin-left:5px;"
-          (change)="onImageUpload($event)" type="file" class="form-control">
+            <p> Your file Name :  {{fileName}}</p>
+        </div>
 
-          <p> Your file Name :  {{fileName}}</p>
       </div>
       <!-- <div>
         <div>
@@ -55,7 +57,7 @@
             </mat-form-field>
         </div>
       </div> -->
-      <div>
+      <!-- <div>
         <div>
           <p class="form-subheading">Submit Files</p>
           <div class="line-after-text" fxFlex></div>
@@ -64,7 +66,7 @@
           <mat-checkbox formControlName="is_submitted"></mat-checkbox>
           <div style="font-size:small;margin-left:8px;"> Submit </div>
         </div>
-      </div>
+      </div> -->
 
 
       <div fxLayout="row" fxLayoutAlign="end center" style="margin-top:10px;">

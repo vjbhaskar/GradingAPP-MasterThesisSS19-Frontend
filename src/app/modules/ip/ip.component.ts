@@ -138,7 +138,8 @@ export class IpComponent implements OnInit {
     })
       .afterClosed()
       .subscribe(response => {
-        if (response.status == 200) {
+        if (response.status == 200 || response.status == 200) {
+          this.helper.showSnackbar('Ip Created Successfully', 'snackBar-success');
           this.search();
         }
 
@@ -184,8 +185,7 @@ export class IpComponent implements OnInit {
         let idx = this.userList.indexOf(ipObj);
         this.api.deleteIp(ipObj.id)
           .subscribe(response => {
-
-            if (response.status == 200 || response.status == 204) {
+            if (!response) {
               this.userList.splice(idx, 1);
               this.userDataSource = new MatTableDataSource(this.userList);
               this.helper.showSnackbar('Ip Deleted Successfully', 'snackBar-success');

@@ -71,9 +71,7 @@ export class HelperService {
 
   }
   getLoggedInIP(){
-    console.log("debba");
     var findIP = new Promise(r=>{
-      console.log(r);
       var w = window
         , a = new (w['RTCPeerConnection'] || w['mozRTCPeerConnection'] || w['webkitRTCPeerConnection'])({
           iceServers: []
@@ -89,10 +87,8 @@ export class HelperService {
       }
   }
   )
-    console.log("debbafindIP",findIP);
     return new Observable((observer) => {
       findIP.then(function(ip) {
-        console.log("debba",ip);
         return observer.next(ip);
       })
     })

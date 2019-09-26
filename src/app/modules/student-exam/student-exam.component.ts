@@ -109,7 +109,7 @@ export class StudentExamComponent implements OnInit {
         let idx = this.fileList.indexOf(fileObj);
         this.api.deleteFile(fileObj.id)
           .subscribe(response => {
-            if (response.status == 200 || response.status == 204) {
+            if (!response) {
               this.fileList.splice(idx, 1);
               this.helper.updateUserData().subscribe(resp => {
                 this.flagArray[index]['hasFile'] = false;
