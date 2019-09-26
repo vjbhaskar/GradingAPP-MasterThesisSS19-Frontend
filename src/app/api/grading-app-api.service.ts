@@ -121,7 +121,7 @@ export class GradingAppApiService {
   }
 
   getLabById(id){
-    return this.api.getRequest(`api/lab/${id}`)
+    return this.api.getRequestWithToken(`api/lab/${id}`)
   }
 
   getAllTimeSlots(){
@@ -148,7 +148,7 @@ export class GradingAppApiService {
     return this.api.postRequestWithToken('api/labIp/adminips',data)
   }
   getExamDetails(id){
-    return this.api.getRequest(`api/exam/${id}/`)
+    return this.api.getRequestWithToken(`api/exam/${id}/`)
   }
   printSingleFile(data){
     return this.api.postRequestWithToken('api/printSingleFile/', data);
