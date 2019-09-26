@@ -10,7 +10,7 @@ import { environment } from '../../environments/environment';
 @Injectable()
 export class CommonApiService {
 
-  private API_ENDPOINT = environment.baseUrl;
+  private API_ENDPOINT = window.location.origin + environment.baseUrl;
 
   private httpOptions = {
     headers: new HttpHeaders({
