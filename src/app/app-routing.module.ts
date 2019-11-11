@@ -57,7 +57,7 @@ const routes: Routes = [
           component: TimeSlotComponent
         },
         {
-          path:'assignedExam',
+          path:'assignedLab',
           component: AssignedExamsComponent
         },
         {

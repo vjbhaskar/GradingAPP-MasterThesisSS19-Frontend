@@ -179,13 +179,13 @@ export class DashboardAppsService {
         ]
       },
       {
-        'headerName': 'Assigned Exam',
+        'headerName': 'Assigned Lab',
         'icon': 'dashboard',
         'isAccordion': false,
         'apps': [
           {
-            'name': 'Assigned Exam',
-            'route': '/dashboard/assignedExam',
+            'name': 'Assigned Lab',
+            'route': '/dashboard/assignedLab',
             'icon': undefined,
             'fontAwesomeIcon': 'fab fa-leanpub',
           },
